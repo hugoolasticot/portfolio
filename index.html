@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio BUT Informatique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e6f1ff;
+            overflow-x: hidden;
+        }
+        
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            padding: 2rem 6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: #ccd6f6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ff6b6b;
+        }
+        
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 6rem;
+            background: rgba(22, 33, 62, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #f1faee;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #a8dadc;
+        }
+        
+        .hero p {
+            max-width: 600px;
+            margin-bottom: 3rem;
+            color: #f1faee;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+            border-radius: 4px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 107, 107, 0.1);
+        }
+        
+        section {
+            padding: 6rem;
+            min-height: 100vh;
+            background-color: rgba(26, 26, 46, 0.7);
+            backdrop-filter: blur(5px);
+            margin: 4rem 0;
+        }
+        
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #f1faee;
+            text-align: center;
+            position: relative;
+        }
+        
+        section h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #ff6b6b;
+            margin: 10px auto 0;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: rgba(22, 33, 62, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(168, 218, 220, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-card h3 {
+            color: #e6f1ff;
+            margin-bottom: 1rem;
+        }
+        
+        .project-card p {
+            color: #a8dadc;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-list li {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+        }
+        
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+        
+        .skill {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(22, 33, 62, 0.8);
+            border-radius: 10px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(168, 218, 220, 0.1);
+        }
+        
+        .skill:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill h3 {
+            margin: 1rem 0;
+            color: #e6f1ff;
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+        }
+        
+        .contact {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact p {
+            margin-bottom: 2rem;
+            color: #a8dadc;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #a8dadc;
+            background-color: rgba(26, 26, 46, 0.9);
+        }
+        
+        /* Animation pour les éléments lors du défilement */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header, section {
+                padding: 2rem;
+            }
+            
+            .hero {
+                padding: 0 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Effet de verre */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg"></canvas>
+    
+    <div class="content">
+        <header>
+            <div class="logo">NOM.DEV</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#projects">Projets</a></li>
+                    <li><a href="#skills">Compétences</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="hero">
+                <h1>Bonjour, je suis</h1>
+                <h2>Étudiant en BUT Informatique</h2>
+                <p>Je suis passionné par le développement web et la programmation. Actuellement en première année de BUT Informatique, je cherche constamment à améliorer mes compétences et à découvrir de nouvelles technologies.</p>
+                <a href="#contact" class="btn">Me contacter</a>
+            </section>
+            
+            <section id="about" class="fade-in glass">
+                <h2>À propos de moi</h2>
+                <div style="max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                    <p style="margin-bottom: 1.5rem; color: #a8dadc;">
+                        Je suis actuellement étudiant en première année de BUT Informatique à [Nom de l'université]. Ma passion pour l'informatique a commencé [votre histoire personnelle ici].
+                    </p>
+                    <p style="margin-bottom: 1.5rem; color: #a8dadc;">
+                        J'ai une forte appétence pour les technologies web et le développement d'applications. Je m'intéresse particulièrement à [domaines d'intérêt spécifiques].
+                    </p>
+                    <p style="color: #a8dadc;">
+                        En dehors des cours, j'aime [hobbies/autres intérêts] et je participe activement à [activités extrascolaires, hackathons, etc.].
+                    </p>
+                </div>
+            </section>
+            
+            <section id="projects" class="fade-in glass">
+                <h2>Mes Projets</h2>
+                <div class="projects">
+                    <div class="project-card">
+                        <h3>Application Web</h3>
+                        <p>Description du projet. Une application développée dans le cadre de mon BUT utilisant HTML, CSS et JavaScript.</p>
+                        <ul class="tech-list">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <a href="#" class="btn">Voir le projet</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Application Java</h3>
+                        <p>Une application de gestion développée en Java avec interface utilisateur JavaFX et base de données MySQL.</p>
+                        <ul class="tech-list">
+                            <li>Java</li>
+                            <li>JavaFX</li>
+                            <li>MySQL</li>
+                        </ul>
+                        <a href="#" class="btn">Voir le projet</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Site Portfolio</h3>
+                        <p>Ce site portfolio lui-même, développé avec HTML, CSS et intégrant des effets 3D avec Three.js.</p>
+                        <ul class="tech-list">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>Three.js</li>
+                        </ul>
+                        <a href="#" class="btn">Voir le code</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="skills" class="fade-in glass">
+                <h2>Mes Compétences</h2>
+                <div class="skills">
+                    <div class="skill">
+                        <div class="skill-icon">💻</div>
+                        <h3>Langages</h3>
+                        <p>Java, Python, JavaScript, HTML/CSS</p>
+                    </div>
+                    
+                    <div class="skill">
+                        <div class="skill-icon">🔧</div>
+                        <h3>Outils</h3>
+                        <p>Git, VS Code, Eclipse, MySQL</p>
+                    </div>
+                    
+                    <div class="skill">
+                        <div class="skill-icon">🌐</div>
+                        <h3>Web</h3>
+                        <p>React, Node.js, Three.js</p>
+                    </div>
+                    
+                    <div class="skill">
+                        <div class="skill-icon">📊</div>
+                        <h3>Autres</h3>
+                        <p>Gestion de projet, Bases de données</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="contact" class="fade-in glass">
+                <h2>Contact</h2>
+                <div class="contact">
+                    <p>Vous souhaitez discuter d'un projet ou simplement échanger ? N'hésitez pas à me contacter !</p>
+                    <a href="mailto:email@example.com" class="btn">email@example.com</a>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Conçu et développé par [Votre Nom] - 2025</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('#bg'),
+            antialias: true,
+            alpha: true
+        });
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.setZ(30);
+
+        // Création d'un effet de grille
+        const size = 50;
+        const divisions = 50;
+        const gridHelper = new THREE.GridHelper(size, divisions, 0xff6b6b, 0x1a1a2e);
+        gridHelper.position.y = -10;
+        gridHelper.rotation.x = Math.PI / 2;
+        scene.add(gridHelper);
+
+        // Ajout de sphères flottantes avec effet de lueur
+        function addSphere() {
+            const geometry = new THREE.SphereGeometry(0.5, 24, 24);
+            const material = new THREE.MeshBasicMaterial({
+                color: new THREE.Color(
+                    Math.random() * 0.2 + 0.8, // Plus de rouge
+                    Math.random() * 0.2 + 0.2, // Moins de vert
+                    Math.random() * 0.5 + 0.5  // Niveau moyen de bleu
+                ),
+                transparent: true,
+                opacity: 0.7
+            });
+            const sphere = new THREE.Mesh(geometry, material);
+            
+            const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
+            sphere.position.set(x, y, z);
+            
+            // Vitesse aléatoire pour chaque sphère
+            sphere.userData = {
+                speedX: Math.random() * 0.02 - 0.01,
+                speedY: Math.random() * 0.02 - 0.01,
+                speedZ: Math.random() * 0.02 - 0.01
+            };
+            
+            scene.add(sphere);
+            return sphere;
+        }
+        
+        const spheres = Array(30).fill().map(addSphere);
+
+        // Ajout de lignes connectant certaines sphères
+        const lineMaterial = new THREE.LineBasicMaterial({ 
+            color: 0xff6b6b,
+            transparent: true,
+            opacity: 0.3
+        });
+        
+        const lines = [];
+        function createLines() {
+            // Supprimer les anciennes lignes
+            lines.forEach(line => scene.remove(line));
+            lines.length = 0;
+            
+            // Créer de nouvelles lignes entre sphères proches
+            for (let i = 0; i < spheres.length; i++) {
+                for (let j = i + 1; j < spheres.length; j++) {
+                    const sphere1 = spheres[i];
+                    const sphere2 = spheres[j];
+                    
+                    // Calculer la distance entre les sphères
+                    const distance = sphere1.position.distanceTo(sphere2.position);
+                    
+                    // Si elles sont assez proches, dessiner une ligne
+                    if (distance < 20) {
+                        const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                            sphere1.position,
+                            sphere2.position
+                        ]);
+                        
+                        const line = new THREE.Line(lineGeometry, lineMaterial);
+                        scene.add(line);
+                        lines.push(line);
+                    }
+                }
+            }
+        }
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Faire bouger les sphères
+            spheres.forEach(sphere => {
+                sphere.position.x += sphere.userData.speedX;
+                sphere.position.y += sphere.userData.speedY;
+                sphere.position.z += sphere.userData.speedZ;
+                
+                // Rebondir sur les bords
+                ['x', 'y', 'z'].forEach(axis => {
+                    if (Math.abs(sphere.position[axis]) > 50) {
+                        sphere.userData[`speed${axis.toUpperCase()}`] *= -1;
+                    }
+                });
+            });
+            
+            // Mettre à jour les lignes toutes les 10 frames pour économiser les performances
+            if (Math.random() < 0.1) {
+                createLines();
+            }
+            
+            // Rotation de la grille
+            gridHelper.rotation.z += 0.001;
+            
+            // Effet de mouvement de la souris
+            camera.position.x += (mouseX * 0.01 - camera.position.x) * 0.01;
+            camera.position.y += (-mouseY * 0.01 - camera.position.y) * 0.01;
+            camera.lookAt(scene.position);
+            
+            renderer.render(scene, camera);
+        }
+
+        // Tracking de la souris
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX - window.innerWidth / 2;
+            mouseY = event.clientY - window.innerHeight / 2;
+        });
+        
+        // Adaptation à la taille de la fenêtre
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Animation des éléments au défilement
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        animate();
+    </script>
+</div>
+</body>
+</html>
