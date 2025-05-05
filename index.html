@@ -174,58 +174,58 @@
             width: 100%;
         }
 
-        /* Section Héro */
-        .hero {
+    /* Section A propos */
+        .propos {
             height: 100vh;
             display: flex;
             align-items: center;
             margin-top: 60px;
         }
 
-        .hero-content {
+        .propos-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 50px;
         }
 
-        .hero-text {
+        .propos-text {
             flex: 1;
         }
 
-        .hero-text h1 {
+        .propos-text h1 {
             font-family: var(--font-heading);
             font-size: 3.5rem;
             margin-bottom: 15px;
             color: var(--dark);
         }
 
-        .hero-text h2 {
+        .propos-text h2 {
             font-family: var(--font-heading);
             font-size: 2rem;
             margin-bottom: 20px;
             color: var(--primary);
         }
 
-        .hero-text p {
+        .propos-text p {
             font-size: 1.1rem;
             color: var(--gray);
             margin-bottom: 30px;
         }
 
-        .hero-image {
+        .propos-image {
             flex: 1;
             text-align: center;
         }
 
-        .hero-image img {
+        .propos-image img {
             width: 80%;
             max-width: 400px;
             border-radius: 20px;
             box-shadow: var(--shadow);
         }
 
-        .hero-buttons {
+        .propos-buttons {
             display: flex;
             gap: 20px;
             margin-top: 30px;
@@ -529,11 +529,11 @@
 
         /* Responsive */
         @media (max-width: 992px) {
-            .hero-content, .about-content {
+            .propos-content, .about-content {
                 flex-direction: column;
             }
 
-            .hero-image, .about-image {
+            .propos-image, .about-image {
                 order: -1;
             }
         }
@@ -547,11 +547,11 @@
                 font-size: 2rem;
             }
 
-            .hero-text h1 {
+            .propos-text h1 {
                 font-size: 2.5rem;
             }
 
-            .hero-text h2 {
+            .propos-text h2 {
                 font-size: 1.5rem;
             }
 
@@ -598,20 +598,21 @@
     </header>
 
     <!-- Section À propos -->
-    <section id="home" class="hero">
+    <section id="home" class="propos">
             <div class="container">
                 <h2 class="section-title">À propos</h2>
-                <div class="hero-container animated">
-                <div class="hero-content animated">
-                    <div class="hero-text">
+                <div class="propos-container animated">
+                <div class="propos-content animated">
+                    <div class="propos-text">
                         <h1>Hugo Challaye</h1>
                         <h2>Étudiant en 1 ère année de BUT Informatique</h2>
                         <p>Étudiant en première année de BUT Informatique, je suis à la recherche d'une alternance pour un contrat de 2 ans afin de développer mes compétences et en apprendre plus sur le monde du travail. </p>
-                        <div class="hero-buttons">
+                        <div class="propos-buttons">
                             <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+                            <a href="/home/3binf1/hugo.challaye/Telechargement/portfolio/CV HUGO CHALLAYE-1.pdf" download class="btn btn-primary">Mon CV</a>                              
                         </div>
                     </div>
-                    <div class="hero-image">
+                    <div class="propos-image">
                         <img src="https://st.depositphotos.com/1202217/1833/i/450/depositphotos_18335825-stock-photo-portfolio-cut-from-paper-on.jpg" alt="Hugo Challaye" style="width: 80%; max-width: 500px; border-radius: 20px; box-shadow: var(--shadow); object-fit: cover;">
                         </div>
                     </div>
@@ -620,7 +621,6 @@
         </div>
     </section>
 
-    <!-- <div style="font-size: 30px; margin-bottom: 10px;">Mon Portfolio</div> -->
     <!-- Section Compétences -->
     <section id="skills" class="skills">
         <div class="container">
