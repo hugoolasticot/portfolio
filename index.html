@@ -7,247 +7,284 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!--------------------------------------------------- En-Tête -------------------------------------------------------->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">Mon<span> </span>Portfolio</div>
-                <ul class="nav-links">
-                    <li><a href="#home">À propos</a></li>
-                    <li><a href="#skills">Compétences</a></li>
-                    <li><a href="#projects">Projets</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!---------------------------------------------- Section À propos ---------------------------------------------------->
-    <section id="home" class="propos">
-            <div class="container">
-                <h2 class="section-title">À propos</h2>
-                <div class="propos-container">
-                <div class="propos-content">
-                    <div class="propos-text">
-                        <h1>Hugo Challaye</h1>
-                        <h2>Étudiant en 1 ère année de BUT Informatique</h2>
-                        <p>Étudiant en première année de BUT Informatique, je suis à la recherche d'une alternance pour un contrat de 2 ans afin de développer mes compétences et en apprendre plus sur le monde du travail. </p>
-                        <div class="propos-buttons">
-                            <a href="#projects" class="btn">Voir mes projets</a>
-                            <a href="Hugo CHALLAYE CV.pdf" download class="btn">Télécharger Mon CV</a>                              
-                        </div>
-                    </div>
-                    <div class="propos-image">
-                        <img src="https://st.depositphotos.com/1202217/1833/i/450/depositphotos_18335825-stock-photo-portfolio-cut-from-paper-on.jpg" alt="image portfolio libre de droit" style="width: 80%; max-width: 500px; border-radius: 20px; box-shadow: var(--shadow); object-fit: cover;">
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- NAV -->
+    <nav>
+        <div class="logo">HUGO.exe</div>
+        <div class="nav-links">
+            <a href="#accueil">Accueil</a>
+            <a href="#skills">Skills</a>
+            <a href="#projets">Projets</a>
+            <a href="#contact">Contact</a>
+            <a href="#cv">CV</a>
+        </div>
+    </nav>
+
+    <!-- ACCUEIL -->
+    <section id="accueil">
+        <div class="avatar"><span class="rotate">👨‍💻</span></div>
+        <h1>HUGO CHALLAYE</h1>
+        <p class="subtitle">~ Étudiant BUT Informatique ~</p>
+        <div class="stats-box">
+            <div><span class="stat-label">NIVEAU</span><span class="stat-value">1ère année</span></div>
+            <div><span class="stat-label">CLASSE</span><span class="stat-value">Développeur</span></div>
+            <div><span class="stat-label">QUÊTE</span><span class="stat-value blink">Alternance 2 ans</span></div>
+        </div>
+        <div>
+            <a href="#projets" class="btn">► MES PROJETS</a>
+        </div>
     </section>
 
-    <!----------------------------------------------- Section Compétences ------------------------------------------------>
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Mes Compétences</h2>
-            <div class="skills-container">
-
-                <div class="skill-card">
-                    <h3>Base en Programmation</h3>
-                    <ul>
-                        <li>Java / JavaFX</li>
-                        <li>Python</li>
-                        <li>SQL</li>
-                        <li>HTML / CSS</li>
-                        <li>C</li>
-                    </ul>
+    <!-- SKILLS -->
+    <section id="skills">
+        <h2 class="section-title">☆ MES SKILLS ☆</h2>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <h3>⚔️ LANGAGES</h3>
+                <div class="skill-item"><span class="skill-name">Python</span><div class="hp-bar"><div class="hp-fill" style="width:70%"></div></div></div>
+                <div class="skill-item"><span class="skill-name">Java / JavaFX</span><div class="hp-bar"><div class="hp-fill" style="width:65%"></div></div></div>
+                <div class="skill-item"><span class="skill-name">SQL</span><div class="hp-bar"><div class="hp-fill" style="width:60%"></div></div></div>
+                <div class="skill-item"><span class="skill-name">HTML / CSS</span><div class="hp-bar"><div class="hp-fill" style="width:70%"></div></div></div>
+                <div class="skill-item"><span class="skill-name">C</span><div class="hp-bar"><div class="hp-fill" style="width:40%"></div></div></div>
+            </div>
+            <div class="skill-box">
+                <h3>🛡️ OUTILS</h3>
+                <div class="tools">
+                    <span class="tool">GitHub</span>
+                    <span class="tool">VS Code</span>
+                    <span class="tool">Eclipse</span>
+                    <span class="tool">MySQL</span>
+                    <span class="tool">PostgreSQL</span>
+                    <span class="tool">Excel</span>
                 </div>
-
-                <div class="skill-card">
-                    <h3>Outils Informatiques</h3>
-                    <ul>
-                        <li>GitHub</li>
-                        <li>VS Code, Eclipse</li>
-                        <li>MySQL & PostgreSQL</li>
-                        <li>Exel</li>
-                        <li>LibreOffice</li>
-                        <li>PowerPoint</li>
-                    </ul>
-                </div>
-
-                <div class="skill-card">
-                    <h3>Soft Skills</h3>
-                    <ul>
-                        <li>Communication</li>
-                        <li>Patient</li>
-                        <li>Déterminé</li>
-                        <li>Gestion de projets</li>
-                        <li>À l'écoute</li>
-                    </ul>
-                </div>
+            </div>
+            <div class="skill-box">
+                <h3>✨ TRAITS</h3>
+                <div class="trait">💬 Communication</div>
+                <div class="trait">⏳ Patient</div>
+                <div class="trait">🎯 Déterminé</div>
+                <div class="trait">📋 Gestion de projet</div>
+                <div class="trait">👂 À l'écoute</div>
+                <div class="trait">🤝 Esprit d'équipe</div>
             </div>
         </div>
     </section>
 
-    <!--------------------------------------------------- Section Projets ---------------------------------------------------->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Mes Projets</h2>
-            <div class="projects-container">
-                <div class="project-card">
-                    <div class="project-image">
-                        <h3>Tetris</h3>
-                    </div>
-                    <div class="project-info">
-                        <h3>Création du jeu Tetris</h3>
-                        <p>Nous avons eu comme projet de créer le jeu Tetris avec le language Python. Ce projet devait être réalisé en binôme.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Python 3</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <h3>Le Kremlin</h3>
-                    </div>
-                    <div class="project-info">
-                        <h3>Site Internet pour l'UNESCO</h3>
-                        <p>Nous avons eu comme projet de réaliser un site de médiation culturelle pour le Kremlin. Chaque personne dans le groupe avait un ou plusieurs rôle(s) spécifique. C'est un projet réalisé par groupe de 6. </p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML 5</span>
-                            <span class="project-tag">CSS 3</span>
-                            <span class="project-tag">Java Script</span>
-                        </div>
-                        <div>
-                            <a href="https://unesco.sae.bnicolas.fr/" class="btn" target="_blank">Site Unesco</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <h3>Yahtzee</h3>
-                    </div>
-                    <div class="project-info">
-                        <h3>Création du jeu Yahtzee</h3>
-                        <p>J'ai réalisé en binôme un projet qui consistait à crée le jeu du Yahtzee. Pour effectuer ce projet, nous avons du utilisé le language Java.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Java</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <h3>Base de donnée</h3>
-                    </div>
-                    <div class="project-info">
-                        <h3>Création d'une Base de donnée</h3>
-                        <p>L'objectif de ce projet était de créer une base de donnée pour un cimetière. Nous devions créer une base de donnée MySQL au premier semestre pour ensuite créer, au second semestre, une base de donnée avec PostgreSQL.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML 5</span>
-                            <span class="project-tag">PHP</span>
-                            <span class="project-tag">MySQL & PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <h3>Amor Vincit</h3>
-                    </div>
-                    <div class="project-info">
-                        <h3>Site Internet pour les Seniors</h3>
-                        <p>Nous avons eu comme projet de créer un site de rencontre pour les seniors qui sont dans des maisons de retraite en groupe. Le but est de pouvoir discuter facilement avec d'autre personne de la maison ou bien d'un autre lieu. De plus il doit y avoir des comptes admins pour gérer tout type de paramètre.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML 5</span>
-                            <span class="project-tag">CSS 3</span>
-                            <span class="project-tag">PHP</span>
-                        </div>
-                        <div>
-                            <a href="https://chu.alwaysdata.net/" class="btn" target="_blank">Site Senior</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <h3>Imperium Pizza</h3>
-                    </div>
-                    <div class="project-info">
-                        <h3>Site Internet pour commander des pizzas</h3>
-                        <p>J'ai réalisé en groupe de 4 un projet qui est de créer un site avec JavaFX qui nous permet de créer notre pizza pour ensuite la commander.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">JavaFX</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- PROJETS -->
+    <section id="projets">
+        <h2 class="section-title">★ MES PROJETS ★</h2>
+        <div class="projets-grid">
+            <a href="#popup-tetris" class="projet-card">
+                <div class="projet-icon">🎮</div>
+                <h3>TETRIS</h3>
+                <p>Jeu Python</p>
+                <div class="projet-tags"><span>Python</span></div>
+            </a>
+            <a href="#popup-kremlin" class="projet-card">
+                <div class="projet-icon">🏰</div>
+                <h3>LE KREMLIN</h3>
+                <p>Site UNESCO</p>
+                <div class="projet-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+            </a>
+            <a href="#popup-yahtzee" class="projet-card">
+                <div class="projet-icon">🎲</div>
+                <h3>YAHTZEE</h3>
+                <p>Jeu Java</p>
+                <div class="projet-tags"><span>Java</span></div>
+            </a>
+            <a href="#popup-database" class="projet-card">
+                <div class="projet-icon">🗄️</div>
+                <h3>BASE DE DONNÉES</h3>
+                <p>Gestion cimetière</p>
+                <div class="projet-tags"><span>SQL</span><span>PHP</span></div>
+            </a>
+            <a href="#popup-amor" class="projet-card">
+                <div class="projet-icon">💕</div>
+                <h3>AMOR VINCIT</h3>
+                <p>Site seniors</p>
+                <div class="projet-tags"><span>HTML</span><span>PHP</span></div>
+            </a>
+            <a href="#popup-pizza" class="projet-card">
+                <div class="projet-icon">🍕</div>
+                <h3>IMPERIUM PIZZA</h3>
+                <p>App commande</p>
+                <div class="projet-tags"><span>JavaFX</span></div>
+            </a>
         </div>
     </section>
 
-    <!-------------------------------------------------------- Section Contact ---------------------------------------------------------->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contactez-moi</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Informations de contact</h3>
-                    
-                    <div class="contact-method">
-                        <div class="icon">📱</div>
-                        <div class="info">
-                            <h4>Téléphone</h4>
-                            <p>+33 6 15 04 37 95</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-method">
-                        <div class="icon">✉️</div>
-                        <div class="info">
-                            <h4>Email</h4>
-                            <p>hugo.challaye@gmail.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-method">
-                        <div class="icon">📍</div>
-                        <div class="info">
-                            <h4>Localisation</h4>
-                            <p>Neufmoutiers-en-brie - France</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-method">
-                        <div class="icon">🔗</div>
-                        <div class="info">
-                            <h4>LinkedIn</h4>
-                            <p>Mon compte <a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank"> LinkedIn </a ></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2 class="section-title">✉️ CONTACT ✉️</h2>
+        <div class="contact-box">
+            <div class="contact-item"><span>📱</span><span>+33 6 15 04 37 95</span></div>
+            <div class="contact-item"><span>📧</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5bda0b2bafbb6bdb4b9b9b4acb095b2b8b4bcb9fbb6bab8">[email&#160;protected]</a></span></div>
+            <div class="contact-item"><span>📍</span><span>Neufmoutiers-en-Brie</span></div>
+            <div class="contact-item"><a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank"><span>🔗</span><span>LinkedIn</span></a></div>
         </div>
     </section>
 
-    <!---------------------------------------------------- Footer --------------------------------------------------------->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">Hugo<span> </span>Challaye</div>
-                
-                <div class="footer-nav">
-                    <a href="#home">À propos</a>
-                    <a href="#skills">Compétences</a>
-                    <a href="#projects">Projets</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                
-                <div class="copyright">
-                    © 2025 Hugo Challaye. Tous droits réservés.
-                </div>
+    <!-- CV -->
+    <section id="cv">
+        <h2 class="section-title">📄 MON CV 📄</h2>
+        <div class="cv-container">
+            <embed src="Hugo CHALLAYE CV.pdf" type="application/pdf" width="100%" height="600px">
+        </div>
+        <div class="cv-download">
+            <a href="Hugo CHALLAYE CV.pdf" download class="btn">► TÉLÉCHARGER LE CV</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer><p>© 2025 HUGO CHALLAYE</p></footer>
+
+    <!-- ==================== POPUPS ==================== -->
+
+    <!-- TETRIS -->
+    <div id="popup-tetris" class="popup-overlay">
+        <div class="popup">
+            <a href="#projets" class="popup-close">✕</a>
+            <div class="popup-header">
+                <div class="icon">🎮</div>
+                <h2>TETRIS</h2>
+                <p class="tagline">Jeu Python</p>
+            </div>
+            <div class="info-grid">
+                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
+                <div><span class="label">Équipe:</span> <span class="value">Binôme</span></div>
+            </div>
+            <div class="popup-content">
+                <h3>📜 DESCRIPTION</h3>
+                <p>À compléter...</p>
+                <h3>🎯 MON RÔLE</h3>
+                <ul><li>À compléter...</li></ul>
+                <h3>📚 CE QUE J'AI APPRIS</h3>
+                <ul><li>À compléter...</li></ul>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- KREMLIN -->
+    <div id="popup-kremlin" class="popup-overlay">
+        <div class="popup">
+            <a href="#projets" class="popup-close">✕</a>
+            <div class="popup-header">
+                <div class="icon">🏰</div>
+                <h2>LE KREMLIN</h2>
+                <p class="tagline">Site UNESCO</p>
+            </div>
+            <div class="info-grid">
+                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
+                <div><span class="label">Équipe:</span> <span class="value">6 personnes</span></div>
+            </div>
+            <div class="popup-content">
+                <h3>📜 DESCRIPTION</h3>
+                <p>À compléter...</p>
+                <h3>🎯 MON RÔLE</h3>
+                <ul><li>À compléter...</li></ul>
+                <h3>📚 CE QUE J'AI APPRIS</h3>
+                <ul><li>À compléter...</li></ul>
+                <h3>🔗 LIEN</h3>
+                <a href="https://starrk.xyz/site/index.html" target="_blank" class="popup-link">► VOIR LE SITE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- YAHTZEE -->
+    <div id="popup-yahtzee" class="popup-overlay">
+        <div class="popup">
+            <a href="#projets" class="popup-close">✕</a>
+            <div class="popup-header">
+                <div class="icon">🎲</div>
+                <h2>YAHTZEE</h2>
+                <p class="tagline">Jeu Java</p>
+            </div>
+            <div class="info-grid">
+                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
+                <div><span class="label">Équipe:</span> <span class="value">Binôme</span></div>
+            </div>
+            <div class="popup-content">
+                <h3>📜 DESCRIPTION</h3>
+                <p>À compléter...</p>
+                <h3>🎯 MON RÔLE</h3>
+                <ul><li>À compléter...</li></ul>
+                <h3>📚 CE QUE J'AI APPRIS</h3>
+                <ul><li>À compléter...</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATABASE -->
+    <div id="popup-database" class="popup-overlay">
+        <div class="popup">
+            <a href="#projets" class="popup-close">✕</a>
+            <div class="popup-header">
+                <div class="icon">🗄️</div>
+                <h2>BASE DE DONNÉES</h2>
+                <p class="tagline">Gestion cimetière</p>
+            </div>
+            <div class="info-grid">
+                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
+                <div><span class="label">Durée:</span> <span class="value">2 semestres</span></div>
+            </div>
+            <div class="popup-content">
+                <h3>📜 DESCRIPTION</h3>
+                <p>À compléter...</p>
+                <h3>🎯 MON RÔLE</h3>
+                <ul><li>À compléter...</li></ul>
+                <h3>📚 CE QUE J'AI APPRIS</h3>
+                <ul><li>À compléter...</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- AMOR VINCIT -->
+    <div id="popup-amor" class="popup-overlay">
+        <div class="popup">
+            <a href="#projets" class="popup-close">✕</a>
+            <div class="popup-header">
+                <div class="icon">💕</div>
+                <h2>AMOR VINCIT</h2>
+                <p class="tagline">Site seniors</p>
+            </div>
+            <div class="info-grid">
+                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
+                <div><span class="label">Équipe:</span> <span class="value">Groupe</span></div>
+            </div>
+            <div class="popup-content">
+                <h3>📜 DESCRIPTION</h3>
+                <p>À compléter...</p>
+                <h3>🎯 MON RÔLE</h3>
+                <ul><li>À compléter...</li></ul>
+                <h3>📚 CE QUE J'AI APPRIS</h3>
+                <ul><li>À compléter...</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPERIUM PIZZA -->
+    <div id="popup-pizza" class="popup-overlay">
+        <div class="popup">
+            <a href="#projets" class="popup-close">✕</a>
+            <div class="popup-header">
+                <div class="icon">🍕</div>
+                <h2>IMPERIUM PIZZA</h2>
+                <p class="tagline">App commande</p>
+            </div>
+            <div class="info-grid">
+                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
+                <div><span class="label">Équipe:</span> <span class="value">4 personnes</span></div>
+            </div>
+            <div class="popup-content">
+                <h3>📜 DESCRIPTION</h3>
+                <p>À compléter...</p>
+                <h3>🎯 MON RÔLE</h3>
+                <ul><li>À compléter...</li></ul>
+                <h3>📚 CE QUE J'AI APPRIS</h3>
+                <ul><li>À compléter...</li></ul>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
