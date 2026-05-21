@@ -5,284 +5,562 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hugo Challaye | Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="layout">
 
-    <!-- NAV -->
-    <nav>
-        <div class="logo">HUGO.exe</div>
-        <div class="nav-links">
-            <a href="#accueil">Accueil</a>
-            <a href="#skills">Skills</a>
-            <a href="#projets">Projets</a>
-            <a href="#contact">Contact</a>
-            <a href="#cv">CV</a>
-        </div>
-    </nav>
+<!-- ========================
+     SIDEBAR — nav gauche
+     ======================== -->
+<aside class="sidebar">
+    <div class="sidebar-nav">
+        <a href="#hero">Accueil</a>
+        <a href="#apropos">À propos</a>
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+        <a href="#cv">CV</a>
+    </div>
 
-    <!-- ACCUEIL -->
-    <section id="accueil">
-        <div class="avatar"><span class="rotate">👨‍💻</span></div>
-        <h1>HUGO CHALLAYE</h1>
-        <p class="subtitle">~ Étudiant BUT Informatique ~</p>
-        <div class="stats-box">
-            <div><span class="stat-label">NIVEAU</span><span class="stat-value">1ère année</span></div>
-            <div><span class="stat-label">CLASSE</span><span class="stat-value">Etudiant</span></div>
-            <div><span class="stat-label">QUÊTE</span><span class="stat-value blink">Alternance 2 ans</span></div>
-        </div>
-        <div>
-            <a href="#projets" class="btn">► MES PROJETS</a>
-        </div>
-    </section>
+    <div class="sidebar-icons">
+        <a href="https://github.com/" target="_blank" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:challayehugo.pro@gmail.com" title="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        </a>
+    </div>
+</aside>
 
-    <!-- SKILLS -->
-    <section id="skills">
-        <h2 class="section-title">☆ MES SKILLS ☆</h2>
-        <div class="skills-grid">
-            <div class="skill-box">
-                <h3>⚔️ LANGAGES</h3>
-                <div class="trait"> Python</div>
-                <div class="trait"> Java / JavaFX</div>
-                <div class="trait"> SQL</div>
-                <div class="trait"> HTML / CSS</div>
-                <div class="trait"> C</div>
+<main class="content">
+
+    <!-- 01 HERO -->
+    <section id="hero">
+        <p class="hero-topname">Portfolio</p>
+
+        <div class="hero-titles">
+            <p class="hero-name-small">IUT Gustave Eiffel · Champs-sur-Marne</p>
+            <div class="hero-big">
+                <span class="line-white">HUGO</span>
+                <span class="line-green">CHALLAYE</span>
+                <span class="line-white">BUT INFO.</span>
             </div>
-            <div class="skill-box">
-                <h3>🛡️ OUTILS</h3>
-                <div class="trait"> GitHub</div>
-                <div class="trait"> VS Code</div>
-                <div class="trait"> Eclipse</div>
-                <div class="trait"> MySQL</div>
-                <div class="trait"> PostgreSQL</div>
-                <div class="trait"> Excel</div>
-            </div>
-            <div class="skill-box">
-                <h3>✨ ATOUTS</h3>
-                <div class="trait"> Communication</div>
-                <div class="trait"> Patient</div>
-                <div class="trait"> Déterminé</div>
-                <div class="trait"> Gestion de projet</div>
-                <div class="trait"> À l'écoute</div>
-                <div class="trait"> Esprit d'équipe</div>
+        </div>
+
+        <div class="hero-bottom">
+            <p class="hero-desc">
+                
+            </p>
+            <div class="hero-cta">
+                <a href="#projets" class="btn btn-filled">Mes projets</a>
+                <a href="Hugo_CHALLAYE_CV.pdf" download class="btn btn-ghost">Télécharger le CV</a>
             </div>
         </div>
     </section>
 
-    <!-- PROJETS -->
+    <!-- 02 À PROPOS -->
+    <section id="apropos">
+        <p class="sec-label">02 — À propos</p>
+
+        <div class="apropos-layout">
+            <div class="apropos-left">
+                <h2 class="apropos-big">
+                    Qui<br>suis<span>-je ?</span>
+                </h2>
+
+                <div class="apropos-bio">
+                    <p>Je m'appelle <strong>Hugo Challaye</strong>, j'ai 20 ans. Je suis étudiant en BUT Informatique à l'IUT Gustave Eiffel de Champs-sur-Marne.</p>
+                    <p>Je travaille sur des projets en Python, Java et développement web. J'aime comprendre comment les choses fonctionnent, que ce soit un algorithme, un réseau ou une interface.</p>
+                    <p>Je m'exprime en français, en anglais (B1) et un peu en espagnol (A2). Je suis joignable à <a href="mailto:challayehugo.pro@gmail.com" style="color:var(--green);text-decoration:none;">challayehugo.pro@gmail.com</a> ou sur <a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank" style="color:var(--green);text-decoration:none;">LinkedIn</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03 COMPÉTENCES — onglets CSS -->
+    <section id="competences">
+        <p class="sec-label">03 — Compétences</p>
+
+        <input type="radio" name="tabs" id="tab-langages" class="tabs-radio" checked>
+        <input type="radio" name="tabs" id="tab-outils" class="tabs-radio">
+        <input type="radio" name="tabs" id="tab-soft" class="tabs-radio">
+        <input type="radio" name="tabs" id="tab-langues" class="tabs-radio">
+
+        <div class="tabs-labels">
+            <label for="tab-langages" class="tab-label">Langages</label>
+            <label for="tab-outils" class="tab-label">Outils</label>
+            <label for="tab-soft" class="tab-label">Soft Skills</label>
+            <label for="tab-langues" class="tab-label">Langues</label>
+        </div>
+
+        <div class="tab-panels">
+            <div class="tab-panel panel-langages">
+                <div class="skills-grid">
+                    <div class="skill-item"><span class="skill-dot"></span>Python</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Java</div>
+                    <div class="skill-item"><span class="skill-dot"></span>JavaFX</div>
+                    <div class="skill-item"><span class="skill-dot"></span>HTML / CSS</div>
+                    <div class="skill-item"><span class="skill-dot"></span>SQL</div>
+                    <div class="skill-item"><span class="skill-dot"></span>PHP</div>
+                    <div class="skill-item"><span class="skill-dot"></span>C</div>
+                    <div class="skill-item"><span class="skill-dot"></span>JavaScript</div>
+                </div>
+            </div>
+            <div class="tab-panel panel-outils">
+                <div class="skills-grid">
+                    <div class="skill-item"><span class="skill-dot"></span>Git / GitHub</div>
+                    <div class="skill-item"><span class="skill-dot"></span>VS Code</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Eclipse</div>
+                    <div class="skill-item"><span class="skill-dot"></span>MySQL</div>
+                    <div class="skill-item"><span class="skill-dot"></span>PostgreSQL</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Netkit-ng</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Wireshark</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Linux</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Suite Office</div>
+                </div>
+            </div>
+            <div class="tab-panel panel-soft">
+                <div class="skills-grid">
+                    <div class="skill-item"><span class="skill-dot"></span>Travail d'équipe</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Communication</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Gestion de projet</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Adaptabilité</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Rigueur</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Curiosité</div>
+                </div>
+            </div>
+            <div class="tab-panel panel-langues">
+                <div class="skills-grid">
+                    <div class="skill-item"><span class="skill-dot"></span>Français — Natif</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Anglais — B1</div>
+                    <div class="skill-item"><span class="skill-dot"></span>Espagnol — A2</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04 PROJETS -->
     <section id="projets">
-        <h2 class="section-title">★ MES PROJETS ★</h2>
-        <div class="projets-grid">
-            <a href="#popup-tetris" class="projet-card">
-                <div class="projet-icon">🎮</div>
-                <h3>TETRIS</h3>
-                <p>Jeu Python</p>
-                <div class="projet-tags"><span>Python</span></div>
+        <p class="sec-label">04 — Projets</p>
+
+        <input type="radio" name="pfilter" id="pf-all" class="filter-radios" checked>
+        <input type="radio" name="pfilter" id="pf-python" class="filter-radios">
+        <input type="radio" name="pfilter" id="pf-java" class="filter-radios">
+        <input type="radio" name="pfilter" id="pf-web" class="filter-radios">
+        <input type="radio" name="pfilter" id="pf-sql" class="filter-radios">
+        <input type="radio" name="pfilter" id="pf-reseau" class="filter-radios">
+
+        <div class="filter-labels">
+            <label for="pf-all" class="filter-label">Tous</label>
+            <label for="pf-python" class="filter-label">Python</label>
+            <label for="pf-java" class="filter-label">Java</label>
+            <label for="pf-web" class="filter-label">Web</label>
+            <label for="pf-sql" class="filter-label">SQL</label>
+            <label for="pf-reseau" class="filter-label">Réseau</label>
+        </div>
+
+        <div class="projects-grid">
+
+            <a href="#pp-msm" class="pcard web">
+                <div class="pcard-img">
+                    <img src="c:\Users\hugoc\OneDrive\Images\projet_unesco_michel.png" alt="Le Mont Saint-Michel">
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">01</span>
+                    <h3 class="pcard-title">Le Mont Saint-Michel</h3>
+                    <p class="pcard-desc">Site de médiation culturelle UNESCO. Projet en équipe de 6.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">HTML</span>
+                        <span class="pcard-tag">CSS</span>
+                        <span class="pcard-tag">JS</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
             </a>
-            <a href="#popup-kremlin" class="projet-card">
-                <div class="projet-icon">🏰</div>
-                <h3>LE KREMLIN</h3>
-                <p>Site UNESCO</p>
-                <div class="projet-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+
+            <a href="#pp-wiy" class="pcard python">
+                <div class="pcard-img">
+                    <!-- <img src="ton-image.jpg" alt="Wall Is You"> -->
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">02</span>
+                    <h3 class="pcard-title">Wall Is You</h3>
+                    <p class="pcard-desc">Jeu de donjon avec pathfinding. Interface graphique fltk.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">Python</span>
+                        <span class="pcard-tag">fltk</span>
+                        <span class="pcard-tag">Algorithmes</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
             </a>
-            <a href="#popup-yahtzee" class="projet-card">
-                <div class="projet-icon">🎲</div>
-                <h3>YAHTZEE</h3>
-                <p>Jeu Java</p>
-                <div class="projet-tags"><span>Java</span></div>
+
+            <a href="#pp-schtroumpfs" class="pcard java">
+                <div class="pcard-img">
+                    <img src="c:\Users\hugoc\OneDrive\Images\projet_conseil_sae.png" alt="Conseil des Schtroumpfs">
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">03</span>
+                    <h3 class="pcard-title">Conseil des Schtroumpfs</h3>
+                    <p class="pcard-desc">Jeu de gestion stratégique en Java. Architecture MVC.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">Java 25</span>
+                        <span class="pcard-tag">MVC</span>
+                        <span class="pcard-tag">POO</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
             </a>
-            <a href="#popup-database" class="projet-card">
-                <div class="projet-icon">🗄️</div>
-                <h3>BASE DE DONNÉES</h3>
-                <p>Gestion cimetière</p>
-                <div class="projet-tags"><span>SQL</span><span>PHP</span></div>
+
+            <a href="#pp-automates" class="pcard python">
+                <div class="pcard-img">
+                    <!-- <img src="ton-image.jpg" alt="Exploration Algorithmique"> -->
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">04</span>
+                    <h3 class="pcard-title">Exploration Algorithmique</h3>
+                    <p class="pcard-desc">Algorithmes sur automates et langages formels.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">Python</span>
+                        <span class="pcard-tag">Graphes</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
             </a>
-            <a href="#popup-amor" class="projet-card">
-                <div class="projet-icon">💕</div>
-                <h3>AMOR VINCIT</h3>
-                <p>Site seniors</p>
-                <div class="projet-tags"><span>HTML</span><span>PHP</span></div>
+
+            <a href="#pp-yahtzee" class="pcard java">
+                <div class="pcard-img">
+                    <!-- <img src="ton-image.jpg" alt="Yahtzee"> -->
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">05</span>
+                    <h3 class="pcard-title">Yahtzee</h3>
+                    <p class="pcard-desc">Recréation du jeu de dés classique en Java.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">Java</span>
+                        <span class="pcard-tag">POO</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
             </a>
-            <a href="#popup-pizza" class="projet-card">
-                <div class="projet-icon">🍕</div>
-                <h3>IMPERIUM PIZZA</h3>
-                <p>App commande</p>
-                <div class="projet-tags"><span>JavaFX</span></div>
+
+            <a href="#pp-bdd" class="pcard sql">
+                <div class="pcard-img">
+                    <!-- <img src="ton-image.jpg" alt="Base de données"> -->
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">06</span>
+                    <h3 class="pcard-title">Base de données</h3>
+                    <p class="pcard-desc">Gestion d'un cimetière. MySQL puis PostgreSQL.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">MySQL</span>
+                        <span class="pcard-tag">PostgreSQL</span>
+                        <span class="pcard-tag">PHP</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
             </a>
+
+            <a href="#pp-dhcp" class="pcard reseau">
+                <div class="pcard-img">
+                    <!-- <img src="ton-image.jpg" alt="Serveur DHCP"> -->
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">07</span>
+                    <h3 class="pcard-title">Serveur DHCP</h3>
+                    <p class="pcard-desc">Configuration réseau Linux avec Netkit-ng et Wireshark.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">Linux</span>
+                        <span class="pcard-tag">Netkit</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
+            </a>
+
+            <a href="#pp-amor" class="pcard sql web">
+                <div class="pcard-img">
+                    <!-- <img src="ton-image.jpg" alt="Amor Vincit"> -->
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">08</span>
+                    <h3 class="pcard-title">Amor Vincit</h3>
+                    <p class="pcard-desc">Site de rencontre pour seniors en maison de retraite.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">HTML</span>
+                        <span class="pcard-tag">PHP</span>
+                        <span class="pcard-tag">MySQL</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
+            </a>
+
+            <a href="#pp-pizza" class="pcard java">
+                <div class="pcard-img">
+                    <!-- <img src="ton-image.jpg" alt="Imperium Pizza"> -->
+                    <div class="pcard-img-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        Ajouter une image
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <span class="pcard-num">09</span>
+                    <h3 class="pcard-title">Imperium Pizza</h3>
+                    <p class="pcard-desc">Application de commande de pizzas avec JavaFX.</p>
+                    <div class="pcard-tags">
+                        <span class="pcard-tag">Java</span>
+                        <span class="pcard-tag">JavaFX</span>
+                    </div>
+                </div>
+                <div class="pcard-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </div>
+            </a>
+
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-        <h2 class="section-title">✉️ CONTACT ✉️</h2>
-        <div class="contact-box">
-            <div class="contact-item"><span>📱</span><span>+33 6 15 04 37 95</span></div>
-            <div class="contact-item"><span>📧</span><span>challayehugo.pro@gmail.com</span></div>
-            <div class="contact-item"><span>📍</span><span>Neufmoutiers-en-Brie</span></div>
-            <div class="contact-item"><a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank"><span>🔗</span><span>LinkedIn</span></a></div>
-        </div>
-    </section>
-
-    <!-- CV -->
+    <!-- 05 CV -->
     <section id="cv">
-        <h2 class="section-title">📄 MON CV 📄</h2>
-        <div class="cv-container">
-            <embed src="Hugo CHALLAYE CV.pdf" type="application/pdf" width="100%" height="600px">
-        </div>
-        <div class="cv-download">
-            <a href="Hugo CHALLAYE CV.pdf" download class="btn">► TÉLÉCHARGER LE CV</a>
+        <p class="sec-label">05 — Curriculum Vitae</p>
+        <div class="cv-layout">
+            <div class="cv-left">
+                <h3>Hugo Challaye</h3>
+                <p><strong>BUT Informatique</strong> — IUT Gustave Eiffel (2024-2027)</p>
+                <p>Recherche une alternance de 2 ans en développement informatique.</p>
+                <div class="cv-btns">
+                    <a href="Hugo_CHALLAYE_CV.pdf" download class="btn btn-filled">Télécharger (PDF)</a>
+                    <a href="Hugo_CHALLAYE_CV.pdf" target="_blank" class="btn btn-ghost">Ouvrir dans un onglet</a>
+                </div>
+            </div>
+            <div class="cv-frame">
+                <iframe src="Hugo_CHALLAYE_CV.pdf"></iframe>
+            </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer><p>© 2025 HUGO CHALLAYE</p></footer>
+    <footer>
+        <span>© Hugo Challaye</span>
+        <a href="mailto:challayehugo.pro@gmail.com">challayehugo.pro@gmail.com</a>
+    </footer>
 
-    <!-- ==================== POPUPS ==================== -->
+</main>
+</div>
 
-    <!-- TETRIS -->
-    <div id="popup-tetris" class="popup-overlay">
-        <div class="popup">
-            <a href="#projets" class="popup-close">✕</a>
-            <div class="popup-header">
-                <div class="icon">🎮</div>
-                <h2>TETRIS</h2>
-                <p class="tagline">Jeu Python</p>
-            </div>
-            <div class="info-grid">
-                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
-                <div><span class="label">Équipe:</span> <span class="value">Binôme</span></div>
-            </div>
-            <div class="popup-content">
-                <h3>📜 DESCRIPTION</h3>
-                <p>À compléter...</p>
-                <h3>🎯 MON RÔLE</h3>
-                <ul><li>À compléter...</li></ul>
-                <h3>📚 CE QUE J'AI APPRIS</h3>
-                <ul><li>À compléter...</li></ul>
-            </div>
+<!-- ========================
+     POPUPS PROJETS (:target)
+     ======================== -->
+
+<div id="pp-msm" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">Web · HTML / CSS / JS · 1ère année</div>
+        <h1 class="popup-h1">Le Mont<br>Saint-Michel</h1>
+        <p class="popup-desc">Site de médiation culturelle pour l'UNESCO, présentant le Mont Saint-Michel et son histoire. Projet collaboratif en équipe de 6 personnes.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">Projet universitaire</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">6 personnes</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Mon rôle</div><div class="popup-meta-v">À compléter</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2024-2025</div></div>
         </div>
+        <div class="popup-tags"><span class="popup-tag">HTML5</span><span class="popup-tag">CSS3</span><span class="popup-tag">JavaScript</span></div>
+        <div class="popup-section"><div class="popup-section-title">Contexte</div><p>À compléter avec les détails du projet.</p></div>
+        <div class="popup-section"><div class="popup-section-title">Fonctionnalités</div><ul><li>Présentation immersive du Mont Saint-Michel</li><li>Sections thématiques : histoire, architecture, légendes</li><li>Design responsive mobile / tablette / desktop</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Ma contribution</div><ul><li>À compléter avec ton rôle exact</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Compétences développées</div><ul><li>Développement web front-end (HTML, CSS, JavaScript)</li><li>Travail collaboratif avec Git</li></ul></div>
     </div>
+</div>
 
-    <!-- KREMLIN -->
-    <div id="popup-kremlin" class="popup-overlay">
-        <div class="popup">
-            <a href="#projets" class="popup-close">✕</a>
-            <div class="popup-header">
-                <div class="icon">🏰</div>
-                <h2>LE KREMLIN</h2>
-                <p class="tagline">Site UNESCO</p>
-            </div>
-            <div class="info-grid">
-                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
-                <div><span class="label">Équipe:</span> <span class="value">6 personnes</span></div>
-            </div>
-            <div class="popup-content">
-                <h3>📜 DESCRIPTION</h3>
-                <p>À compléter...</p>
-                <h3>🎯 MON RÔLE</h3>
-                <ul><li>À compléter...</li></ul>
-                <h3>📚 CE QUE J'AI APPRIS</h3>
-                <ul><li>À compléter...</li></ul>
-                <h3>🔗 LIEN</h3>
-                <a href="https://starrk.xyz/site/index.html" target="_blank" class="popup-link">► VOIR LE SITE</a>
-            </div>
+<div id="pp-wiy" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">Python · SAÉ · 1ère année</div>
+        <h1 class="popup-h1">Wall Is You</h1>
+        <p class="popup-desc">Jeu de puzzle où le joueur incarne un donjon bienveillant devant guider un aventurier à travers des salles pivotables pour vaincre des dragons.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">SAÉ</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">Binôme</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Durée</div><div class="popup-meta-v">5 mois</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2025-2026</div></div>
         </div>
+        <div class="popup-tags"><span class="popup-tag">Python 3</span>
+        <div class="popup-section"><div class="popup-section-title">Contexte</div><p>SAÉ du module <strong>Initiation au développement</strong>. Les rôles sont inversés : le joueur est le donjon, l'aventurier est automatique. Projet en 3 rendus de complexité croissante.</p></div>
+        <div class="popup-section"><div class="popup-section-title">Fonctionnalités</div><ul><li><strong>Moteur de jeu</strong> : grille de salles représentées par tuples de booléens</li><li><strong>Rotation des salles</strong> : pivot de 90° au clic</li><li><strong>Pathfinding</strong> : calcul automatique de l'intention de l'aventurier (BFS)</li><li><strong>Lecture de fichiers de donjons</strong> avec caractères spéciaux</li><li><strong>Variantes</strong> : trésors, sauvegarde, déplacement des dragons</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Ma contribution</div><ul><li>Conception du moteur de jeu</li><li>Algorithme de pathfinding</li><li>Interface graphique avec fltk</li><li>Lecture et parsing des fichiers de donjons</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Compétences développées</div><ul><li>Algorithmique avancée : parcours de graphes, BFS</li><li>Programmation Python et interface graphique fltk</li><li>Travail collaboratif avec Git / GitHub</li></ul></div>
     </div>
+</div>
 
-    <!-- YAHTZEE -->
-    <div id="popup-yahtzee" class="popup-overlay">
-        <div class="popup">
-            <a href="#projets" class="popup-close">✕</a>
-            <div class="popup-header">
-                <div class="icon">🎲</div>
-                <h2>YAHTZEE</h2>
-                <p class="tagline">Jeu Java</p>
-            </div>
-            <div class="info-grid">
-                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
-                <div><span class="label">Équipe:</span> <span class="value">Binôme</span></div>
-            </div>
-            <div class="popup-content">
-                <h3>📜 DESCRIPTION</h3>
-                <p>À compléter...</p>
-                <h3>🎯 MON RÔLE</h3>
-                <ul><li>À compléter...</li></ul>
-                <h3>📚 CE QUE J'AI APPRIS</h3>
-                <ul><li>À compléter...</li></ul>
-            </div>
+<div id="pp-schtroumpfs" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">Java · SAÉ POO · 1ère année</div>
+        <h1 class="popup-h1">Conseil des<br>Schtroumpfs</h1>
+        <p class="popup-desc">Jeu de rôle collaboratif simulant la gestion du village des Schtroumpfs pendant 12 mois. Java 25, architecture MVC stricte.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">SAÉ POO</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">4-5 personnes</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Durée</div><div class="popup-meta-v">1 semestre</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2025-2026</div></div>
         </div>
+        <div class="popup-tags"><span class="popup-tag">Java 25</span><span class="popup-tag">MVC</span><span class="popup-tag">Records</span><span class="popup-tag">Enums</span></div>
+        <div class="popup-section"><div class="popup-section-title">Fonctionnalités</div><ul><li><strong>7 ressources</strong> : Baies, Salsepareille, Or, Outils, Moral, Défense, Savoir</li><li><strong>Événements aléatoires</strong> : Gargamel, tempêtes, découvertes</li><li><strong>4 personnages jouables</strong> avec actions spécifiques</li><li><strong>Système de crises</strong> et conditions de victoire</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Ma contribution</div><ul><li>À compléter avec ton rôle exact</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Compétences développées</div><ul><li>POO avancée en Java 25 : records, interfaces, enums</li><li>Architecture MVC stricte</li><li>Travail en équipe et soutenance</li></ul></div>
     </div>
+</div>
 
-    <!-- DATABASE -->
-    <div id="popup-database" class="popup-overlay">
-        <div class="popup">
-            <a href="#projets" class="popup-close">✕</a>
-            <div class="popup-header">
-                <div class="icon">🗄️</div>
-                <h2>BASE DE DONNÉES</h2>
-                <p class="tagline">Gestion cimetière</p>
-            </div>
-            <div class="info-grid">
-                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
-                <div><span class="label">Durée:</span> <span class="value">2 semestres</span></div>
-            </div>
-            <div class="popup-content">
-                <h3>📜 DESCRIPTION</h3>
-                <p>À compléter...</p>
-                <h3>🎯 MON RÔLE</h3>
-                <ul><li>À compléter...</li></ul>
-                <h3>📚 CE QUE J'AI APPRIS</h3>
-                <ul><li>À compléter...</li></ul>
-            </div>
+<div id="pp-automates" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">Python · SAÉ 2-02 · Mathématiques</div>
+        <h1 class="popup-h1">Exploration<br>Algorithmique</h1>
+        <p class="popup-desc">Implémentation des algorithmes de la théorie des automates et des langages formels en Python.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">SAÉ 2-02</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">Individuel</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Module</div><div class="popup-meta-v">Graphes</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2024-2025</div></div>
         </div>
+        <div class="popup-tags"><span class="popup-tag">Python 3</span><span class="popup-tag">Automates</span><span class="popup-tag">Graphes</span></div>
+        <div class="popup-section"><div class="popup-section-title">Fonctions implémentées</div><ul><li><strong>Mots :</strong> pref, suf, fact, miroir</li><li><strong>Langages :</strong> concatene, puis, tousmots</li><li><strong>Automates :</strong> defauto, lirelettre, accepte</li><li><strong>Déterminisation</strong> et renommage</li><li><strong>Complémentation</strong></li><li><strong>Automate produit</strong> : intersection, différence</li><li><strong>Minimisation</strong> — algorithme de Moore</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Compétences développées</div><ul><li>Algorithmique avancée et théorie des graphes</li><li>Mathématiques discrètes et langages formels</li></ul></div>
     </div>
+</div>
 
-    <!-- AMOR VINCIT -->
-    <div id="popup-amor" class="popup-overlay">
-        <div class="popup">
-            <a href="#projets" class="popup-close">✕</a>
-            <div class="popup-header">
-                <div class="icon">💕</div>
-                <h2>AMOR VINCIT</h2>
-                <p class="tagline">Site seniors</p>
-            </div>
-            <div class="info-grid">
-                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
-                <div><span class="label">Équipe:</span> <span class="value">Groupe</span></div>
-            </div>
-            <div class="popup-content">
-                <h3>📜 DESCRIPTION</h3>
-                <p>À compléter...</p>
-                <h3>🎯 MON RÔLE</h3>
-                <ul><li>À compléter...</li></ul>
-                <h3>📚 CE QUE J'AI APPRIS</h3>
-                <ul><li>À compléter...</li></ul>
-            </div>
+<div id="pp-yahtzee" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">Java · Projet · 1ère année</div>
+        <h1 class="popup-h1">Yahtzee</h1>
+        <p class="popup-desc">Recréation du jeu de dés Yahtzee en Java. Logique de combinaisons et calcul de score complet.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">Projet universitaire</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">Binôme</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2024-2025</div></div>
         </div>
+        <div class="popup-tags"><span class="popup-tag">Java</span><span class="popup-tag">POO</span></div>
+        <div class="popup-section"><div class="popup-section-title">Fonctionnalités</div><ul><li>Lancer de 5 dés, relances (3 max)</li><li>Reconnaissance automatique des combinaisons</li><li>Calcul des scores par catégorie</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Ma contribution</div><ul><li>À compléter</li></ul></div>
     </div>
+</div>
 
-    <!-- IMPERIUM PIZZA -->
-    <div id="popup-pizza" class="popup-overlay">
-        <div class="popup">
-            <a href="#projets" class="popup-close">✕</a>
-            <div class="popup-header">
-                <div class="icon">🍕</div>
-                <h2>IMPERIUM PIZZA</h2>
-                <p class="tagline">App commande</p>
-            </div>
-            <div class="info-grid">
-                <div><span class="label">Type:</span> <span class="value">Projet universitaire</span></div>
-                <div><span class="label">Équipe:</span> <span class="value">4 personnes</span></div>
-            </div>
-            <div class="popup-content">
-                <h3>📜 DESCRIPTION</h3>
-                <p>À compléter...</p>
-                <h3>🎯 MON RÔLE</h3>
-                <ul><li>À compléter...</li></ul>
-                <h3>📚 CE QUE J'AI APPRIS</h3>
-                <ul><li>À compléter...</li></ul>
-            </div>
+<div id="pp-bdd" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">SQL / PHP · Projet · 1ère année</div>
+        <h1 class="popup-h1">Base de données</h1>
+        <p class="popup-desc">Création d'une base de données pour la gestion d'un cimetière sur 2 semestres. MySQL en S1, migration PostgreSQL et interface PHP en S2.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">Projet universitaire</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Durée</div><div class="popup-meta-v">2 semestres</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2024-2025</div></div>
         </div>
+        <div class="popup-tags"><span class="popup-tag">MySQL</span><span class="popup-tag">PostgreSQL</span><span class="popup-tag">PHP</span></div>
+        <div class="popup-section"><div class="popup-section-title">Compétences développées</div><ul><li>Conception de bases de données (MCD, MLD)</li><li>SQL avancé, migration MySQL → PostgreSQL</li><li>Développement backend PHP</li></ul></div>
     </div>
+</div>
+
+<div id="pp-dhcp" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">Réseau · SAÉ · 1ère année</div>
+        <h1 class="popup-h1">Serveur DHCP</h1>
+        <p class="popup-desc">Installation et configuration d'un serveur DHCP sous Linux avec Netkit-ng. Analyse des échanges réseau avec Wireshark.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">SAÉ Réseaux</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">Trinôme</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2024-2025</div></div>
+        </div>
+        <div class="popup-tags"><span class="popup-tag">Linux</span><span class="popup-tag">Netkit-ng</span><span class="popup-tag">Wireshark</span><span class="popup-tag">DHCP</span></div>
+        <div class="popup-section"><div class="popup-section-title">Travail réalisé</div><ul><li>Réseau virtuel avec Netkit-ng (4 machines + 1 serveur)</li><li>Configuration isc-dhcp-server</li><li>Analyse des 4 messages DHCP : Discover, Offer, Request, Acknowledge</li><li>Capture et analyse de trames Wireshark</li><li>Configuration d'adresses IP fixes</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Compétences développées</div><ul><li>Administration système Linux</li><li>Protocole DHCP et adressage IPv4</li><li>Analyse de trames réseau</li></ul></div>
+    </div>
+</div>
+
+<div id="pp-amor" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">Web / PHP · Projet · 1ère année</div>
+        <h1 class="popup-h1">Amor Vincit</h1>
+        <p class="popup-desc">Site de rencontre pour seniors en maison de retraite. Messagerie, profils et interface administrateur.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">Projet universitaire</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">Groupe</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2024-2025</div></div>
+        </div>
+        <div class="popup-tags"><span class="popup-tag">HTML</span><span class="popup-tag">CSS</span><span class="popup-tag">PHP</span><span class="popup-tag">MySQL</span></div>
+        <div class="popup-section"><div class="popup-section-title">Fonctionnalités</div><ul><li>Inscription et connexion utilisateurs</li><li>Messagerie entre résidents</li><li>Interface administrateur</li><li>Design adapté aux seniors</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Ma contribution</div><ul><li>À compléter</li></ul></div>
+    </div>
+</div>
+
+<div id="pp-pizza" class="popup-overlay">
+    <div class="popup-box">
+        <a href="#projets" class="popup-back">← Retour</a>
+        <div class="popup-cat">JavaFX · Projet · 1ère année</div>
+        <h1 class="popup-h1">Imperium Pizza</h1>
+        <p class="popup-desc">Application desktop de commande de pizzas avec interface graphique JavaFX. Création personnalisée et panier de commande.</p>
+        <div class="popup-meta">
+            <div class="popup-meta-item"><div class="popup-meta-l">Type</div><div class="popup-meta-v">Projet universitaire</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Équipe</div><div class="popup-meta-v">4 personnes</div></div>
+            <div class="popup-meta-item"><div class="popup-meta-l">Année</div><div class="popup-meta-v">2024-2025</div></div>
+        </div>
+        <div class="popup-tags"><span class="popup-tag">Java</span><span class="popup-tag">JavaFX</span><span class="popup-tag">POO</span></div>
+        <div class="popup-section"><div class="popup-section-title">Fonctionnalités</div><ul><li>Menu de pizzas et création personnalisée</li><li>Sélection d'ingrédients</li><li>Panier et récapitulatif de commande</li></ul></div>
+        <div class="popup-section"><div class="popup-section-title">Ma contribution</div><ul><li>À compléter</li></ul></div>
+    </div>
+</div>
 
 </body>
 </html>
