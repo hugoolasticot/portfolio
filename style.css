@@ -370,8 +370,26 @@ section:not(#hero) {
     background: var(--surface);
 }
 
-/* Onglets radio CSS */
-.tabs-radio { display: none; }
+/* Onglets radio CSS — masqués visuellement mais gardés focusables au clavier */
+.tabs-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#tab-langages:focus-visible ~ .tabs-labels label[for="tab-langages"],
+#tab-outils:focus-visible ~ .tabs-labels label[for="tab-outils"],
+#tab-soft:focus-visible ~ .tabs-labels label[for="tab-soft"],
+#tab-langues:focus-visible ~ .tabs-labels label[for="tab-langues"] {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
 
 .tabs-labels {
     display: flex;
@@ -459,8 +477,28 @@ section:not(#hero) {
 /* ================================
    PROJETS
    ================================ */
-/* Filtres */
-.filter-radios { display: none; }
+/* Filtres — masqués visuellement mais gardés focusables au clavier */
+.filter-radios {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#pf-all:focus-visible ~ .filter-labels label[for="pf-all"],
+#pf-python:focus-visible ~ .filter-labels label[for="pf-python"],
+#pf-java:focus-visible ~ .filter-labels label[for="pf-java"],
+#pf-web:focus-visible ~ .filter-labels label[for="pf-web"],
+#pf-sql:focus-visible ~ .filter-labels label[for="pf-sql"],
+#pf-reseau:focus-visible ~ .filter-labels label[for="pf-reseau"] {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
 
 .filter-labels {
     display: flex;
@@ -802,6 +840,14 @@ footer a:hover { color: var(--green); }
 
 .popup-overlay:target {
     display: block;
+}
+
+body.popup-open {
+    overflow: hidden;
+}
+
+.popup-box:focus {
+    outline: none;
 }
 
 .popup-box {
