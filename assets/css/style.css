@@ -132,8 +132,6 @@ img { max-width: 100%; display: block; }
     border-color: var(--line2);
 }
 
-.sidebar-logo { display: none; }
-
 /* Nav liens en haut */
 .sidebar-nav {
     display: flex;
@@ -199,11 +197,9 @@ img { max-width: 100%; display: block; }
     min-width: 0;
 }
 
-.topnav { display: none; }
-
 
 /* ================================
-   HERO — style Helder
+   HERO
    ================================ */
 #hero {
     min-height: 100vh;
@@ -331,10 +327,6 @@ section:not(#hero) {
 /* ================================
    À PROPOS — texte + bio
    ================================ */
-.apropos-right-empty {
-    display: none;
-}
-
 #apropos .apropos-layout {
     display: grid;
     grid-template-columns: 1fr;
@@ -344,24 +336,12 @@ section:not(#hero) {
     text-align: center;
 }
 
-#apropos .apropos-big {
+/* Une seule règle par sélecteur. Avant, .apropos-big et #apropos .apropos-big
+   se chevauchaient, et les quatre propriétés de .apropos-bio p étaient
+   entièrement écrasées par la règle plus spécifique placée au-dessus. */
+.apropos-big {
     text-align: center;
     font-size: clamp(44px, 5.5vw, 72px);
-}
-
-#apropos .apropos-bio {
-    text-align: center;
-}
-
-#apropos .apropos-bio p {
-    font-size: 18px;
-    line-height: 1.85;
-    color: var(--text-3);
-    margin-bottom: 20px;
-}
-
-.apropos-big {
-    font-size: clamp(36px, 4vw, 56px);
     font-weight: 700;
     letter-spacing: -2px;
     line-height: 1.05;
@@ -371,11 +351,15 @@ section:not(#hero) {
 
 .apropos-big span { color: var(--green); }
 
+#apropos .apropos-bio {
+    text-align: center;
+}
+
 .apropos-bio p {
-    font-size: 15px;
+    font-size: 18px;
+    line-height: 1.85;
     color: var(--text-3);
-    line-height: 1.9;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .apropos-bio p strong { color: var(--text-2); font-weight: 600; }
@@ -389,65 +373,6 @@ section:not(#hero) {
 }
 
 .lien-vert:hover { border-bottom-color: var(--green); }
-
-.apropos-right {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
-}
-
-/* Stats inline */
-.apropos-stats {
-    display: flex;
-    gap: 40px;
-    padding: 28px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    margin-top: 28px;
-}
-
-.apropos-stat-n {
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--text);
-    letter-spacing: -1px;
-    line-height: 1;
-}
-
-.apropos-stat-n span { color: var(--green); }
-
-.apropos-stat-l {
-    font-size: 11px;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 6px;
-}
-
-/* Cards info */
-.info-card {
-    background: var(--surface);
-    border: 1px solid var(--line2);
-    border-radius: 8px;
-    padding: 22px 24px;
-    transition: border-color 0.2s;
-}
-
-.info-card:hover { border-color: var(--green); }
-
-.info-card-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 8px;
-}
-
-.info-card-text {
-    font-size: 13px;
-    color: var(--text-3);
-    line-height: 1.6;
-}
 
 /* ================================
    COMPÉTENCES — onglets CSS purs
@@ -894,10 +819,10 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 /* ================================
    CV
    ================================ */
-#cv {
-    padding: 96px 64px;
-}
-
+/* Le padding vient de la règle section:not(#hero) plus haut.
+   L'ancienne règle #cv le redéfinissait à l'identique, mais avec une
+   spécificité d'identifiant : elle empêchait donc les media queries de
+   réduire les marges de cette section sur tablette et mobile. */
 .cv-layout {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
@@ -953,9 +878,6 @@ footer {
     color: var(--text-4);
     border-top: 1px solid var(--line);
 }
-
-footer a { color: var(--text-3); transition: color 0.2s; }
-footer a:hover { color: var(--green); }
 
 /* ================================
    POPUPS (:target)
@@ -1371,6 +1293,7 @@ body.popup-open {
     .skills-grid { grid-template-columns: repeat(2, 1fr); }
     #apropos .apropos-bio p { font-size: 15px; }
     .to-top { right: 16px; bottom: 16px; }
+    .erreur { padding: 32px 24px; }
 }
 
 /* En dessous de 600px une carte projet sur deux colonnes devient
@@ -1429,10 +1352,6 @@ body.popup-open {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-    .erreur { padding: 32px 24px; }
 }
 
 /* ================================
