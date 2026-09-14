@@ -1,63 +1,26 @@
 /* ================================
-   VARIABLES
+   STYLES DU SITE
+   ================================
+   Les valeurs (couleurs, espacements, tailles) ne sont plus écrites ici :
+   elles viennent de tokens.css, chargé juste avant dans le <head>.
+
+   Ce fichier ne décrit donc plus que des RÈGLES : quel élément ressemble
+   à quoi. Pour changer une couleur ou un rythme d'espacement, c'est
+   tokens.css qu'il faut ouvrir.
    ================================ */
-/* Thème sombre = thème par défaut.
-   Les noms décrivent le rôle (fond, texte, trait) et non la couleur,
-   pour que le thème clair puisse réutiliser les mêmes variables. */
-:root {
-    --bg:       #000000;   /* fond de page */
-    --surface:  #111111;   /* fond des cartes et encarts */
-    --line:     #1c1c1c;   /* trait discret */
-    --line2:    #252525;   /* trait plus marqué */
-
-    /* Les gris sont calés pour rester lisibles (WCAG AA, 4.5:1)
-       même sur le fond des cartes, qui est le pire cas */
-    --text:     #ffffff;   /* texte principal */
-    --text-2:   #c8c8c8;   /* texte secondaire */
-    --text-3:   #949494;   /* texte tertiaire   — 6.2:1 */
-    --text-4:   #808080;   /* texte très discret — 4.8:1 */
-
-    --green:    #4a9e78;   /* vert sobre, mat */
-    --on-green: #ffffff;   /* texte posé sur le vert : blanc dans les deux thèmes */
-    --green-hover: #3a8a66;
-    --green-soft:  rgba(74, 158, 120, 0.08);   /* fond vert très dilué */
-
-    --shadow:   0 12px 28px rgba(0, 0, 0, 0.45);   /* élévation des cartes au survol */
-
-    --sidebar:  160px;
-    --font:     'Inter', sans-serif;
-}
-
-/* Thème clair. Appliqué par le JS via data-theme="light" sur <html>.
-   Le vert est assombri pour rester lisible sur fond blanc. */
-:root[data-theme="light"] {
-    --bg:       #ffffff;
-    --surface:  #f6f6f4;
-    --line:     #e7e7e3;
-    --line2:    #d5d5cf;
-
-    --text:     #14140f;
-    --text-2:   #3a3a34;
-    --text-3:   #5f5f57;   /* 6.0:1 */
-    --text-4:   #6e6e66;   /* 4.8:1 */
-
-    --green:    #2c7355;
-    --green-hover: #215a42;
-    --green-soft:  rgba(44, 115, 85, 0.09);
-
-    --shadow:   0 10px 24px rgba(0, 0, 0, 0.12);
-}
 
 /* ================================
    RESET
    ================================ */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
 body {
     font-family: var(--font);
     background: var(--bg);
     color: var(--text);
 }
+
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
@@ -69,8 +32,8 @@ img { max-width: 100%; display: block; }
    ================================ */
 .reveal {
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(var(--space-4));
+    transition: opacity var(--dur-slow) ease, transform var(--dur-slow) ease;
 }
 
 .reveal.is-visible {
@@ -80,7 +43,7 @@ img { max-width: 100%; display: block; }
 
 /* Cascade du hero au chargement de la page */
 @keyframes apparition {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(var(--space-4)); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -90,7 +53,7 @@ img { max-width: 100%; display: block; }
 .hero-desc,
 .hero-cta {
     opacity: 0;
-    animation: apparition 0.6s ease forwards;
+    animation: apparition var(--dur-slow) ease forwards;
 }
 
 .hero-topname    { animation-delay: 0.05s; }
@@ -121,15 +84,15 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 28px 0;
+    padding: var(--space-7) 0;
     z-index: 200;
-    transition: background-color 0.25s, border-color 0.25s;
+    transition: background-color var(--dur-fast), border-color var(--dur-fast);
 }
 
 /* Le fond se densifie une fois qu'on a quitté le haut de la page */
 .sidebar.is-scrolled {
     background: var(--surface);
-    border-color: var(--line2);
+    border-color: var(--line-strong);
 }
 
 /* Nav liens en haut */
@@ -137,18 +100,18 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 28px 12px 0;
+    padding: var(--space-7) var(--space-3) 0;
     width: 100%;
 }
 
 .sidebar-nav a {
     display: block;
-    padding: 9px 14px;
-    font-size: 12px;
-    font-weight: 500;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
     color: var(--text-3);
-    border-radius: 4px;
-    transition: all 0.2s;
+    border-radius: var(--radius-sm);
+    transition: all var(--dur-fast);
 }
 
 .sidebar-nav a:hover {
@@ -167,12 +130,14 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-2);
     margin-top: auto;
-    padding-bottom: 28px;
+    padding-bottom: var(--space-7);
     width: 100%;
 }
 
+/* 36px est une taille de cible tactile, pas un espacement :
+   elle reste écrite en clair. */
 .sidebar-icons a {
     width: 36px;
     height: 36px;
@@ -180,8 +145,8 @@ img { max-width: 100%; display: block; }
     align-items: center;
     justify-content: center;
     color: var(--text-3);
-    transition: color 0.2s;
-    border-radius: 4px;
+    transition: color var(--dur-fast);
+    border-radius: var(--radius-sm);
 }
 
 .sidebar-icons a:hover {
@@ -197,7 +162,6 @@ img { max-width: 100%; display: block; }
     min-width: 0;
 }
 
-
 /* ================================
    HERO
    ================================ */
@@ -206,16 +170,16 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 32px 64px 48px;
+    padding: var(--space-8) var(--space-11) var(--space-10);
     border-bottom: 1px solid var(--line);
     position: relative;
 }
 
 /* Nom en haut */
 .hero-topname {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: var(--text-2);
     align-self: flex-start;
@@ -227,24 +191,24 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 40px 0;
+    padding: var(--space-9) 0;
 }
 
 .hero-name-small {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 3px;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: var(--text-3);
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
     text-align: center;
 }
 
 .hero-big {
-    font-size: clamp(80px, 13vw, 180px);
-    font-weight: 800;
-    line-height: 0.88;
-    letter-spacing: -4px;
+    font-size: var(--fs-hero);
+    font-weight: var(--fw-black);
+    line-height: var(--lh-hero);
+    letter-spacing: var(--ls-hero);
     text-transform: uppercase;
     text-align: center;
 }
@@ -260,24 +224,24 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-desc {
-    font-size: 13px;
+    font-size: var(--fs-sm);
     color: var(--text-3);
     max-width: 340px;
-    line-height: 1.7;
+    line-height: var(--lh-base);
 }
 
 .hero-cta {
     display: flex;
-    gap: 12px;
+    gap: var(--space-3);
 }
 
 .btn {
-    padding: 13px 24px;
-    font-size: 12px;
-    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
     letter-spacing: 0.5px;
-    border-radius: 4px;
-    transition: all 0.2s;
+    border-radius: var(--radius-sm);
+    transition: all var(--dur-fast);
     cursor: pointer;
     font-family: var(--font);
 }
@@ -287,40 +251,43 @@ img { max-width: 100%; display: block; }
     color: var(--on-green);
     border: 1px solid var(--green);
 }
+
 .btn-filled:hover { background: var(--green-hover); border-color: var(--green-hover); }
 
 .btn-ghost {
     background: transparent;
     color: var(--text-2);
-    border: 1px solid var(--line2);
+    border: 1px solid var(--line-strong);
 }
+
 .btn-ghost:hover { border-color: var(--text-3); color: var(--text); }
 
 /* ================================
    SECTIONS COMMUNES
    ================================ */
 section:not(#hero) {
-    padding: 96px 64px;
+    padding: var(--space-12) var(--space-11);
     border-bottom: 1px solid var(--line);
 }
 
 .sec-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 3px;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: var(--green);
-    margin-bottom: 48px;
+    margin-bottom: var(--space-10);
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: var(--space-4);
 }
 
+/* Le filet horizontal qui prolonge le label */
 .sec-label::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: var(--line2);
+    background: var(--line-strong);
     max-width: 80px;
 }
 
@@ -336,17 +303,14 @@ section:not(#hero) {
     text-align: center;
 }
 
-/* Une seule règle par sélecteur. Avant, .apropos-big et #apropos .apropos-big
-   se chevauchaient, et les quatre propriétés de .apropos-bio p étaient
-   entièrement écrasées par la règle plus spécifique placée au-dessus. */
 .apropos-big {
     text-align: center;
-    font-size: clamp(44px, 5.5vw, 72px);
-    font-weight: 700;
-    letter-spacing: -2px;
-    line-height: 1.05;
+    font-size: var(--fs-title);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-title);
+    line-height: var(--lh-tight);
     color: var(--text);
-    margin-bottom: 32px;
+    margin-bottom: var(--space-8);
 }
 
 .apropos-big span { color: var(--green); }
@@ -356,20 +320,20 @@ section:not(#hero) {
 }
 
 .apropos-bio p {
-    font-size: 18px;
-    line-height: 1.85;
+    font-size: var(--fs-md);
+    line-height: var(--lh-loose);
     color: var(--text-3);
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
 }
 
-.apropos-bio p strong { color: var(--text-2); font-weight: 600; }
+.apropos-bio p strong { color: var(--text-2); font-weight: var(--fw-semibold); }
 
 /* Lien mis en avant dans un paragraphe */
 .lien-vert {
     color: var(--green);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color var(--dur-fast);
 }
 
 .lien-vert:hover { border-bottom-color: var(--green); }
@@ -405,22 +369,22 @@ section:not(#hero) {
 .tabs-labels {
     display: flex;
     gap: 0;
-    border: 1px solid var(--line2);
-    border-radius: 6px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
     overflow: hidden;
     width: fit-content;
-    margin-bottom: 48px;
+    margin-bottom: var(--space-10);
 }
 
 .tab-label {
-    padding: 11px 24px;
-    font-size: 12px;
-    font-weight: 600;
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
     letter-spacing: 0.5px;
     color: var(--text-3);
     cursor: pointer;
-    transition: all 0.2s;
-    border-right: 1px solid var(--line2);
+    transition: all var(--dur-fast);
+    border-right: 1px solid var(--line-strong);
     user-select: none;
     background: transparent;
 }
@@ -452,24 +416,26 @@ section:not(#hero) {
     display: block;
 }
 
+/* 180px = largeur minimale d'une carte avant que la grille ne change
+   de nombre de colonnes. C'est une contrainte de mise en page. */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
+    gap: var(--space-3);
 }
 
 .skill-item {
     background: var(--bg);
-    border: 1px solid var(--line2);
-    border-radius: 6px;
-    padding: 18px 20px;
-    font-size: 14px;
-    font-weight: 500;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
     color: var(--text-2);
-    transition: all 0.2s;
+    transition: all var(--dur-fast);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-3);
 }
 
 .skill-item:hover {
@@ -477,10 +443,11 @@ section:not(#hero) {
     color: var(--text);
 }
 
+/* Pastille de 6px : c'est une forme, pas un espacement */
 .skill-dot {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
+    border-radius: var(--radius-full);
     background: var(--green);
     flex-shrink: 0;
 }
@@ -514,22 +481,22 @@ section:not(#hero) {
 
 .filter-labels {
     display: flex;
-    gap: 8px;
+    gap: var(--space-2);
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-9);
 }
 
 .filter-label {
-    padding: 8px 18px;
-    font-size: 11px;
-    font-weight: 600;
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
     letter-spacing: 1px;
     text-transform: uppercase;
-    border: 1px solid var(--line2);
-    border-radius: 3px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
     color: var(--text-3);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all var(--dur-fast);
     user-select: none;
 }
 
@@ -559,7 +526,7 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
     display: none;
 }
 
-/* Grille projets */
+/* Grille projets — l'interstice de 2px est un filet, pas un espacement */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -574,7 +541,10 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
     color: inherit;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.2s, transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    transition: border-color var(--dur-fast),
+                transform var(--dur-fast) ease,
+                box-shadow var(--dur-fast) ease,
+                opacity var(--dur-fast) ease;
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -586,7 +556,7 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 
 /* Élévation douce au survol */
 .pcard:hover {
-    border-color: var(--line2);
+    border-color: var(--line-strong);
     z-index: 1;
     transform: translateY(-4px);
     box-shadow: var(--shadow);
@@ -605,7 +575,7 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
     display: none;
 }
 
-/* Zone image — simple, carré */
+/* Zone image */
 .pcard-img {
     width: 100%;
     aspect-ratio: 16/9;
@@ -620,7 +590,7 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
+    transition: transform var(--dur-base) ease;
 }
 
 .pcard:hover .pcard-img img {
@@ -628,7 +598,9 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 }
 
 /* Placeholder quand la capture n'est pas encore fournie :
-   dégradé teinté selon le langage + initiales du langage en filigrane */
+   dégradé teinté selon le langage + initiales du langage en filigrane.
+   Ces dégradés sont des illustrations ponctuelles, pas des couleurs du
+   système : ils restent écrits en clair. */
 .pcard-ph {
     width: 100%;
     height: 100%;
@@ -640,9 +612,9 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 }
 
 .pcard-ph span {
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: 3px;
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.13);
 }
@@ -663,83 +635,85 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 :root[data-theme="light"] .pcard-ph[data-lang="Python"] { background: linear-gradient(135deg, #e0e8f3 0%, #f6f6f4 100%); }
 :root[data-theme="light"] .pcard-ph[data-lang="Linux"]  { background: linear-gradient(135deg, #f0ead6 0%, #f6f6f4 100%); }
 
-/* Marqueur des contenus qu'il me reste à rédiger — voir TODO.md */
+/* Marqueur des contenus qu'il me reste à rédiger — voir SUIVI.md.
+   Les couleurs sont encore écrites en clair ici : elles sont illisibles
+   en thème clair (2,05:1), et c'est corrigé au commit suivant. */
 .todo {
     display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-bold);
     letter-spacing: 1px;
     color: #e0a33e;
     border: 1px solid rgba(224, 163, 62, 0.45);
     background: rgba(224, 163, 62, 0.09);
-    padding: 1px 7px;
-    border-radius: 3px;
+    padding: 1px var(--space-2);
+    border-radius: var(--radius-sm);
     vertical-align: middle;
 }
 
 /* Corps carte */
 .pcard-body {
-    padding: 22px 24px;
+    padding: var(--space-6);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--space-2);
     flex: 1;
 }
 
 .pcard-num {
-    font-size: 10px;
+    font-size: var(--fs-2xs);
     color: var(--text-4);
     letter-spacing: 2px;
-    font-weight: 500;
+    font-weight: var(--fw-medium);
     text-transform: uppercase;
 }
 
 .pcard-title {
-    font-size: 17px;
-    font-weight: 700;
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
     color: var(--text);
     letter-spacing: -0.3px;
-    line-height: 1.2;
+    line-height: var(--lh-snug);
 }
 
 .pcard-desc {
-    font-size: 13px;
+    font-size: var(--fs-sm);
     color: var(--text-3);
-    line-height: 1.6;
+    line-height: var(--lh-base);
 }
 
 .pcard-tags {
     display: flex;
-    gap: 6px;
+    gap: var(--space-2);
     flex-wrap: wrap;
-    margin-top: 6px;
+    margin-top: var(--space-2);
 }
 
 .pcard-tag {
-    font-size: 10px;
-    font-weight: 600;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
     letter-spacing: 0.5px;
     color: var(--text-4);
-    border: 1px solid var(--line2);
-    padding: 3px 8px;
-    border-radius: 2px;
+    border: 1px solid var(--line-strong);
+    padding: 3px var(--space-2);
+    border-radius: var(--radius-sm);
     text-transform: uppercase;
 }
 
-/* Flèche hover */
+/* Flèche affichée au survol — 30px est une taille de pastille */
 .pcard-arrow {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: var(--space-4);
+    right: var(--space-4);
     width: 30px;
     height: 30px;
-    border: 1px solid var(--line2);
-    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.2s, border-color 0.2s;
+    transition: opacity var(--dur-fast), border-color var(--dur-fast);
     background: var(--bg);
 }
 
@@ -755,7 +729,7 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 }
 
 /* ================================
-   CONTACT — minimal
+   CONTACT
    ================================ */
 #contact {
     background: var(--surface);
@@ -764,15 +738,15 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 .contact-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: var(--space-11);
     align-items: center;
 }
 
 .contact-big {
-    font-size: clamp(40px, 5vw, 72px);
-    font-weight: 800;
-    letter-spacing: -3px;
-    line-height: 1.0;
+    font-size: var(--fs-title);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-title);
+    line-height: var(--lh-tight);
     color: var(--text);
 }
 
@@ -781,20 +755,20 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--space-4);
 }
 
 .contact-link-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
-    border: 1px solid var(--line2);
-    border-radius: 6px;
-    transition: all 0.2s;
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    transition: all var(--dur-fast);
     color: var(--text-2);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
 }
 
 .contact-link-item:hover {
@@ -808,7 +782,7 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
     height: 16px;
     color: var(--green);
     opacity: 0;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity var(--dur-fast), transform var(--dur-fast);
 }
 
 .contact-link-item:hover svg {
@@ -826,23 +800,23 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 .cv-layout {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
-    gap: 64px;
+    gap: var(--space-11);
     align-items: start;
 }
 
 .cv-left h3 {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
     letter-spacing: -0.5px;
     color: var(--text);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
 }
 
 .cv-left p {
-    font-size: 14px;
+    font-size: var(--fs-base);
     color: var(--text-3);
-    line-height: 1.8;
-    margin-bottom: 12px;
+    line-height: var(--lh-loose);
+    margin-bottom: var(--space-3);
 }
 
 .cv-left p strong { color: var(--text-2); }
@@ -850,16 +824,18 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 .cv-btns {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 28px;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
 }
 
 .cv-frame {
-    border: 1px solid var(--line2);
-    border-radius: 6px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 
+/* 540px : hauteur d'aperçu du PDF, choisie pour qu'une page A4 reste
+   lisible sur un écran d'ordinateur. */
 .cv-frame iframe {
     width: 100%;
     height: 540px;
@@ -871,10 +847,10 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
    FOOTER
    ================================ */
 footer {
-    padding: 24px 64px;
+    padding: var(--space-6) var(--space-11);
     display: flex;
     justify-content: space-between;
-    font-size: 11px;
+    font-size: var(--fs-2xs);
     color: var(--text-4);
     border-top: 1px solid var(--line);
 }
@@ -902,59 +878,62 @@ body.popup-open {
     overflow: hidden;
 }
 
+/* Le JS donne le focus à cette boîte à l'ouverture, pour que le lecteur
+   d'écran y entre. Comme ce n'est pas un élément interactif, on masque
+   le contour : le focus clavier, lui, reste visible partout ailleurs. */
 .popup-box:focus {
     outline: none;
 }
 
 .popup-box {
     max-width: 860px;
-    margin: 60px auto 80px;
-    padding: 0 24px;
+    margin: var(--space-11) auto var(--space-11);
+    padding: 0 var(--space-6);
 }
 
 .popup-back {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 600;
+    gap: var(--space-2);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text-3);
-    border: 1px solid var(--line2);
-    padding: 10px 18px;
-    border-radius: 4px;
-    margin-bottom: 48px;
-    transition: all 0.2s;
+    border: 1px solid var(--line-strong);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-10);
+    transition: all var(--dur-fast);
 }
 
 .popup-back:hover { border-color: var(--green); color: var(--green); }
 
 .popup-cat {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 3px;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: var(--green);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
 }
 
 .popup-h1 {
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 800;
-    letter-spacing: -2px;
+    font-size: var(--fs-title);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-title);
     color: var(--text);
-    line-height: 1.0;
-    margin-bottom: 20px;
+    line-height: var(--lh-tight);
+    margin-bottom: var(--space-5);
 }
 
 .popup-desc {
-    font-size: 15px;
+    font-size: var(--fs-base);
     color: var(--text-3);
-    line-height: 1.8;
+    line-height: var(--lh-loose);
     max-width: 600px;
-    margin-bottom: 36px;
-    padding-bottom: 36px;
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-8);
     border-bottom: 1px solid var(--line);
 }
 
@@ -964,71 +943,71 @@ body.popup-open {
     gap: 1px;
     background: var(--line);
     border: 1px solid var(--line);
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-9);
 }
 
 .popup-meta-item {
     background: var(--surface);
-    padding: 20px;
+    padding: var(--space-5);
     text-align: center;
 }
 
 .popup-meta-l {
-    font-size: 10px;
+    font-size: var(--fs-2xs);
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text-4);
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
 }
 
 .popup-meta-v {
-    font-size: 15px;
-    font-weight: 700;
+    font-size: var(--fs-base);
+    font-weight: var(--fw-bold);
     color: var(--text);
 }
 
 .popup-tags {
     display: flex;
-    gap: 8px;
+    gap: var(--space-2);
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    margin-bottom: var(--space-10);
 }
 
 .popup-tag {
-    font-size: 11px;
-    font-weight: 600;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
     letter-spacing: 0.5px;
     border: 1px solid var(--green);
     color: var(--green);
-    padding: 6px 14px;
-    border-radius: 3px;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
 }
 
 .popup-section {
-    margin-bottom: 24px;
-    padding: 28px 32px;
+    margin-bottom: var(--space-6);
+    padding: var(--space-7) var(--space-8);
     background: var(--surface);
-    border: 1px solid var(--line2);
-    border-radius: 6px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
     border-left: 2px solid var(--green);
 }
 
 .popup-section-title {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-bold);
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text-2);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
 }
 
 .popup-section p {
-    font-size: 14px;
+    font-size: var(--fs-base);
     color: var(--text-3);
-    line-height: 1.8;
-    margin-bottom: 10px;
+    line-height: var(--lh-loose);
+    margin-bottom: var(--space-3);
 }
 
 .popup-section p strong { color: var(--text-2); }
@@ -1036,15 +1015,15 @@ body.popup-open {
 .popup-section ul {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--space-3);
 }
 
 .popup-section li {
-    font-size: 14px;
+    font-size: var(--fs-base);
     color: var(--text-3);
-    padding-left: 20px;
+    padding-left: var(--space-5);
     position: relative;
-    line-height: 1.6;
+    line-height: var(--lh-base);
 }
 
 .popup-section li::before {
@@ -1052,7 +1031,7 @@ body.popup-open {
     position: absolute;
     left: 0;
     color: var(--green);
-    font-weight: 700;
+    font-weight: var(--fw-bold);
 }
 
 .popup-section li strong { color: var(--text-2); }
@@ -1064,30 +1043,30 @@ body.popup-open {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 32px;
+    gap: var(--space-8);
     flex-wrap: wrap;
-    padding: 28px 64px;
+    padding: var(--space-7) var(--space-11);
     background: var(--green-soft);
     border-bottom: 1px solid var(--line);
     border-left: 3px solid var(--green);
 }
 
 .alt-banner-title {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
     color: var(--text);
     letter-spacing: -0.2px;
 }
 
 .alt-banner-sub {
-    font-size: 13px;
+    font-size: var(--fs-sm);
     color: var(--text-3);
-    margin-top: 6px;
+    margin-top: var(--space-2);
 }
 
 .alt-banner-cta {
     display: flex;
-    gap: 12px;
+    gap: var(--space-3);
     flex-wrap: wrap;
 }
 
@@ -1099,13 +1078,13 @@ body.popup-open {
     width: 100%;
     background: transparent;
     font-family: var(--font);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
     text-align: left;
     cursor: pointer;
 }
 
-/* État affiché une seconde après la copie */
+/* État affiché deux secondes après la copie */
 .contact-copy.is-copied {
     border-color: var(--green);
     color: var(--green);
@@ -1122,10 +1101,10 @@ body.popup-open {
     justify-content: center;
     background: transparent;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     color: var(--text-3);
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color var(--dur-fast);
 }
 
 .theme-toggle:hover { color: var(--text); }
@@ -1145,10 +1124,10 @@ body.popup-open {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: var(--space-1);
     background: transparent;
-    border: 1px solid var(--line2);
-    border-radius: 4px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
     cursor: pointer;
 }
 
@@ -1158,29 +1137,29 @@ body.popup-open {
     height: 2px;
     background: var(--text-2);
     border-radius: 2px;
-    transition: transform 0.2s, opacity 0.2s;
+    transition: transform var(--dur-fast), opacity var(--dur-fast);
 }
 
 /* Burger ouvert : les barres forment une croix */
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 /* ================================
    RETOUR EN HAUT
    ================================ */
 .to-top {
     position: fixed;
-    right: 24px;
-    bottom: 24px;
+    right: var(--space-6);
+    bottom: var(--space-6);
     width: 44px;
     height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--surface);
-    border: 1px solid var(--line2);
-    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
     color: var(--text-2);
     cursor: pointer;
     z-index: 300;
@@ -1188,8 +1167,9 @@ body.popup-open {
     /* Caché par défaut, révélé par .is-visible */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
-    transition: opacity 0.2s, transform 0.2s, visibility 0.2s, border-color 0.2s;
+    transform: translateY(var(--space-2));
+    transition: opacity var(--dur-fast), transform var(--dur-fast),
+                visibility var(--dur-fast), border-color var(--dur-fast);
 }
 
 .to-top.is-visible {
@@ -1215,16 +1195,18 @@ body.popup-open {
    ================================ */
 @media (max-width: 1100px) {
     .projects-grid { grid-template-columns: repeat(2, 1fr); }
-    #apropos .apropos-layout { grid-template-columns: 1fr; gap: 48px; }
-    .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    #apropos .apropos-layout { grid-template-columns: 1fr; gap: var(--space-10); }
+    .contact-inner { grid-template-columns: 1fr; gap: var(--space-10); }
     .cv-layout { grid-template-columns: 1fr; }
-    section:not(#hero) { padding: 72px 48px; }
-    #hero { padding: 28px 48px 40px; }
-    .alt-banner { padding: 24px 48px; }
+    section:not(#hero) { padding: var(--space-11) var(--space-10); }
+    #hero { padding: var(--space-7) var(--space-10) var(--space-9); }
+    .alt-banner { padding: var(--space-6) var(--space-10); }
 }
 
 /* Sous 768px la sidebar devient une barre en haut de l'écran,
-   et les liens de nav passent dans un panneau ouvert par le burger. */
+   et les liens de nav passent dans un panneau ouvert par le burger.
+   56px est la hauteur de cette barre : c'est une dimension de structure,
+   réutilisée telle quelle par .sidebar-nav et .content. */
 @media (max-width: 768px) {
     :root { --sidebar: 0px; }
 
@@ -1238,7 +1220,7 @@ body.popup-open {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 0 16px;
+        padding: 0 var(--space-4);
         border-right: none;
         border-bottom: 1px solid var(--line);
     }
@@ -1253,7 +1235,7 @@ body.popup-open {
         width: 100%;
         flex-direction: column;
         gap: 0;
-        padding: 8px 12px 16px;
+        padding: var(--space-2) var(--space-3) var(--space-4);
         background: var(--bg);
         border-bottom: 1px solid var(--line);
         display: none;
@@ -1262,8 +1244,8 @@ body.popup-open {
     .sidebar.is-open .sidebar-nav { display: flex; }
 
     .sidebar-nav a {
-        padding: 14px;
-        font-size: 14px;
+        padding: var(--space-4);
+        font-size: var(--fs-base);
     }
 
     /* Icônes sociales alignées à droite de la barre */
@@ -1280,20 +1262,20 @@ body.popup-open {
         padding-top: 56px;
     }
 
-    section:not(#hero) { padding: 56px 24px; }
-    #hero { padding: 24px 24px 36px; min-height: calc(100vh - 56px); }
-    .hero-big { font-size: 56px; letter-spacing: -2px; }
-    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .alt-banner { padding: 24px; gap: 20px; }
-    .alt-banner-title { font-size: 15px; }
+    section:not(#hero) { padding: var(--space-10) var(--space-6); }
+    #hero { padding: var(--space-6) var(--space-6) var(--space-8); min-height: calc(100vh - 56px); }
+    .hero-big { font-size: 56px; letter-spacing: var(--ls-title); }
+    .hero-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-5); }
+    .alt-banner { padding: var(--space-6); gap: var(--space-5); }
+    .alt-banner-title { font-size: var(--fs-base); }
     .popup-meta { grid-template-columns: repeat(2, 1fr); }
-    .popup-box { padding: 0 16px; }
-    footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+    .popup-box { padding: 0 var(--space-4); }
+    footer { padding: var(--space-5) var(--space-6); flex-direction: column; gap: var(--space-2); }
     .tabs-labels { flex-wrap: wrap; width: 100%; }
     .skills-grid { grid-template-columns: repeat(2, 1fr); }
-    #apropos .apropos-bio p { font-size: 15px; }
-    .to-top { right: 16px; bottom: 16px; }
-    .erreur { padding: 32px 24px; }
+    #apropos .apropos-bio p { font-size: var(--fs-base); }
+    .to-top { right: var(--space-4); bottom: var(--space-4); }
+    .erreur { padding: var(--space-8) var(--space-6); }
 }
 
 /* En dessous de 600px une carte projet sur deux colonnes devient
@@ -1316,41 +1298,41 @@ body.popup-open {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 64px;
+    padding: var(--space-11);
     max-width: 720px;
     margin: 0 auto;
 }
 
 .erreur-code {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: var(--green);
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
 }
 
 .erreur-titre {
-    font-size: clamp(40px, 7vw, 76px);
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.0;
+    font-size: var(--fs-title);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-title);
+    line-height: var(--lh-tight);
     color: var(--text);
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
 }
 
 .erreur-titre span { color: var(--green); }
 
 .erreur-texte {
-    font-size: 15px;
+    font-size: var(--fs-base);
     color: var(--text-3);
-    line-height: 1.8;
-    margin-bottom: 36px;
+    line-height: var(--lh-loose);
+    margin-bottom: var(--space-8);
 }
 
 .erreur-cta {
     display: flex;
-    gap: 12px;
+    gap: var(--space-3);
     flex-wrap: wrap;
 }
 
