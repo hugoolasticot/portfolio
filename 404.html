@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page introuvable | Hugo Challaye</title>
+    <meta name="robots" content="noindex">
+
+    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Chemins absolus : GitHub Pages sert cette page pour n'importe quelle
+         URL inconnue, y compris /portfolio/un/chemin/profond/ -->
+    <link rel="stylesheet" href="/portfolio/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Même thème que le reste du site, appliqué avant l'affichage -->
+    <script>
+        (function () {
+            document.documentElement.classList.add('js');
+
+            var choix = null;
+            try {
+                choix = localStorage.getItem('theme');
+            } catch (e) {
+                // localStorage peut être bloqué : on ignore
+            }
+
+            var clair = window.matchMedia('(prefers-color-scheme: light)').matches;
+            document.documentElement.setAttribute('data-theme', choix || (clair ? 'light' : 'dark'));
+        })();
+    </script>
+</head>
+<body>
+
+<main class="erreur">
+    <p class="erreur-code">404</p>
+    <h1 class="erreur-titre">Cette page<br><span>n'existe pas</span></h1>
+    <p class="erreur-texte">
+        Le lien est peut-être erroné, ou la page a été déplacée.
+        Tu peux revenir à l'accueil pour retrouver mes projets.
+    </p>
+    <div class="erreur-cta">
+        <a href="/portfolio/" class="btn btn-filled">Retour à l'accueil</a>
+        <a href="/portfolio/#projets" class="btn btn-ghost">Voir mes projets</a>
+    </div>
+</main>
+
+</body>
+</html>
