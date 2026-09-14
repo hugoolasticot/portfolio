@@ -94,6 +94,12 @@
     </script>
 </head>
 <body>
+
+<!-- Premier élément focusable de la page : invisible tant qu'on ne l'a pas
+     atteint au clavier. Il évite de retraverser les 10 liens de la barre
+     latérale à chaque fois pour arriver au contenu. -->
+<a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
 <div class="layout">
 
 <!-- ========================
@@ -135,7 +141,7 @@
     </div>
 </aside>
 
-<main class="content">
+<main class="content" id="contenu" tabindex="-1">
 
     <!-- 01 HERO -->
     <section id="hero">
@@ -282,7 +288,7 @@
                 <div class="pcard-img">
                     <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
                          <img src="assets/img/projets/campusconnect.webp" alt="Capture d'écran de la plateforme CampusConnect" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" data-lang="PHP"><span>PHP</span></div>
+                    <div class="pcard-ph" aria-hidden="true" data-lang="PHP"><span>PHP</span></div>
                 </div>
                 <div class="pcard-body">
                     <span class="pcard-num">01</span>
@@ -333,7 +339,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -352,7 +358,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -371,7 +377,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -379,7 +385,7 @@
                 <div class="pcard-img">
                     <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
                          <img src="assets/img/projets/exploration-algorithmique.webp" alt="Capture d'écran du projet Exploration Algorithmique" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" data-lang="Python"><span>Py</span></div>
+                    <div class="pcard-ph" aria-hidden="true" data-lang="Python"><span>Py</span></div>
                 </div>
                 <div class="pcard-body">
                     <span class="pcard-num">06</span>
@@ -391,7 +397,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -399,7 +405,7 @@
                 <div class="pcard-img">
                     <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
                          <img src="assets/img/projets/yahtzee.webp" alt="Capture d'écran du jeu de dés Yahtzee" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" data-lang="Java"><span>Java</span></div>
+                    <div class="pcard-ph" aria-hidden="true" data-lang="Java"><span>Java</span></div>
                 </div>
                 <div class="pcard-body">
                     <span class="pcard-num">07</span>
@@ -411,7 +417,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -419,7 +425,7 @@
                 <div class="pcard-img">
                     <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
                          <img src="assets/img/projets/base-de-donnees.webp" alt="Schéma relationnel de la base de données de gestion de cimetière" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" data-lang="SQL"><span>SQL</span></div>
+                    <div class="pcard-ph" aria-hidden="true" data-lang="SQL"><span>SQL</span></div>
                 </div>
                 <div class="pcard-body">
                     <span class="pcard-num">08</span>
@@ -432,7 +438,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -440,7 +446,7 @@
                 <div class="pcard-img">
                     <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
                          <img src="assets/img/projets/serveur-dhcp.webp" alt="Capture Wireshark des échanges du serveur DHCP" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" data-lang="Linux"><span>Net</span></div>
+                    <div class="pcard-ph" aria-hidden="true" data-lang="Linux"><span>Net</span></div>
                 </div>
                 <div class="pcard-body">
                     <span class="pcard-num">09</span>
@@ -452,7 +458,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -460,7 +466,7 @@
                 <div class="pcard-img">
                     <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
                          <img src="assets/img/projets/amor-vincit.webp" alt="Capture d'écran du site de rencontre Amor Vincit" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" data-lang="PHP"><span>PHP</span></div>
+                    <div class="pcard-ph" aria-hidden="true" data-lang="PHP"><span>PHP</span></div>
                 </div>
                 <div class="pcard-body">
                     <span class="pcard-num">10</span>
@@ -473,7 +479,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -481,7 +487,7 @@
                 <div class="pcard-img">
                     <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
                          <img src="assets/img/projets/imperium-pizza.webp" alt="Interface JavaFX de commande de l'application Imperium Pizza" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" data-lang="Java"><span>JavaFX</span></div>
+                    <div class="pcard-ph" aria-hidden="true" data-lang="Java"><span>JavaFX</span></div>
                 </div>
                 <div class="pcard-body">
                     <span class="pcard-num">11</span>
@@ -493,7 +499,7 @@
                     </div>
                 </div>
                 <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </div>
             </a>
 
@@ -514,7 +520,7 @@
                 </div>
             </div>
             <div class="cv-frame">
-                <iframe src="assets/cv/Hugo_CHALLAYE_CV.pdf"></iframe>
+                <iframe src="assets/cv/Hugo_CHALLAYE_CV.pdf" title="Aperçu du CV de Hugo Challaye au format PDF"></iframe>
             </div>
         </div>
     </section>

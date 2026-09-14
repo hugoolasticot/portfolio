@@ -1186,6 +1186,38 @@ body.popup-open {
 .to-top svg { width: 18px; height: 18px; }
 
 /* ================================
+   LIEN D'ÉVITEMENT
+   ================================
+   Hors écran tant qu'il n'a pas le focus. On ne le masque pas avec
+   display:none : un élément masqué ainsi n'est plus atteignable au
+   clavier, ce qui reviendrait à ne pas avoir de lien du tout. */
+.skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: calc(-1 * var(--space-12));
+    z-index: 1000;
+    padding: var(--space-3) var(--space-5);
+    background: var(--green);
+    color: var(--on-green);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    border-radius: var(--radius-sm);
+    transition: top var(--dur-fast);
+}
+
+.skip-link:focus {
+    top: var(--space-4);
+}
+
+/* La cible du lien d'évitement reçoit le focus pour que la lecture
+   reprenne au bon endroit. Comme <main> n'est pas un élément
+   interactif, on masque son contour : un cadre vert autour de toute la
+   page n'apprendrait rien. Le saut visuel suffit comme retour. */
+.content:focus {
+    outline: none;
+}
+
+/* ================================
    FOCUS CLAVIER — visible partout
    ================================ */
 :focus-visible {
