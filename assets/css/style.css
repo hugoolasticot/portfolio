@@ -55,6 +55,19 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
 
+/* Bouts de code cités dans le texte : noms de fonctions, de fichiers.
+   Sans cette règle, le navigateur applique sa propre police monospace,
+   souvent trop grosse et étrangère au reste de la page. */
+code {
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.9em;
+    padding: 1px var(--space-1);
+    background: var(--green-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text-2);
+}
+
 /* ================================
    APPARITION AU SCROLL
    Placé tôt dans le fichier volontairement : les règles :hover des
