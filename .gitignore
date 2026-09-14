@@ -14,9 +14,27 @@ SUIVI.md
 # Dépendances installées par npm (si un outil en génère un jour)
 node_modules/
 
-# Fichiers temporaires créés par des outils (skills Claude Code)
-.impeccable/
+# ------------------------------------------------------------
+# Outillage de design (skills Claude Code)
+# ------------------------------------------------------------
+
+# Réglages locaux de la machine
 .claude/settings.local.json
+
+# Les skills sont installés par npx et pèsent 21 Mo, dont un binaire
+# Windows de 15 Mo propre à ma machine. Ils se réinstallent en deux
+# commandes (voir SUIVI.md), donc ils n'ont rien à faire dans
+# l'historique d'un dépôt de portfolio servi par GitHub Pages.
+.claude/skills/
+.claude/agents/
+
+# Sorties éphémères d'impeccable : seuls le contexte de design et les
+# rapports d'audit sont conservés.
+.impeccable/
+!.impeccable/config.json
+!.impeccable/design.json
+!.impeccable/surfaces/
+!.impeccable/critique/
 
 # Fichiers générés automatiquement par les systèmes d'exploitation
 .DS_Store
