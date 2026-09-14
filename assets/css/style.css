@@ -392,13 +392,17 @@ section:not(#hero) {
 .tab-label:last-child { border-right: none; }
 .tab-label:hover { color: var(--text); background: var(--line); }
 
-/* Onglet actif */
+/* Onglet actif.
+   Le texte utilise --on-green, comme les boutons verts pleins, et non
+   --text : sur fond vert, --text donnait du blanc sur vert clair en
+   thème sombre et du noir sur vert foncé en thème clair, soit 3,25:1
+   dans les deux cas. */
 #tab-langages:checked ~ .tabs-labels label[for="tab-langages"],
 #tab-outils:checked ~ .tabs-labels label[for="tab-outils"],
 #tab-soft:checked ~ .tabs-labels label[for="tab-soft"],
 #tab-langues:checked ~ .tabs-labels label[for="tab-langues"] {
     background: var(--green);
-    color: var(--text);
+    color: var(--on-green);
     border-color: var(--green);
 }
 
@@ -636,16 +640,16 @@ html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
 :root[data-theme="light"] .pcard-ph[data-lang="Linux"]  { background: linear-gradient(135deg, #f0ead6 0%, #f6f6f4 100%); }
 
 /* Marqueur des contenus qu'il me reste à rédiger — voir SUIVI.md.
-   Les couleurs sont encore écrites en clair ici : elles sont illisibles
-   en thème clair (2,05:1), et c'est corrigé au commit suivant. */
+   L'ambre vif ne fonctionne que sur fond sombre : --warn bascule vers
+   un brun doré en thème clair (voir tokens.css). */
 .todo {
     display: inline-block;
     font-size: var(--fs-2xs);
     font-weight: var(--fw-bold);
     letter-spacing: 1px;
-    color: #e0a33e;
-    border: 1px solid rgba(224, 163, 62, 0.45);
-    background: rgba(224, 163, 62, 0.09);
+    color: var(--warn);
+    border: 1px solid var(--warn-line);
+    background: var(--warn-soft);
     padding: 1px var(--space-2);
     border-radius: var(--radius-sm);
     vertical-align: middle;
