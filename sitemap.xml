@@ -39,22 +39,7 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/yahtzee.html</loc>
-        <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
         <loc>https://hugoolasticot.github.io/portfolio/pages/projets/serveur-dhcp.html</loc>
-        <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/amor-vincit.html</loc>
-        <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/imperium-pizza.html</loc>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
