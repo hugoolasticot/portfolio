@@ -57,14 +57,25 @@ let lenis = null;
 
 if (!mouvementReduit) {
     lenis = new Lenis({
-        // Durée d'amortissement après un coup de molette. Au-delà
-        // d'une seconde, on perd le contrôle de la page.
-        duration: 1.15,
-
-        // Courbe d'arrivée très amortie, accordée à la variable
-        // --courbe du CSS pour que tout le site partage le même
-        // sentiment de ralentissement.
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        // LISSAGE PAR POURSUITE, ET NON PAR DURÉE FIXE.
+        //
+        // Lenis propose deux modes. Le mode `duration` lance, à
+        // chaque cran de molette, une animation d'une durée
+        // imposée : la page continue de glisser après qu'on a
+        // arrêté, et un nouveau cran relance l'animation depuis le
+        // début au lieu de s'y ajouter. À 1,15 s, cela se ressentait
+        // franchement comme de la latence — la page ne partait pas
+        // quand on scrollait, et ne s'arrêtait pas quand on
+        // s'arrêtait.
+        //
+        // Le mode `lerp` poursuit en continu la position visée :
+        // le mouvement démarre dès le premier cran et s'éteint
+        // presque aussitôt qu'on relâche. On garde le défilement
+        // continu dont la scène 3D a besoin, sans la traîne.
+        //
+        // 0,12 par image : plus haut, on retombe sur le défilement
+        // par à-coups du navigateur ; plus bas, la traîne revient.
+        lerp: 0.12,
 
         // Sur écran tactile, le défilement natif est déjà inertiel
         // et géré par le système : le doubler donne une sensation

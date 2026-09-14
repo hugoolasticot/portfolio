@@ -598,7 +598,14 @@ export function creerScene(conteneur) {
         // 1. L'état courant rejoint l'état visé, avec inertie.
         //    La caméra est plus lente que l'objet : elle traîne
         //    légèrement, ce qui accentue la sensation de masse.
-        const v = mouvementReduit ? 1e6 : 3.2;
+        //
+        //    Cette inertie s'ajoute à celle du défilement. À 3,2,
+        //    l'objet traînait derrière une page qui traînait déjà :
+        //    il semblait avancer par paliers et rattraper son retard
+        //    d'une section à l'autre. À 5,5 il suit le scroll de
+        //    près, tout en gardant assez de masse pour ne pas se
+        //    coller image par image à la molette.
+        const v = mouvementReduit ? 1e6 : 5.5;
 
         for (let i = 0; i < 3; i++) {
             actuel.camera[i]   = amortir(actuel.camera[i],   cible.camera[i],   v * 0.7, delta);
