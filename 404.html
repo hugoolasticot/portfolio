@@ -6,14 +6,24 @@
     <title>Page introuvable | Hugo Challaye</title>
     <meta name="robots" content="noindex">
 
-    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/portfolio/favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="/portfolio/apple-touch-icon.png">
+
     <!-- Chemins absolus : GitHub Pages sert cette page pour n'importe quelle
          URL inconnue, y compris /portfolio/un/chemin/profond/ -->
-    <link rel="stylesheet" href="/portfolio/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- La police est désormais servie par le site lui-même : voir la règle
+         @font-face en haut de style.css. preload la demande dès la
+         première lecture du <head>, sans attendre que le CSS soit
+         analysé. L'attribut crossorigin est obligatoire pour les
+         polices, même lorsqu'elles viennent du même domaine. -->
+    <link rel="preload" href="/portfolio/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="/portfolio/assets/css/tokens.css">
+    <link rel="stylesheet" href="/portfolio/assets/css/style.css">
 
     <!-- Même thème que le reste du site, appliqué avant l'affichage -->
     <script>

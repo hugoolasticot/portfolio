@@ -1,0 +1,5 @@
+# Autorise tous les robots à indexer l'ensemble du site.
+User-agent: *
+Allow: /
+
+Sitemap: https://hugoolasticot.github.io/portfolio/sitemap.xml

@@ -1,0 +1,1451 @@
+/* ================================
+   STYLES DU SITE
+   ================================
+   Les valeurs (couleurs, espacements, tailles) ne sont plus écrites ici :
+   elles viennent de tokens.css, chargé juste avant dans le <head>.
+
+   Ce fichier ne décrit donc plus que des RÈGLES : quel élément ressemble
+   à quoi. Pour changer une couleur ou un rythme d'espacement, c'est
+   tokens.css qu'il faut ouvrir.
+   ================================ */
+
+/* ================================
+   POLICE — Inter, hébergée avec le site
+   ================================
+   Le fichier est une « police variable » : une seule police contient
+   toutes les graisses de 400 à 800, d'où le « font-weight: 400 800 ».
+   Le navigateur interpole ce dont il a besoin. Un seul téléchargement
+   de 47 Ko au lieu de cinq fichiers.
+
+   Le sous-ensemble « latin » suffit : il couvre U+0000-00FF (tous les
+   accents français), les ligatures œ, l'euro et la ponctuation — tiret
+   cadratin et points de suspension compris. Les flèches ← et → n'étant
+   dans aucun sous-ensemble d'Inter, elles sont rendues par la police du
+   système, comme c'était déjà le cas avant.
+
+   font-display: swap affiche immédiatement le texte avec la police de
+   repli, puis bascule vers Inter une fois chargée : le contenu est
+   lisible dès le premier instant.
+   ================================ */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('../fonts/inter-latin-variable.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                   U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                   U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                   U+FEFF, U+FFFD;
+}
+
+/* ================================
+   RESET
+   ================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ================================
+   APPARITION AU SCROLL
+   Placé tôt dans le fichier volontairement : les règles :hover des
+   cartes, définies plus bas, doivent pouvoir écraser ce transform.
+   ================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+    transition: opacity var(--dur-slow) ease, transform var(--dur-slow) ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cascade du hero au chargement de la page */
+@keyframes apparition {
+    from { opacity: 0; transform: translateY(var(--space-4)); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-topname,
+.hero-name-small,
+.hero-big,
+.hero-desc,
+.hero-cta {
+    opacity: 0;
+    animation: apparition var(--dur-slow) ease forwards;
+}
+
+.hero-topname    { animation-delay: 0.05s; }
+.hero-name-small { animation-delay: 0.15s; }
+.hero-big        { animation-delay: 0.25s; }
+.hero-desc       { animation-delay: 0.40s; }
+.hero-cta        { animation-delay: 0.50s; }
+
+/* ================================
+   LAYOUT
+   ================================ */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================================
+   SIDEBAR — nav gauche, icônes en bas
+   ================================ */
+.sidebar {
+    width: var(--sidebar);
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--bg);
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-7) 0;
+    z-index: 200;
+    transition: background-color var(--dur-fast), border-color var(--dur-fast);
+}
+
+/* Le fond se densifie une fois qu'on a quitté le haut de la page */
+.sidebar.is-scrolled {
+    background: var(--surface);
+    border-color: var(--line-strong);
+}
+
+/* Nav liens en haut */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-7) var(--space-3) 0;
+    width: 100%;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    color: var(--text-3);
+    border-radius: var(--radius-sm);
+    transition: all var(--dur-fast);
+}
+
+.sidebar-nav a:hover {
+    color: var(--text);
+    background: var(--line);
+}
+
+/* Lien de la section en cours de lecture (scrollspy piloté par le JS) */
+.sidebar-nav a.is-active {
+    color: var(--green);
+    background: var(--green-soft);
+}
+
+/* Icônes sociales en bas */
+.sidebar-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-bottom: var(--space-7);
+    width: 100%;
+}
+
+/* 36px est une taille de cible tactile, pas un espacement :
+   elle reste écrite en clair. */
+.sidebar-icons a {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+    transition: color var(--dur-fast);
+    border-radius: var(--radius-sm);
+}
+
+.sidebar-icons a:hover {
+    color: var(--text);
+}
+
+/* ================================
+   CONTENU
+   ================================ */
+.content {
+    margin-left: var(--sidebar);
+    flex: 1;
+    min-width: 0;
+}
+
+/* ================================
+   HERO
+   ================================ */
+/* 100svh = « small viewport height », la hauteur de l'écran quand la barre
+   d'adresse du navigateur mobile est dépliée. Avec 100vh, cette barre
+   n'était pas comptée : le bas du hero (la description et les deux boutons)
+   se retrouvait coupé au chargement, puis sautait quand la barre se
+   rétractait. 100vh reste écrit juste avant comme repli pour les
+   navigateurs qui ne connaissent pas encore svh. */
+#hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-8) var(--space-11) var(--space-10);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+}
+
+/* Nom en haut */
+.hero-topname {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-2);
+    align-self: flex-start;
+}
+
+/* Titre massif centré */
+.hero-titles {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-9) 0;
+}
+
+.hero-name-small {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: var(--space-5);
+    text-align: center;
+}
+
+.hero-big {
+    font-size: var(--fs-hero);
+    font-weight: var(--fw-black);
+    line-height: var(--lh-hero);
+    letter-spacing: var(--ls-hero);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.hero-big .line-white  { color: var(--text-2); display: block; }
+.hero-big .line-green  { color: var(--green);  display: block; }
+
+/* Bas du hero */
+.hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.hero-desc {
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    max-width: 340px;
+    line-height: var(--lh-base);
+}
+
+.hero-cta {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.btn {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.5px;
+    border-radius: var(--radius-sm);
+    transition: all var(--dur-fast);
+    cursor: pointer;
+    font-family: var(--font);
+}
+
+.btn-filled {
+    background: var(--green);
+    color: var(--on-green);
+    border: 1px solid var(--green);
+}
+
+.btn-filled:hover { background: var(--green-hover); border-color: var(--green-hover); }
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-2);
+    border: 1px solid var(--line-strong);
+}
+
+.btn-ghost:hover { border-color: var(--text-3); color: var(--text); }
+
+/* ================================
+   SECTIONS COMMUNES
+   ================================ */
+section:not(#hero) {
+    padding: var(--space-12) var(--space-11);
+    border-bottom: 1px solid var(--line);
+}
+
+.sec-label {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: var(--space-10);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* Le filet horizontal qui prolonge le label */
+.sec-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line-strong);
+    max-width: 80px;
+}
+
+/* ================================
+   À PROPOS — texte + bio
+   ================================ */
+#apropos .apropos-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.apropos-big {
+    text-align: center;
+    font-size: var(--fs-title);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-title);
+    line-height: var(--lh-tight);
+    color: var(--text);
+    margin-bottom: var(--space-8);
+}
+
+.apropos-big span { color: var(--green); }
+
+#apropos .apropos-bio {
+    text-align: center;
+}
+
+.apropos-bio p {
+    font-size: var(--fs-md);
+    line-height: var(--lh-loose);
+    color: var(--text-3);
+    margin-bottom: var(--space-5);
+}
+
+.apropos-bio p strong { color: var(--text-2); font-weight: var(--fw-semibold); }
+
+/* Lien mis en avant dans un paragraphe */
+.lien-vert {
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast);
+}
+
+.lien-vert:hover { border-bottom-color: var(--green); }
+
+/* ================================
+   COMPÉTENCES — onglets CSS purs
+   ================================ */
+#competences {
+    background: var(--surface);
+}
+
+/* Onglets radio CSS — masqués visuellement mais gardés focusables au clavier */
+.tabs-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#tab-langages:focus-visible ~ .tabs-labels label[for="tab-langages"],
+#tab-outils:focus-visible ~ .tabs-labels label[for="tab-outils"],
+#tab-soft:focus-visible ~ .tabs-labels label[for="tab-soft"],
+#tab-langues:focus-visible ~ .tabs-labels label[for="tab-langues"] {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
+
+.tabs-labels {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    width: fit-content;
+    margin-bottom: var(--space-10);
+}
+
+.tab-label {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.5px;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: all var(--dur-fast);
+    border-right: 1px solid var(--line-strong);
+    user-select: none;
+    background: transparent;
+}
+
+.tab-label:last-child { border-right: none; }
+.tab-label:hover { color: var(--text); background: var(--line); }
+
+/* Onglet actif.
+   Le texte utilise --on-green, comme les boutons verts pleins, et non
+   --text : sur fond vert, --text donnait du blanc sur vert clair en
+   thème sombre et du noir sur vert foncé en thème clair, soit 3,25:1
+   dans les deux cas. */
+#tab-langages:checked ~ .tabs-labels label[for="tab-langages"],
+#tab-outils:checked ~ .tabs-labels label[for="tab-outils"],
+#tab-soft:checked ~ .tabs-labels label[for="tab-soft"],
+#tab-langues:checked ~ .tabs-labels label[for="tab-langues"] {
+    background: var(--green);
+    color: var(--on-green);
+    border-color: var(--green);
+}
+
+/* Panneaux */
+.tab-panels { position: relative; }
+
+.tab-panel {
+    display: none;
+}
+
+#tab-langages:checked ~ .tab-panels .panel-langages,
+#tab-outils:checked ~ .tab-panels .panel-outils,
+#tab-soft:checked ~ .tab-panels .panel-soft,
+#tab-langues:checked ~ .tab-panels .panel-langues {
+    display: block;
+}
+
+/* 180px = largeur minimale d'une carte avant que la grille ne change
+   de nombre de colonnes. C'est une contrainte de mise en page. */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-3);
+}
+
+.skill-item {
+    background: var(--bg);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
+    transition: all var(--dur-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.skill-item:hover {
+    border-color: var(--green);
+    color: var(--text);
+}
+
+/* Pastille de 6px : c'est une forme, pas un espacement */
+.skill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--green);
+    flex-shrink: 0;
+}
+
+/* ================================
+   PROJETS
+   ================================ */
+/* Filtres — masqués visuellement mais gardés focusables au clavier */
+.filter-radios {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#pf-all:focus-visible ~ .filter-labels label[for="pf-all"],
+#pf-python:focus-visible ~ .filter-labels label[for="pf-python"],
+#pf-java:focus-visible ~ .filter-labels label[for="pf-java"],
+#pf-web:focus-visible ~ .filter-labels label[for="pf-web"],
+#pf-php:focus-visible ~ .filter-labels label[for="pf-php"],
+#pf-sql:focus-visible ~ .filter-labels label[for="pf-sql"],
+#pf-reseau:focus-visible ~ .filter-labels label[for="pf-reseau"] {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
+
+.filter-labels {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-9);
+}
+
+.filter-label {
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text-3);
+    cursor: pointer;
+    transition: all var(--dur-fast);
+    user-select: none;
+}
+
+.filter-label:hover { border-color: var(--text-4); color: var(--text-2); }
+
+#pf-all:checked ~ .filter-labels label[for="pf-all"],
+#pf-python:checked ~ .filter-labels label[for="pf-python"],
+#pf-java:checked ~ .filter-labels label[for="pf-java"],
+#pf-web:checked ~ .filter-labels label[for="pf-web"],
+#pf-php:checked ~ .filter-labels label[for="pf-php"],
+#pf-sql:checked ~ .filter-labels label[for="pf-sql"],
+#pf-reseau:checked ~ .filter-labels label[for="pf-reseau"] {
+    border-color: var(--green);
+    color: var(--green);
+    background: var(--green-soft);
+}
+
+/* Masquage des cartes filtrées.
+   Le JS reprend la main pour animer la transition (voir .is-hiding / .is-hidden).
+   Ces règles servent de repli si le JS ne se charge pas : html.js les désactive. */
+html:not(.js) #pf-python:checked ~ .projects-grid .pcard:not(.python),
+html:not(.js) #pf-java:checked ~ .projects-grid .pcard:not(.java),
+html:not(.js) #pf-web:checked ~ .projects-grid .pcard:not(.web),
+html:not(.js) #pf-php:checked ~ .projects-grid .pcard:not(.php),
+html:not(.js) #pf-sql:checked ~ .projects-grid .pcard:not(.sql),
+html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
+    display: none;
+}
+
+/* Grille projets — l'interstice de 2px est un filet, pas un espacement */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+}
+
+/* Carte projet */
+.pcard {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--dur-fast),
+                transform var(--dur-fast) ease,
+                box-shadow var(--dur-fast) ease,
+                opacity var(--dur-fast) ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.pcard * {
+    pointer-events: none;
+}
+
+/* Élévation douce au survol */
+.pcard:hover {
+    border-color: var(--line-strong);
+    z-index: 1;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+/* Filtrage : la carte s'efface avant d'être retirée de la grille.
+   Ces deux classes sont posées par le JS (voir script.js).
+   Elles viennent après :hover pour pouvoir l'écraser. */
+.pcard.is-hiding {
+    opacity: 0;
+    transform: scale(0.96);
+    pointer-events: none;
+}
+
+.pcard.is-hidden {
+    display: none;
+}
+
+/* Zone image */
+.pcard-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--bg);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Image quand renseignée */
+.pcard-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--dur-base) ease;
+}
+
+.pcard:hover .pcard-img img {
+    transform: scale(1.04);
+}
+
+/* Placeholder quand la capture n'est pas encore fournie :
+   dégradé teinté selon le langage + initiales du langage en filigrane.
+   Ces dégradés sont des illustrations ponctuelles, pas des couleurs du
+   système : ils restent écrits en clair. */
+.pcard-ph {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #17211d 0%, #0b0b0b 100%);
+    pointer-events: none;
+}
+
+.pcard-ph span {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.13);
+}
+
+/* Une teinte par langage pour que les cartes ne se ressemblent pas toutes */
+.pcard-ph[data-lang="PHP"]    { background: linear-gradient(135deg, #1b1d2e 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="SQL"]    { background: linear-gradient(135deg, #12231f 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="Java"]   { background: linear-gradient(135deg, #2a1c15 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="Python"] { background: linear-gradient(135deg, #16202e 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="Linux"]  { background: linear-gradient(135deg, #26200f 0%, #0b0b0b 100%); }
+
+/* Mêmes dégradés en version claire */
+:root[data-theme="light"] .pcard-ph                     { background: linear-gradient(135deg, #e4ece8 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph span                { color: rgba(0, 0, 0, 0.16); }
+:root[data-theme="light"] .pcard-ph[data-lang="PHP"]    { background: linear-gradient(135deg, #e5e6f2 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="SQL"]    { background: linear-gradient(135deg, #dfeee8 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="Java"]   { background: linear-gradient(135deg, #f2e5dd 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="Python"] { background: linear-gradient(135deg, #e0e8f3 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="Linux"]  { background: linear-gradient(135deg, #f0ead6 0%, #f6f6f4 100%); }
+
+/* Marqueur des contenus qu'il me reste à rédiger — voir SUIVI.md.
+   L'ambre vif ne fonctionne que sur fond sombre : --warn bascule vers
+   un brun doré en thème clair (voir tokens.css). */
+.todo {
+    display: inline-block;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-bold);
+    letter-spacing: 1px;
+    color: var(--warn);
+    border: 1px solid var(--warn-line);
+    background: var(--warn-soft);
+    padding: 1px var(--space-2);
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+}
+
+/* Corps carte */
+.pcard-body {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+}
+
+.pcard-num {
+    font-size: var(--fs-2xs);
+    color: var(--text-4);
+    letter-spacing: 2px;
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+}
+
+.pcard-title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
+    color: var(--text);
+    letter-spacing: -0.3px;
+    line-height: var(--lh-snug);
+}
+
+.pcard-desc {
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    line-height: var(--lh-base);
+}
+
+.pcard-tags {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+}
+
+.pcard-tag {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.5px;
+    color: var(--text-4);
+    border: 1px solid var(--line-strong);
+    padding: 3px var(--space-2);
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+}
+
+/* Flèche affichée au survol — 30px est une taille de pastille */
+.pcard-arrow {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--dur-fast), border-color var(--dur-fast);
+    background: var(--bg);
+}
+
+.pcard-arrow svg {
+    width: 13px;
+    height: 13px;
+    color: var(--green);
+}
+
+.pcard:hover .pcard-arrow {
+    opacity: 1;
+    border-color: var(--green);
+}
+
+/* ================================
+   CONTACT
+   ================================ */
+#contact {
+    background: var(--surface);
+}
+
+.contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-11);
+    align-items: center;
+}
+
+.contact-big {
+    font-size: var(--fs-title);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-title);
+    line-height: var(--lh-tight);
+    color: var(--text);
+}
+
+.contact-big span { color: var(--green); }
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.contact-link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    transition: all var(--dur-fast);
+    color: var(--text-2);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+}
+
+.contact-link-item:hover {
+    border-color: var(--green);
+    color: var(--text);
+    background: var(--green-soft);
+}
+
+.contact-link-item svg {
+    width: 16px;
+    height: 16px;
+    color: var(--green);
+    opacity: 0;
+    transition: opacity var(--dur-fast), transform var(--dur-fast);
+}
+
+.contact-link-item:hover svg {
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+
+/* ================================
+   CV
+   ================================ */
+/* Le padding vient de la règle section:not(#hero) plus haut.
+   L'ancienne règle #cv le redéfinissait à l'identique, mais avec une
+   spécificité d'identifiant : elle empêchait donc les media queries de
+   réduire les marges de cette section sur tablette et mobile. */
+.cv-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-11);
+    align-items: start;
+}
+
+.cv-left h3 {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: var(--space-4);
+}
+
+.cv-left p {
+    font-size: var(--fs-base);
+    color: var(--text-3);
+    line-height: var(--lh-loose);
+    margin-bottom: var(--space-3);
+}
+
+.cv-left p strong { color: var(--text-2); }
+
+.cv-btns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+}
+
+.cv-frame {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+/* 540px : hauteur d'aperçu du PDF, choisie pour qu'une page A4 reste
+   lisible sur un écran d'ordinateur. */
+.cv-frame iframe {
+    width: 100%;
+    height: 540px;
+    display: block;
+    border: none;
+}
+
+/* Message de remplacement de l'aperçu sur mobile : masqué par défaut,
+   affiché par la media query 768px. */
+.cv-note {
+    display: none;
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    line-height: var(--lh-base);
+    padding: var(--space-5);
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius-md);
+}
+
+/* ================================
+   FOOTER
+   ================================ */
+footer {
+    padding: var(--space-6) var(--space-11);
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-2xs);
+    color: var(--text-4);
+    border-top: 1px solid var(--line);
+}
+
+/* ================================
+   FICHES PROJET — pages/projets/*.html
+   ================================
+   Ces styles servaient aux fiches affichées en superposition par-dessus
+   la page d'accueil. Chaque projet ayant maintenant sa propre page, le
+   préfixe « popup » ne décrivait plus rien : il est devenu « fiche ».
+   Les règles de superposition (.popup-overlay, body.popup-open) et le
+   masquage du contour de focus n'ont plus d'objet et ont disparu. */
+.fiche {
+    max-width: 860px;
+    margin: var(--space-11) auto;
+    padding: 0 var(--space-6);
+}
+
+/* Barre du haut de la fiche : retour à gauche, bascule de thème à droite */
+.fiche-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-10);
+}
+
+.fiche-retour {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    border: 1px solid var(--line-strong);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-sm);
+    transition: all var(--dur-fast);
+}
+
+.fiche-retour:hover { border-color: var(--green); color: var(--green); }
+
+.fiche-cat {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: var(--space-4);
+}
+
+.fiche-titre {
+    font-size: var(--fs-title);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-title);
+    color: var(--text);
+    line-height: var(--lh-tight);
+    margin-bottom: var(--space-5);
+}
+
+.fiche-chapo {
+    font-size: var(--fs-base);
+    color: var(--text-3);
+    line-height: var(--lh-loose);
+    max-width: 600px;
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--line);
+}
+
+.fiche-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-9);
+}
+
+.fiche-meta-item {
+    background: var(--surface);
+    padding: var(--space-5);
+    text-align: center;
+}
+
+.fiche-meta-l {
+    font-size: var(--fs-2xs);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-4);
+    margin-bottom: var(--space-2);
+}
+
+.fiche-meta-v {
+    font-size: var(--fs-base);
+    font-weight: var(--fw-bold);
+    color: var(--text);
+}
+
+.fiche-tags {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-10);
+}
+
+.fiche-tag {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.5px;
+    border: 1px solid var(--green);
+    color: var(--green);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+}
+
+.fiche-bloc {
+    margin-bottom: var(--space-6);
+    padding: var(--space-7) var(--space-8);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    border-left: 2px solid var(--green);
+}
+
+.fiche-bloc-titre {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-bold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: var(--space-4);
+}
+
+.fiche-bloc p {
+    font-size: var(--fs-base);
+    color: var(--text-3);
+    line-height: var(--lh-loose);
+    margin-bottom: var(--space-3);
+}
+
+.fiche-bloc p strong { color: var(--text-2); }
+
+.fiche-bloc ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.fiche-bloc li {
+    font-size: var(--fs-base);
+    color: var(--text-3);
+    padding-left: var(--space-5);
+    position: relative;
+    line-height: var(--lh-base);
+}
+
+.fiche-bloc li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: var(--fw-bold);
+}
+
+.fiche-bloc li strong { color: var(--text-2); }
+
+/* ================================
+   BANDEAU ALTERNANCE
+   ================================ */
+.alt-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+    padding: var(--space-7) var(--space-11);
+    background: var(--green-soft);
+    border-bottom: 1px solid var(--line);
+    border-left: 3px solid var(--green);
+}
+
+.alt-banner-title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
+    color: var(--text);
+    letter-spacing: -0.2px;
+}
+
+.alt-banner-sub {
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    margin-top: var(--space-2);
+}
+
+.alt-banner-cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+/* ================================
+   BOUTON DE COPIE DE L'EMAIL
+   ================================ */
+/* Le bouton doit ressembler exactement aux liens voisins */
+.contact-copy {
+    width: 100%;
+    background: transparent;
+    font-family: var(--font);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+    text-align: left;
+    cursor: pointer;
+}
+
+/* État affiché deux secondes après la copie */
+.contact-copy.is-copied {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+/* ================================
+   BASCULE DE THÈME
+   ================================ */
+.theme-toggle {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-3);
+    cursor: pointer;
+    transition: color var(--dur-fast);
+}
+
+.theme-toggle:hover { color: var(--text); }
+
+/* On n'affiche que l'icône du thème courant */
+.icon-sun  { display: none; }
+:root[data-theme="light"] .icon-moon { display: none; }
+:root[data-theme="light"] .icon-sun  { display: block; }
+
+/* ================================
+   BURGER — masqué au-dessus de 768px
+   ================================ */
+.nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text-2);
+    border-radius: 2px;
+    transition: transform var(--dur-fast), opacity var(--dur-fast);
+}
+
+/* Burger ouvert : les barres forment une croix */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ================================
+   RETOUR EN HAUT
+   ================================ */
+.to-top {
+    position: fixed;
+    right: var(--space-6);
+    bottom: var(--space-6);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
+    color: var(--text-2);
+    cursor: pointer;
+    z-index: 300;
+
+    /* Caché par défaut, révélé par .is-visible */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(var(--space-2));
+    transition: opacity var(--dur-fast), transform var(--dur-fast),
+                visibility var(--dur-fast), border-color var(--dur-fast);
+}
+
+.to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.to-top:hover { border-color: var(--green); color: var(--green); }
+.to-top svg { width: 18px; height: 18px; }
+
+/* ================================
+   LIEN D'ÉVITEMENT
+   ================================
+   Hors écran tant qu'il n'a pas le focus. On ne le masque pas avec
+   display:none : un élément masqué ainsi n'est plus atteignable au
+   clavier, ce qui reviendrait à ne pas avoir de lien du tout. */
+.skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: calc(-1 * var(--space-12));
+    z-index: 1000;
+    padding: var(--space-3) var(--space-5);
+    background: var(--green);
+    color: var(--on-green);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    border-radius: var(--radius-sm);
+    transition: top var(--dur-fast);
+}
+
+.skip-link:focus {
+    top: var(--space-4);
+}
+
+/* La cible du lien d'évitement reçoit le focus pour que la lecture
+   reprenne au bon endroit. Comme <main> n'est pas un élément
+   interactif, on masque son contour : un cadre vert autour de toute la
+   page n'apprendrait rien. Le saut visuel suffit comme retour. */
+.content:focus {
+    outline: none;
+}
+
+/* ================================
+   FOCUS CLAVIER — visible partout
+   ================================ */
+:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+@media (max-width: 1100px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    #apropos .apropos-layout { grid-template-columns: 1fr; gap: var(--space-10); }
+    .contact-inner { grid-template-columns: 1fr; gap: var(--space-10); }
+    .cv-layout { grid-template-columns: 1fr; }
+    /* Le CV passe sous le texte : un aperçu de 540px de haut occupe alors
+       tout l'écran. On le réduit. */
+    .cv-frame iframe { height: 420px; }
+    section:not(#hero) { padding: var(--space-11) var(--space-10); }
+    #hero { padding: var(--space-7) var(--space-10) var(--space-9); }
+    .alt-banner { padding: var(--space-6) var(--space-10); }
+}
+
+/* Sous 768px la sidebar devient une barre en haut de l'écran,
+   et les liens de nav passent dans un panneau ouvert par le burger.
+   56px est la hauteur de cette barre : c'est une dimension de structure,
+   réutilisée telle quelle par .sidebar-nav et .content. */
+@media (max-width: 768px) {
+    :root { --sidebar: 0px; }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        height: 56px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 var(--space-4);
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .nav-toggle { display: flex; }
+
+    /* Panneau de navigation, dépliant sous la barre */
+    .sidebar-nav {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        padding: var(--space-2) var(--space-3) var(--space-4);
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        display: none;
+    }
+
+    .sidebar.is-open .sidebar-nav { display: flex; }
+
+    .sidebar-nav a {
+        padding: var(--space-4);
+        font-size: var(--fs-base);
+    }
+
+    /* Icônes sociales alignées à droite de la barre */
+    .sidebar-icons {
+        flex-direction: row;
+        gap: 2px;
+        margin-top: 0;
+        padding-bottom: 0;
+        width: auto;
+    }
+
+    .content {
+        margin-left: 0;
+        padding-top: 56px;
+    }
+
+    section:not(#hero) { padding: var(--space-10) var(--space-6); }
+    #hero {
+        padding: var(--space-6) var(--space-6) var(--space-8);
+        min-height: calc(100vh - 56px);
+        min-height: calc(100svh - 56px);
+    }
+
+    /* L'aperçu PDF ne fonctionne pas dans un navigateur mobile :
+       on le remplace par un message renvoyant vers les boutons. */
+    .cv-frame { display: none; }
+    .cv-note  { display: block; }
+
+    .hero-big { font-size: 56px; letter-spacing: var(--ls-title); }
+    .hero-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-5); }
+    .alt-banner { padding: var(--space-6); gap: var(--space-5); }
+    .alt-banner-title { font-size: var(--fs-base); }
+    .fiche-meta { grid-template-columns: repeat(2, 1fr); }
+    .fiche { padding: 0 var(--space-4); }
+    footer { padding: var(--space-5) var(--space-6); flex-direction: column; gap: var(--space-2); }
+    .tabs-labels { flex-wrap: wrap; width: 100%; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    #apropos .apropos-bio p { font-size: var(--fs-base); }
+    .to-top { right: var(--space-4); bottom: var(--space-4); }
+    .erreur { padding: var(--space-8) var(--space-6); }
+}
+
+/* En dessous de 600px une carte projet sur deux colonnes devient
+   trop étroite : on passe à une seule colonne */
+@media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .hero-big { font-size: 44px; }
+    .alt-banner-cta .btn { flex: 1; text-align: center; }
+}
+
+/* ================================
+   PAGE 404
+   ================================ */
+.erreur {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--space-11);
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.erreur-code {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: var(--space-5);
+}
+
+.erreur-titre {
+    font-size: var(--fs-title);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-title);
+    line-height: var(--lh-tight);
+    color: var(--text);
+    margin-bottom: var(--space-6);
+}
+
+.erreur-titre span { color: var(--green); }
+
+.erreur-texte {
+    font-size: var(--fs-base);
+    color: var(--text-3);
+    line-height: var(--lh-loose);
+    margin-bottom: var(--space-8);
+}
+
+.erreur-cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+/* ================================
+   MOUVEMENT RÉDUIT
+   Si le visiteur a demandé moins d'animations dans son système,
+   on coupe tout : plus de transitions, plus de cascade, plus de
+   défilement animé. Le contenu reste évidemment visible.
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+    }
+
+    html { scroll-behavior: auto; }
+
+    /* Les éléments animés au scroll doivent rester visibles
+       même si l'observateur n'a pas encore agi */
+    .reveal,
+    .hero-topname,
+    .hero-name-small,
+    .hero-big,
+    .hero-desc,
+    .hero-cta {
+        opacity: 1;
+        transform: none;
+    }
+}
