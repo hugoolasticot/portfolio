@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Plan du site pour les moteurs de recherche.
-     Le portfolio tient sur une seule page : une seule entrée suffit.
-     Si les fiches projet deviennent un jour de vraies pages, il faudra
-     en ajouter une ligne par fiche. -->
+     Une entrée par page indexable : l'accueil, puis les 11 fiches projet.
+     La page 404 n'y figure pas, elle est en noindex. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://hugoolasticot.github.io/portfolio/</loc>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/campusconnect.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/zarza-ski.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/mont-saint-michel.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/wall-is-you.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/conseil-schtroumpfs.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/exploration-algorithmique.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/yahtzee.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/base-de-donnees.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/serveur-dhcp.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/amor-vincit.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/imperium-pizza.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
     </url>
 </urlset>

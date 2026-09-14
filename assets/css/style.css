@@ -879,42 +879,29 @@ footer {
 }
 
 /* ================================
-   POPUPS (:target)
-   ================================ */
-.popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg);
-    z-index: 9999;
-    overflow-y: auto;
-}
-
-.popup-overlay:target {
-    display: block;
-}
-
-body.popup-open {
-    overflow: hidden;
-}
-
-/* Le JS donne le focus à cette boîte à l'ouverture, pour que le lecteur
-   d'écran y entre. Comme ce n'est pas un élément interactif, on masque
-   le contour : le focus clavier, lui, reste visible partout ailleurs. */
-.popup-box:focus {
-    outline: none;
-}
-
-.popup-box {
+   FICHES PROJET — pages/projets/*.html
+   ================================
+   Ces styles servaient aux fiches affichées en superposition par-dessus
+   la page d'accueil. Chaque projet ayant maintenant sa propre page, le
+   préfixe « popup » ne décrivait plus rien : il est devenu « fiche ».
+   Les règles de superposition (.popup-overlay, body.popup-open) et le
+   masquage du contour de focus n'ont plus d'objet et ont disparu. */
+.fiche {
     max-width: 860px;
-    margin: var(--space-11) auto var(--space-11);
+    margin: var(--space-11) auto;
     padding: 0 var(--space-6);
 }
 
-.popup-back {
+/* Barre du haut de la fiche : retour à gauche, bascule de thème à droite */
+.fiche-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-10);
+}
+
+.fiche-retour {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
@@ -926,13 +913,12 @@ body.popup-open {
     border: 1px solid var(--line-strong);
     padding: var(--space-3) var(--space-5);
     border-radius: var(--radius-sm);
-    margin-bottom: var(--space-10);
     transition: all var(--dur-fast);
 }
 
-.popup-back:hover { border-color: var(--green); color: var(--green); }
+.fiche-retour:hover { border-color: var(--green); color: var(--green); }
 
-.popup-cat {
+.fiche-cat {
     font-size: var(--fs-2xs);
     font-weight: var(--fw-semibold);
     letter-spacing: var(--ls-label);
@@ -941,7 +927,7 @@ body.popup-open {
     margin-bottom: var(--space-4);
 }
 
-.popup-h1 {
+.fiche-titre {
     font-size: var(--fs-title);
     font-weight: var(--fw-black);
     letter-spacing: var(--ls-title);
@@ -950,7 +936,7 @@ body.popup-open {
     margin-bottom: var(--space-5);
 }
 
-.popup-desc {
+.fiche-chapo {
     font-size: var(--fs-base);
     color: var(--text-3);
     line-height: var(--lh-loose);
@@ -960,7 +946,7 @@ body.popup-open {
     border-bottom: 1px solid var(--line);
 }
 
-.popup-meta {
+.fiche-meta {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1px;
@@ -971,13 +957,13 @@ body.popup-open {
     margin-bottom: var(--space-9);
 }
 
-.popup-meta-item {
+.fiche-meta-item {
     background: var(--surface);
     padding: var(--space-5);
     text-align: center;
 }
 
-.popup-meta-l {
+.fiche-meta-l {
     font-size: var(--fs-2xs);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -985,20 +971,20 @@ body.popup-open {
     margin-bottom: var(--space-2);
 }
 
-.popup-meta-v {
+.fiche-meta-v {
     font-size: var(--fs-base);
     font-weight: var(--fw-bold);
     color: var(--text);
 }
 
-.popup-tags {
+.fiche-tags {
     display: flex;
     gap: var(--space-2);
     flex-wrap: wrap;
     margin-bottom: var(--space-10);
 }
 
-.popup-tag {
+.fiche-tag {
     font-size: var(--fs-2xs);
     font-weight: var(--fw-semibold);
     letter-spacing: 0.5px;
@@ -1008,7 +994,7 @@ body.popup-open {
     border-radius: var(--radius-sm);
 }
 
-.popup-section {
+.fiche-bloc {
     margin-bottom: var(--space-6);
     padding: var(--space-7) var(--space-8);
     background: var(--surface);
@@ -1017,7 +1003,7 @@ body.popup-open {
     border-left: 2px solid var(--green);
 }
 
-.popup-section-title {
+.fiche-bloc-titre {
     font-size: var(--fs-2xs);
     font-weight: var(--fw-bold);
     letter-spacing: 2px;
@@ -1026,22 +1012,22 @@ body.popup-open {
     margin-bottom: var(--space-4);
 }
 
-.popup-section p {
+.fiche-bloc p {
     font-size: var(--fs-base);
     color: var(--text-3);
     line-height: var(--lh-loose);
     margin-bottom: var(--space-3);
 }
 
-.popup-section p strong { color: var(--text-2); }
+.fiche-bloc p strong { color: var(--text-2); }
 
-.popup-section ul {
+.fiche-bloc ul {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
 }
 
-.popup-section li {
+.fiche-bloc li {
     font-size: var(--fs-base);
     color: var(--text-3);
     padding-left: var(--space-5);
@@ -1049,7 +1035,7 @@ body.popup-open {
     line-height: var(--lh-base);
 }
 
-.popup-section li::before {
+.fiche-bloc li::before {
     content: '—';
     position: absolute;
     left: 0;
@@ -1057,7 +1043,7 @@ body.popup-open {
     font-weight: var(--fw-bold);
 }
 
-.popup-section li strong { color: var(--text-2); }
+.fiche-bloc li strong { color: var(--text-2); }
 
 /* ================================
    BANDEAU ALTERNANCE
@@ -1336,8 +1322,8 @@ body.popup-open {
     .hero-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-5); }
     .alt-banner { padding: var(--space-6); gap: var(--space-5); }
     .alt-banner-title { font-size: var(--fs-base); }
-    .popup-meta { grid-template-columns: repeat(2, 1fr); }
-    .popup-box { padding: 0 var(--space-4); }
+    .fiche-meta { grid-template-columns: repeat(2, 1fr); }
+    .fiche { padding: 0 var(--space-4); }
     footer { padding: var(--space-5) var(--space-6); flex-direction: column; gap: var(--space-2); }
     .tabs-labels { flex-wrap: wrap; width: 100%; }
     .skills-grid { grid-template-columns: repeat(2, 1fr); }
