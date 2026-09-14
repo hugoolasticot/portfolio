@@ -44,11 +44,6 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://hugoolasticot.github.io/portfolio/pages/projets/base-de-donnees.html</loc>
-        <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
         <loc>https://hugoolasticot.github.io/portfolio/pages/projets/serveur-dhcp.html</loc>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
