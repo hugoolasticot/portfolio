@@ -3,29 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page introuvable | Hugo Challaye</title>
+
+    <title>Page introuvable — Hugo Challaye</title>
     <meta name="robots" content="noindex">
 
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#F2EFE8" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E0D0C" media="(prefers-color-scheme: dark)">
 
+    <!-- Chemins absolus : GitHub Pages sert cette page pour n'importe
+         quelle URL inconnue, y compris /portfolio/un/chemin/profond/.
+         Un chemin relatif s'y résoudrait mal. -->
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg">
     <link rel="icon" type="image/x-icon" href="/portfolio/favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="/portfolio/apple-touch-icon.png">
 
-    <!-- Chemins absolus : GitHub Pages sert cette page pour n'importe quelle
-         URL inconnue, y compris /portfolio/un/chemin/profond/ -->
-    <!-- La police est désormais servie par le site lui-même : voir la règle
-         @font-face en haut de style.css. preload la demande dès la
-         première lecture du <head>, sans attendre que le CSS soit
-         analysé. L'attribut crossorigin est obligatoire pour les
-         polices, même lorsqu'elles viennent du même domaine. -->
     <link rel="preload" href="/portfolio/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-    <link rel="stylesheet" href="/portfolio/assets/css/tokens.css">
-    <link rel="stylesheet" href="/portfolio/assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
 
-    <!-- Même thème que le reste du site, appliqué avant l'affichage -->
+    <link rel="stylesheet" href="/portfolio/assets/css/variables.css">
+    <link rel="stylesheet" href="/portfolio/assets/css/base.css">
+    <link rel="stylesheet" href="/portfolio/assets/css/layout.css">
+    <link rel="stylesheet" href="/portfolio/assets/css/composants.css">
+
+    <style>
+        /* Styles propres à cette page : elle n'a aucun composant en
+           commun avec le reste du site, ce n'est donc pas la peine
+           de les faire vivre dans composants.css. */
+        .erreur {
+            min-height: 100vh;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--e5);
+            padding: var(--e9) clamp(var(--e5), 6vw, var(--e9));
+            max-width: 900px;
+            margin-inline: auto;
+        }
+
+        .erreur-code {
+            font-size: var(--t-micro);
+            font-weight: var(--g-semi);
+            letter-spacing: var(--l-label);
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .erreur h1 {
+            font-size: clamp(44px, 9vw, 104px);
+            line-height: var(--i-titre);
+            letter-spacing: var(--l-geant);
+        }
+
+        .erreur h1 em {
+            color: var(--accent);
+        }
+
+        .erreur p {
+            max-width: 46ch;
+            color: var(--encre-2);
+            font-size: var(--t-lead);
+            line-height: var(--i-serre);
+        }
+
+        .erreur-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--e3);
+            margin-top: var(--e4);
+        }
+    </style>
+
     <script>
         (function () {
             document.documentElement.classList.add('js');
@@ -34,26 +85,30 @@
             try {
                 choix = localStorage.getItem('theme');
             } catch (e) {
-                // localStorage peut être bloqué : on ignore
+                // localStorage bloqué : on retombe sur le système.
             }
 
-            var clair = window.matchMedia('(prefers-color-scheme: light)').matches;
-            document.documentElement.setAttribute('data-theme', choix || (clair ? 'light' : 'dark'));
+            var sombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', choix || (sombre ? 'dark' : 'light'));
         })();
     </script>
 </head>
+
 <body>
 
 <main class="erreur">
-    <p class="erreur-code">404</p>
-    <h1 class="erreur-titre">Cette page<br><span>n'existe pas</span></h1>
-    <p class="erreur-texte">
-        Le lien est peut-être erroné, ou la page a été déplacée.
-        Tu peux revenir à l'accueil pour retrouver mes projets.
+    <p class="erreur-code">Erreur 404</p>
+
+    <h1>Cette page<br><em>n'existe pas</em></h1>
+
+    <p>
+        Le lien est peut-être erroné, ou la page a changé d'adresse.
+        Les projets sont tous accessibles depuis l'accueil.
     </p>
-    <div class="erreur-cta">
-        <a href="/portfolio/" class="btn btn-filled">Retour à l'accueil</a>
-        <a href="/portfolio/#projets" class="btn btn-ghost">Voir mes projets</a>
+
+    <div class="erreur-actions">
+        <a href="/portfolio/" class="bouton bouton-plein">Retour à l'accueil</a>
+        <a href="/portfolio/#projets" class="bouton bouton-creux">Voir les projets</a>
     </div>
 </main>
 

@@ -1,0 +1,702 @@
+/* ============================================================
+   COMPOSANTS
+   ============================================================
+   Les briques réutilisables : boutons, cartes projet, filtres,
+   groupes de compétences, frise, liens de contact, et la mise en
+   forme des fiches projet.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   BOUTONS
+   ------------------------------------------------------------ */
+.bouton {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--e2);
+    padding: var(--e3) var(--e5);
+    border-radius: var(--r-rond);
+    font-size: var(--t-petit);
+    font-weight: var(--g-semi);
+    letter-spacing: 0.02em;
+    border: 1px solid transparent;
+    transition: background var(--d-vif) var(--courbe),
+                border-color var(--d-vif) var(--courbe),
+                color var(--d-vif) var(--courbe),
+                transform var(--d-vif) var(--courbe);
+}
+
+.bouton:hover {
+    transform: translateY(-1px);
+}
+
+.bouton-plein {
+    background: var(--encre);
+    color: var(--fond);
+}
+
+.bouton-plein:hover {
+    background: var(--accent);
+    color: var(--sur-accent);
+}
+
+.bouton-creux {
+    border-color: var(--trait-fort);
+    color: var(--encre);
+}
+
+.bouton-creux:hover {
+    border-color: var(--encre);
+    background: var(--surface);
+}
+
+/* La flèche des boutons et des liens avance au survol. */
+.bouton svg,
+.lien-fleche svg {
+    width: 14px;
+    height: 14px;
+    transition: transform var(--d-base) var(--courbe);
+}
+
+.bouton:hover svg,
+.lien-fleche:hover svg {
+    transform: translate(2px, -2px);
+}
+
+/* ------------------------------------------------------------
+   COMPÉTENCES
+   ------------------------------------------------------------
+   Groupées par catégorie, sans barre de pourcentage : une barre
+   à 80 % ne veut rien dire et personne ne sait sur quoi elle est
+   mesurée.
+
+   La grille se règle sur l'espace disponible plutôt que sur la
+   largeur de l'écran : auto-fit + minmax crée autant de colonnes
+   qu'il en tient, sans aucune media query.
+   ------------------------------------------------------------ */
+.grille-competences {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    background: var(--fond);
+    border: 1px solid var(--trait);
+    border-radius: var(--r-moyen);
+    overflow: hidden;
+}
+
+/* Les filets de séparation sont tracés en box-shadow, et non par
+   une gouttière laissant voir le fond de la grille.
+   Avec `auto-fit`, le nombre de colonnes dépend de la largeur
+   disponible : la dernière ligne est presque toujours incomplète,
+   et les cellules vides laissaient alors apparaître des blocs gris
+   à la place du fond.
+
+   Une ombre portée ne prend aucune place dans la mise en page et
+   n'existe que sur les cellules réellement présentes. Celles de la
+   dernière colonne et de la dernière ligne débordent sur la
+   bordure du conteneur, qui les masque grâce à overflow: hidden. */
+.groupe-competences {
+    background: var(--fond);
+    padding: var(--e6) var(--e5);
+    box-shadow: 1px 0 0 var(--trait), 0 1px 0 var(--trait);
+    transition: background var(--d-base) var(--courbe);
+}
+
+.groupe-competences:hover {
+    background: var(--surface);
+}
+
+.groupe-competences h3 {
+    font-family: var(--texte);
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--e5);
+}
+
+.groupe-competences ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e3);
+}
+
+.groupe-competences li {
+    position: relative;
+    padding-left: var(--e4);
+    font-size: var(--t-base);
+    color: var(--encre-2);
+}
+
+/* Le point devant chaque entrée, posé en ::before pour pouvoir le
+   colorer et l'aligner.
+
+   Le marqueur est positionné en absolu, et non posé dans un
+   conteneur flex. En flex, chaque enfant du <li> devient une
+   colonne : un <li> contenant du <strong> suivi de texte se
+   retrouvait coupé en deux blocs côte à côte au lieu de former
+   une phrase. */
+.groupe-competences li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 4px;
+    height: 4px;
+    border-radius: var(--r-rond);
+    background: var(--trait-fort);
+}
+
+.groupe-competences li .precision {
+    color: var(--encre-3);
+    font-size: var(--t-petit);
+}
+
+/* ------------------------------------------------------------
+   FILTRES DE PROJETS
+   ------------------------------------------------------------
+   Des boutons radio pilotent l'affichage en CSS pur : le filtre
+   fonctionne donc même si le JavaScript ne se charge pas. Le JS
+   n'ajoute qu'un fondu avant le masquage.
+   ------------------------------------------------------------ */
+.radios-filtre {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.etiquettes-filtre {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e2);
+    margin-bottom: var(--e6);
+}
+
+.etiquette-filtre {
+    padding: var(--e2) var(--e4);
+    border: 1px solid var(--trait);
+    border-radius: var(--r-rond);
+    font-size: var(--t-petit);
+    color: var(--encre-3);
+    cursor: pointer;
+    transition: border-color var(--d-vif) var(--courbe),
+                color var(--d-vif) var(--courbe),
+                background var(--d-vif) var(--courbe);
+}
+
+.etiquette-filtre:hover {
+    color: var(--encre);
+    border-color: var(--trait-fort);
+}
+
+/* L'étiquette du filtre actif. Le sélecteur remonte du bouton
+   radio coché vers son étiquette via ~ : ils sont frères dans le
+   document, le radio étant placé juste avant. */
+#f-tous:checked    ~ .etiquettes-filtre [for="f-tous"],
+#f-web:checked     ~ .etiquettes-filtre [for="f-web"],
+#f-php:checked     ~ .etiquettes-filtre [for="f-php"],
+#f-python:checked  ~ .etiquettes-filtre [for="f-python"],
+#f-java:checked    ~ .etiquettes-filtre [for="f-java"],
+#f-sql:checked     ~ .etiquettes-filtre [for="f-sql"],
+#f-reseau:checked  ~ .etiquettes-filtre [for="f-reseau"] {
+    background: var(--encre);
+    border-color: var(--encre);
+    color: var(--fond);
+}
+
+/* Le masquage lui-même : chaque filtre coché cache les cartes
+   qui ne portent pas la classe correspondante. */
+#f-web:checked    ~ .grille-projets .carte-projet:not(.web),
+#f-php:checked    ~ .grille-projets .carte-projet:not(.php),
+#f-python:checked ~ .grille-projets .carte-projet:not(.python),
+#f-java:checked   ~ .grille-projets .carte-projet:not(.java),
+#f-sql:checked    ~ .grille-projets .carte-projet:not(.sql),
+#f-reseau:checked ~ .grille-projets .carte-projet:not(.reseau) {
+    display: none;
+}
+
+/* Quand le JavaScript est actif, il prend la main sur le
+   masquage pour pouvoir jouer un fondu avant de retirer la
+   carte. On neutralise alors la règle CSS ci-dessus. */
+html.js .grille-projets .carte-projet {
+    display: flex;
+}
+
+html.js .grille-projets .carte-projet.est-masquee {
+    display: none;
+}
+
+.carte-projet.est-sortante {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity var(--d-vif) var(--courbe),
+                transform var(--d-vif) var(--courbe);
+}
+
+/* ------------------------------------------------------------
+   CARTES PROJET
+   ------------------------------------------------------------ */
+.grille-projets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr));
+    gap: var(--e5);
+}
+
+.carte-projet {
+    display: flex;
+    flex-direction: column;
+    background: var(--fond);
+    border: 1px solid var(--trait);
+    border-radius: var(--r-moyen);
+    overflow: hidden;
+    transition: border-color var(--d-base) var(--courbe),
+                transform var(--d-base) var(--courbe),
+                box-shadow var(--d-base) var(--courbe);
+}
+
+.carte-projet:hover {
+    border-color: var(--trait-fort);
+    transform: translateY(-3px);
+    box-shadow: var(--ombre-haut);
+}
+
+/* La carte du projet phare occupe deux colonnes quand la place
+   le permet, et passe son visuel à côté du texte plutôt que
+   au-dessus. C'est la hiérarchie du site : un projet compte
+   plus que les autres. */
+@media (min-width: 1100px) {
+    .carte-projet.est-phare {
+        grid-column: span 2;
+        flex-direction: row;
+    }
+
+    .carte-projet.est-phare .visuel-projet {
+        width: 52%;
+        flex-shrink: 0;
+        aspect-ratio: auto;
+    }
+
+    .carte-projet.est-phare .corps-projet {
+        justify-content: center;
+        padding: var(--e7);
+    }
+}
+
+.visuel-projet {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--surface);
+    border-bottom: 1px solid var(--trait);
+}
+
+.visuel-projet img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* Le zoom au survol est en transform : la carte graphique
+       s'en charge seule, sans recalcul de mise en page. */
+    transition: transform 0.7s var(--courbe),
+                filter var(--d-base) var(--courbe);
+
+    /* Léger désaturé au repos : les captures reprennent leurs
+       couleurs au survol, ce qui calme la grille quand on la
+       regarde dans son ensemble. */
+    filter: saturate(0.82);
+}
+
+.carte-projet:hover .visuel-projet img {
+    transform: scale(1.04);
+    filter: saturate(1);
+}
+
+/* Remplace la capture tant qu'elle n'existe pas. Un aplat avec
+   le nom de la technologie vaut mieux qu'un rectangle vide : on
+   comprend tout de suite que le contenu viendra. */
+.visuel-absent {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0 11px,
+            var(--trait) 11px 12px
+        ),
+        var(--surface);
+}
+
+.visuel-absent span {
+    font-family: var(--titre);
+    font-size: clamp(28px, 5vw, 44px);
+    color: var(--encre-3);
+    background: var(--fond);
+    padding: var(--e2) var(--e5);
+    border-radius: var(--r-moyen);
+}
+
+.corps-projet {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e3);
+    padding: var(--e5);
+    flex-grow: 1;
+}
+
+.entete-projet {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--e4);
+}
+
+.numero-projet {
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    color: var(--encre-3);
+    font-variant-numeric: tabular-nums;
+}
+
+.carte-projet h3 {
+    font-size: var(--t-h3);
+    letter-spacing: var(--l-titre);
+}
+
+.carte-projet.est-phare h3 {
+    font-size: clamp(28px, 2.6vw, 44px);
+}
+
+.carte-projet p {
+    color: var(--encre-2);
+    font-size: var(--t-petit);
+    line-height: var(--i-base);
+    max-width: 52ch;
+}
+
+.etiquettes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e2);
+    margin-top: auto;
+    padding-top: var(--e3);
+}
+
+.etiquette {
+    font-size: var(--t-micro);
+    font-weight: var(--g-moyen);
+    letter-spacing: 0.04em;
+    color: var(--encre-3);
+    border: 1px solid var(--trait);
+    border-radius: var(--r-rond);
+    padding: 3px var(--e3);
+}
+
+.lien-fleche {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--e2);
+    font-size: var(--t-petit);
+    font-weight: var(--g-semi);
+    color: var(--accent);
+    margin-top: var(--e2);
+}
+
+/* ------------------------------------------------------------
+   FRISE DU PARCOURS
+   ------------------------------------------------------------
+   Une liste de définition : chaque entrée est une date associée
+   à un contenu. C'est la structure sémantique juste, et elle se
+   lit correctement sans la moindre feuille de style.
+   ------------------------------------------------------------ */
+.frise {
+    border-top: 1px solid var(--trait);
+}
+
+.entree-frise {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--e2);
+    padding-block: var(--e6);
+    border-bottom: 1px solid var(--trait);
+    transition: background var(--d-base) var(--courbe);
+}
+
+@media (min-width: 700px) {
+    .entree-frise {
+        grid-template-columns: 150px minmax(0, 1fr);
+        gap: var(--e6);
+        align-items: start;
+    }
+}
+
+.frise-date {
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.35em;
+}
+
+.frise-titre {
+    font-family: var(--titre);
+    font-size: var(--t-h3);
+    letter-spacing: var(--l-titre);
+    margin-bottom: var(--e2);
+}
+
+.frise-lieu {
+    font-size: var(--t-petit);
+    color: var(--encre-3);
+    margin-bottom: var(--e3);
+}
+
+.entree-frise p {
+    color: var(--encre-2);
+    max-width: var(--mesure);
+}
+
+/* ------------------------------------------------------------
+   CONTACT
+   ------------------------------------------------------------ */
+.liens-contact {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--trait);
+}
+
+.lien-contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--e5);
+    padding: var(--e5) var(--e2);
+    border-bottom: 1px solid var(--trait);
+
+    font-size: clamp(16px, 2vw, 24px);
+    font-family: var(--titre);
+    letter-spacing: var(--l-titre);
+    text-align: left;
+    width: 100%;
+
+    transition: padding var(--d-base) var(--courbe),
+                color var(--d-base) var(--courbe);
+}
+
+.lien-contact:hover {
+    color: var(--accent);
+    padding-inline: var(--e5) var(--e4);
+}
+
+.lien-contact svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform var(--d-base) var(--courbe);
+}
+
+.lien-contact:hover svg {
+    transform: translate(3px, -3px);
+}
+
+/* Confirmation après la copie de l'adresse. */
+.lien-contact.est-copie {
+    color: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   SIGNAL « À COMPLÉTER »
+   ------------------------------------------------------------
+   Marque visible les contenus qu'il reste à rédiger, pour qu'ils
+   ne passent pas inaperçus en ligne.
+   ------------------------------------------------------------ */
+.a-completer {
+    display: inline-block;
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+    color: var(--attente);
+    background: var(--attente-voile);
+    border: 1px solid color-mix(in srgb, var(--attente) 40%, transparent);
+    border-radius: var(--r-rond);
+    padding: 2px var(--e3);
+}
+
+/* ============================================================
+   FICHES PROJET
+   ============================================================ */
+.fiche {
+    max-width: 860px;
+    margin-inline: auto;
+    padding-inline: clamp(var(--e5), 5vw, var(--e7));
+    padding-block: clamp(var(--e9), 16vh, var(--e10)) var(--e9);
+}
+
+.fiche-retour {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--e2);
+    font-size: var(--t-petit);
+    color: var(--encre-3);
+    margin-bottom: var(--e7);
+    transition: color var(--d-vif) var(--courbe), gap var(--d-vif) var(--courbe);
+}
+
+.fiche-retour:hover {
+    color: var(--encre);
+    gap: var(--e3);
+}
+
+.fiche-categorie {
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--e4);
+}
+
+.fiche h1 {
+    font-size: clamp(38px, 7vw, 76px);
+    line-height: var(--i-titre);
+    letter-spacing: var(--l-geant);
+    margin-bottom: var(--e5);
+}
+
+.fiche-chapo {
+    font-size: var(--t-lead);
+    line-height: var(--i-serre);
+    color: var(--encre-2);
+    max-width: 46ch;
+    margin-bottom: var(--e7);
+}
+
+/* Bandeau de métadonnées. Une liste de définition là encore :
+   chaque intitulé est associé à sa valeur. */
+.fiche-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+    gap: var(--e5);
+    padding-block: var(--e5);
+    border-block: 1px solid var(--trait);
+    margin-bottom: var(--e7);
+}
+
+.fiche-meta dt {
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+    color: var(--encre-3);
+    margin-bottom: var(--e2);
+}
+
+.fiche-meta dd {
+    font-size: var(--t-base);
+    color: var(--encre);
+}
+
+.fiche-visuel {
+    margin-bottom: var(--e7);
+    border: 1px solid var(--trait);
+    border-radius: var(--r-moyen);
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--surface);
+}
+
+.fiche-visuel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fiche-bloc {
+    margin-bottom: var(--e7);
+}
+
+.fiche-bloc h2 {
+    font-size: var(--t-h3);
+    margin-bottom: var(--e4);
+    padding-bottom: var(--e3);
+    border-bottom: 1px solid var(--trait);
+}
+
+.fiche-bloc p {
+    color: var(--encre-2);
+    line-height: var(--i-ample);
+    max-width: var(--mesure);
+}
+
+.fiche-bloc p + p {
+    margin-top: var(--e4);
+}
+
+.fiche-bloc ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e3);
+    max-width: var(--mesure);
+}
+
+.fiche-bloc li {
+    position: relative;
+    padding-left: var(--e4);
+    color: var(--encre-2);
+    line-height: var(--i-base);
+}
+
+/* Même raison que pour les compétences : un marqueur en flex
+   découperait les <li> contenant du <strong> en deux colonnes. */
+.fiche-bloc li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 4px;
+    height: 4px;
+    border-radius: var(--r-rond);
+    background: var(--accent);
+}
+
+.fiche-etiquettes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e2);
+    margin-bottom: var(--e7);
+}
+
+/* Navigation d'une fiche à la suivante, en bas de page. */
+.fiche-suite {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--e5);
+    flex-wrap: wrap;
+    padding-top: var(--e6);
+    border-top: 1px solid var(--trait);
+}
+
+.fiche-suite a {
+    font-size: var(--t-petit);
+    color: var(--encre-3);
+    transition: color var(--d-vif) var(--courbe);
+}
+
+.fiche-suite a:hover {
+    color: var(--accent);
+}
+
+.fiche-suite strong {
+    display: block;
+    font-family: var(--titre);
+    font-size: var(--t-h3);
+    font-weight: var(--g-normal);
+    color: var(--encre);
+    letter-spacing: var(--l-titre);
+    margin-top: var(--e1);
+}
