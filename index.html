@@ -77,13 +77,17 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- La police est désormais servie par le site lui-même : voir la règle
+         @font-face en haut de style.css. preload la demande dès la
+         première lecture du <head>, sans attendre que le CSS soit
+         analysé. L'attribut crossorigin est obligatoire pour les
+         polices, même lorsqu'elles viennent du même domaine. -->
+    <link rel="preload" href="assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+
     <!-- tokens.css doit venir en premier : il définit les variables
          (couleurs, espacements, tailles) que style.css utilise ensuite. -->
     <link rel="stylesheet" href="assets/css/tokens.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Ce script doit rester ici, en haut de page et sans defer :
          il applique le thème avant le premier affichage pour éviter

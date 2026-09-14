@@ -25,11 +25,15 @@
     <link rel="icon" type="image/x-icon" href="../../favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- La police est désormais servie par le site lui-même : voir la règle
+         @font-face en haut de style.css. preload la demande dès la
+         première lecture du <head>, sans attendre que le CSS soit
+         analysé. L'attribut crossorigin est obligatoire pour les
+         polices, même lorsqu'elles viennent du même domaine. -->
+    <link rel="preload" href="../../assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="../../assets/css/tokens.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Applique le thème avant le premier affichage, pour éviter un flash
          de thème sombre chez les visiteurs en thème clair. Même code que
