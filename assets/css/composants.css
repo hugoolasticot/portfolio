@@ -97,7 +97,12 @@
     background: var(--fond);
     padding: var(--e6) var(--e5);
     box-shadow: 1px 0 0 var(--trait), 0 1px 0 var(--trait);
-    transition: background var(--d-base) var(--courbe);
+
+    /* background-color, et non le raccourci background : le
+       raccourci englobe des sous-propriétés non animables, et son
+       animation se comporte mal quand la valeur vient d'une
+       variable qui change avec le thème. */
+    transition: background-color var(--d-base) var(--courbe);
 }
 
 .groupe-competences:hover {
@@ -318,22 +323,20 @@ html.js .grille-projets .carte-projet.est-masquee {
     inset: 0;
     display: grid;
     place-items: center;
-    background:
-        repeating-linear-gradient(
-            -45deg,
-            transparent 0 11px,
-            var(--trait) 11px 12px
-        ),
-        var(--surface);
+    background: var(--surface);
+    padding: var(--e5);
 }
 
+/* Le nom du projet composé dans la même serif que les titres. Une
+   première version posait des rayures diagonales en fond : c'est un
+   tic de maquette, et ça salissait la grille sans rien dire. Un
+   aplat et un mot suffisent à signaler que la capture viendra. */
 .visuel-absent span {
     font-family: var(--titre);
-    font-size: clamp(28px, 5vw, 44px);
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: var(--i-serre);
     color: var(--encre-3);
-    background: var(--fond);
-    padding: var(--e2) var(--e5);
-    border-radius: var(--r-moyen);
+    text-align: center;
 }
 
 .corps-projet {
@@ -482,13 +485,17 @@ html.js .grille-projets .carte-projet.est-masquee {
     text-align: left;
     width: 100%;
 
-    transition: padding var(--d-base) var(--courbe),
+    /* On anime une translation, jamais le padding : modifier une
+       marge intérieure oblige le navigateur à refaire la mise en
+       page de la ligne à chaque image, là où une transformation est
+       calculée par la carte graphique seule. */
+    transition: transform var(--d-base) var(--courbe),
                 color var(--d-base) var(--courbe);
 }
 
 .lien-contact:hover {
     color: var(--accent);
-    padding-inline: var(--e5) var(--e4);
+    transform: translateX(var(--e3));
 }
 
 .lien-contact svg {
@@ -536,28 +543,44 @@ html.js .grille-projets .carte-projet.est-masquee {
     padding-block: clamp(var(--e9), 16vh, var(--e10)) var(--e9);
 }
 
-.fiche-retour {
+/* Fil d'Ariane.
+
+   La catégorie était auparavant un petit label en capitales
+   espacées posé juste au-dessus du titre. C'est devenu la signature
+   visuelle des pages générées, et ça n'apportait rien : la même
+   information lue comme un chemin de navigation est plus utile, et
+   le titre redevient le premier élément de la page. */
+.fiche-fil {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--e3);
+    font-size: var(--t-petit);
+    color: var(--encre-3);
+    margin-bottom: var(--e6);
+}
+
+.fiche-fil a {
     display: inline-flex;
     align-items: center;
     gap: var(--e2);
-    font-size: var(--t-petit);
-    color: var(--encre-3);
-    margin-bottom: var(--e7);
-    transition: color var(--d-vif) var(--courbe), gap var(--d-vif) var(--courbe);
+    transition: color var(--d-vif) var(--courbe);
 }
 
-.fiche-retour:hover {
+.fiche-fil a:hover {
     color: var(--encre);
-    gap: var(--e3);
 }
 
-.fiche-categorie {
-    font-size: var(--t-micro);
-    font-weight: var(--g-semi);
-    letter-spacing: var(--l-label);
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: var(--e4);
+.fiche-fil a svg {
+    transition: transform var(--d-vif) var(--courbe);
+}
+
+.fiche-fil a:hover svg {
+    transform: translateX(-2px);
+}
+
+.fiche-fil > span[aria-hidden] {
+    color: var(--trait-fort);
 }
 
 .fiche h1 {

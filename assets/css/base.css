@@ -62,12 +62,27 @@ body {
     -moz-osx-font-smoothing: grayscale;
 
     /* Aucune page ne doit pouvoir défiler horizontalement : la
-       scène 3D déborde volontairement du cadre. */
-    overflow-x: hidden;
+       scène 3D déborde volontairement du cadre.
 
-    /* Le changement de thème traverse tout le site d'un coup. */
-    transition: background var(--d-base) var(--courbe),
-                color var(--d-base) var(--courbe);
+       `clip` plutôt que `hidden` : `hidden` transforme le <body> en
+       conteneur de défilement, ce qui peut rogner les éléments en
+       position fixe ou collante posés à l'intérieur. `clip` coupe
+       le débordement sans rien créer de tel. `hidden` reste en
+       repli pour les navigateurs qui ne connaissent pas `clip`. */
+    overflow-x: hidden;
+    overflow-x: clip;
+
+    /* Pas de transition sur le fond ni sur la couleur du texte.
+       Les deux sont alimentés par des variables qui changent au
+       basculement de thème, et une transition dont la valeur de
+       départ est elle-même redéfinie en cours de route peut rester
+       bloquée : en enchaînant plusieurs basculements rapprochés, la
+       page se retrouvait annoncée en thème clair avec un fond resté
+       sombre, donc texte sombre sur fond sombre.
+
+       Le reste du site change de couleur instantanément de toute
+       façon : faire fondre le seul fond était autant un défaut de
+       cohérence qu'un risque. */
 }
 
 img,

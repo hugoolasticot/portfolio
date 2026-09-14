@@ -87,12 +87,14 @@
 
 <main class="fiche" id="contenu" tabindex="-1">
 
-    <a class="fiche-retour" href="../../index.html#projets">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-        Tous les projets
-    </a>
-
-    <p class="fiche-categorie">Réseau · SAÉ · 1re année</p>
+    <nav class="fiche-fil" aria-label="Fil d'Ariane">
+        <a href="../../index.html#projets">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Tous les projets
+        </a>
+        <span aria-hidden="true">/</span>
+        <span>Réseau · SAÉ · 1re année</span>
+    </nav>
     <h1>Serveur DHCP</h1>
     <p class="fiche-chapo">Installation et configuration d'un serveur DHCP sous Linux avec Netkit-ng. Analyse des échanges réseau avec Wireshark.</p>
 
@@ -143,7 +145,7 @@
 
 <footer class="pied">
     <span>© 2026 Hugo Challaye</span>
-    <span>Écrit à la main — HTML, CSS, JavaScript, Three.js</span>
+    <span>Écrit à la main : HTML, CSS, JavaScript, Three.js</span>
 </footer>
 
 <button type="button" class="vers-haut" aria-label="Revenir en haut de la page">

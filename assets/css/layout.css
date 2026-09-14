@@ -69,9 +69,13 @@
     gap: var(--e5);
     padding: var(--e5) clamp(var(--e5), 4vw, var(--e8));
 
+    /* Seuls le fond et le filet changent au défilement. Une version
+       antérieure réduisait aussi le padding : animer une marge
+       intérieure force le navigateur à refaire la mise en page, et
+       une barre qui change de hauteur sous le curseur fait sauter
+       tout le contenu. */
     transition: background var(--d-base) var(--courbe),
-                border-color var(--d-base) var(--courbe),
-                padding var(--d-base) var(--courbe);
+                border-color var(--d-base) var(--courbe);
     border-bottom: 1px solid transparent;
 }
 
@@ -83,7 +87,6 @@
 .entete.est-detachee {
     border-bottom-color: var(--trait);
     background: var(--fond);
-    padding-block: var(--e3);
 }
 
 @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {

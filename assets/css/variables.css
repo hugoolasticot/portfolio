@@ -119,7 +119,10 @@
     /* Hauteurs de ligne */
     --i-geant: 0.84;
     --i-titre: 1.02;
-    --i-serre: 1.22;
+    /* Employée par les chapôs et les titres de niveau 3. Elle était
+       à 1,22 : correct pour un titre d'une ligne, trop serré pour un
+       chapô de trois ou quatre lignes à 24 px. */
+    --i-serre: 1.32;
     --i-base:  1.65;
     --i-ample: 1.8;
 
