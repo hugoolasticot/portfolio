@@ -1,0 +1,24 @@
+# ============================================================
+# Fichiers que Git doit ignorer.
+# Une ligne = un motif. Le "/" final signifie "dossier".
+# ============================================================
+
+# Mon fichier de suivi personnel : il ne doit pas partir en ligne
+SUIVI.md
+
+# Secrets : mots de passe, clés d'API, identifiants.
+# Rien de tel dans ce projet aujourd'hui, mais la règle protège l'avenir.
+.env
+.env.*
+
+# Dépendances installées par npm (si un outil en génère un jour)
+node_modules/
+
+# Fichiers temporaires créés par des outils (skills Claude Code)
+.impeccable/
+.claude/settings.local.json
+
+# Fichiers générés automatiquement par les systèmes d'exploitation
+.DS_Store
+Thumbs.db
+desktop.ini
