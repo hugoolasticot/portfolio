@@ -1,0 +1,207 @@
+/* ============================================================
+   JETONS DE DESIGN
+   ============================================================
+   Ce fichier ne contient que des variables : aucune règle de mise
+   en forme. C'est le vocabulaire du site, les autres fichiers ne
+   font que l'employer.
+
+   Les noms décrivent le RÔLE (fond, encre, trait) et jamais la
+   couleur elle-même, pour que le thème sombre puisse réutiliser
+   exactement les mêmes noms en changeant seulement les valeurs.
+
+   À charger en premier : une variable doit être définie avant
+   d'être utilisée.
+   ============================================================ */
+
+:root {
+    color-scheme: light;
+
+    /* ========================================================
+       COULEURS — fonds et traits
+       ========================================================
+       Un ivoire tiré vers le papier, pas un blanc d'écran. Le
+       blanc pur sur une grande surface fatigue et fait ressortir
+       le moindre défaut de calibrage. */
+    --fond:         #F2EFE8;
+    --surface:      #E8E4DA;   /* encarts, cartes, champs */
+    --surface-2:    #DEDACE;   /* survol d'un encart */
+    --trait:        #D8D3C6;
+    --trait-fort:   #C2BCAB;
+
+    /* ========================================================
+       COULEURS — encre
+       ========================================================
+       Ratios mesurés sur --fond. Minimum WCAG AA : 4,5:1. */
+    --encre:        #141310;   /* principal    — 15,8:1 */
+    --encre-2:      #46433B;   /* secondaire   —  9,4:1 */
+    --encre-3:      #6B675D;   /* tertiaire    —  5,1:1 */
+
+    /* ========================================================
+       COULEURS — accent cinabre
+       ========================================================
+       Seul point de couleur du site. Tout le reste est
+       achromatique : une couleur unique tenue partout donne plus
+       de caractère qu'une palette.
+
+       --sur-accent est la couleur du texte POSÉ SUR l'accent.
+       C'est elle qui s'inverse d'un thème à l'autre, pas l'accent. */
+    --accent:       #A63A22;   /* 5,9:1 sur --fond */
+    --accent-vif:   #C4462A;   /* survol */
+    --accent-voile: rgba(166, 58, 34, 0.09);
+    --sur-accent:   #F2EFE8;   /* 5,4:1 sur --accent */
+
+    /* Couleur du signal « à compléter » */
+    --attente:      #7A5A12;   /* 5,3:1 sur --fond */
+    --attente-voile: rgba(122, 90, 18, 0.09);
+
+    /* ========================================================
+       LA SCÈNE 3D
+       ========================================================
+       Lues par scene-3d.js via getComputedStyle, pour que le
+       CSS reste la seule source de vérité des couleurs. Elles
+       changent donc avec le thème sans dupliquer les valeurs
+       dans le JavaScript.
+
+       --verre       : teinte de la coque
+       --graphe      : teinte du réseau de nœuds à l'intérieur
+       --iris-a / -b : les deux extrêmes de l'irisation, mélangés
+                       par le shader selon l'angle de vue */
+    --verre:        #1B1A17;
+    --graphe:       #A63A22;
+    --iris-a:       #3E6FB0;
+    --iris-b:       #C4462A;
+
+    /* ========================================================
+       ESPACEMENT
+       ========================================================
+       Échelle sur une grille de 4 px. On n'utilise que ces
+       valeurs pour les marges, les paddings et les gouttières.
+       Les valeurs de 1 à 3 px restent écrites en clair : ce sont
+       des traits, pas des espacements. */
+    --e1:   4px;
+    --e2:   8px;
+    --e3:  12px;
+    --e4:  16px;
+    --e5:  24px;
+    --e6:  32px;
+    --e7:  48px;
+    --e8:  64px;
+    --e9:  96px;
+    --e10: 144px;
+    --e11: 220px;
+
+    /* ========================================================
+       TYPOGRAPHIE
+       ========================================================
+       Deux familles, pas trois. Le serif porte les titres et
+       donne le registre ; la grotesque porte tout le reste. */
+    --titre:  'Instrument Serif', Georgia, 'Times New Roman', serif;
+    --texte:  'Inter', system-ui, -apple-system, sans-serif;
+
+    /* clamp(plancher, valeur souple, plafond) : la taille suit la
+       largeur de l'écran sans jamais sortir des bornes, ce qui
+       évite d'écrire une taille par media query. */
+    --t-micro: 11px;                        /* labels capitales, numéros */
+    --t-petit: 13px;
+    --t-base:  clamp(15px, 0.35vw + 14px, 17px);
+    --t-lead:  clamp(18px, 0.8vw + 15px, 24px);   /* chapôs */
+    --t-h3:    clamp(19px, 0.6vw + 17px, 24px);
+    --t-h2:    clamp(30px, 3.2vw + 16px, 60px);
+    /* Le nom sur l'accueil. Le plancher est haut volontairement :
+       à 13vw sur un écran de 375 px, le titre retombait à 49 px et
+       n'avait plus rien d'un titre d'accueil. */
+    --t-geant: clamp(68px, 13vw, 210px);
+
+    --g-normal:   400;
+    --g-moyen:    500;
+    --g-semi:     600;
+
+    /* Hauteurs de ligne */
+    --i-geant: 0.84;
+    --i-titre: 1.02;
+    /* Employée par les chapôs et les titres de niveau 3. Elle était
+       à 1,22 : correct pour un titre d'une ligne, trop serré pour un
+       chapô de trois ou quatre lignes à 24 px. */
+    --i-serre: 1.32;
+    --i-base:  1.65;
+    --i-ample: 1.8;
+
+    /* Interlettrage. Les grands corps en serif ont besoin d'être
+       resserrés, les petits labels en capitales d'être écartés. */
+    --l-geant: -0.045em;
+    --l-titre: -0.025em;
+    --l-label: 0.16em;
+
+    /* ========================================================
+       FORMES ET MOUVEMENT
+       ======================================================== */
+    --r-petit:  3px;
+    --r-moyen:  6px;
+    --r-rond:   999px;
+
+    --ombre:      0 1px 2px rgba(20, 19, 16, 0.05),
+                  0 12px 32px -12px rgba(20, 19, 16, 0.16);
+    --ombre-haut: 0 2px 4px rgba(20, 19, 16, 0.06),
+                  0 24px 56px -16px rgba(20, 19, 16, 0.22);
+
+    --d-vif:   0.18s;   /* changements d'état */
+    --d-base:  0.42s;   /* déplacements */
+    --d-lent:  0.9s;    /* révélations au scroll */
+
+    /* Courbe d'accélération unique pour tout le site. Démarrage
+       franc, arrivée très amortie : c'est elle qui donne
+       l'impression de calme recherchée. */
+    --courbe: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Largeur de lecture maximale d'un paragraphe : au-delà
+       d'environ 70 caractères, l'œil perd le début de la ligne
+       suivante. */
+    --mesure: 62ch;
+}
+
+/* ============================================================
+   THÈME SOMBRE
+   ============================================================
+   Posé par le script en ligne du <head> sous forme d'un attribut
+   data-theme="dark" sur <html>.
+
+   Seules les couleurs changent. Espacements, tailles, graisses,
+   rayons et durées sont communs aux deux thèmes.
+
+   L'objet 3D s'inverse lui aussi : en sombre, le verre devient
+   clair et lumineux au lieu d'être fumé.
+   ============================================================ */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --fond:         #0E0D0C;
+    --surface:      #1A1917;
+    --surface-2:    #222120;
+    --trait:        #2A2825;
+    --trait-fort:   #3C3934;
+
+    --encre:        #F2EFE8;   /* 15,8:1 */
+    --encre-2:      #B8B3A8;   /*  9,1:1 */
+    --encre-3:      #8A857A;   /*  5,0:1 */
+
+    /* Le cinabre est éclairci : à 5,9:1 sur l'ivoire, il tombait
+       à 3,1:1 sur l'encre. On remonte en luminosité et le texte
+       posé dessus repasse en foncé. */
+    --accent:       #E86A4C;   /* 5,4:1 */
+    --accent-vif:   #F5825F;
+    --accent-voile: rgba(232, 106, 76, 0.12);
+    --sur-accent:   #0E0D0C;   /* 6,8:1 sur --accent */
+
+    --attente:      #D2A23C;   /* 5,6:1 */
+    --attente-voile: rgba(210, 162, 60, 0.12);
+
+    --verre:        #E6E2D8;
+    --graphe:       #E86A4C;
+    --iris-a:       #6E9BD8;
+    --iris-b:       #F5825F;
+
+    --ombre:      0 1px 2px rgba(0, 0, 0, 0.4),
+                  0 12px 32px -12px rgba(0, 0, 0, 0.6);
+    --ombre-haut: 0 2px 4px rgba(0, 0, 0, 0.45),
+                  0 24px 56px -16px rgba(0, 0, 0, 0.7);
+}

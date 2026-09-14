@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exploration Algorithmique | Hugo Challaye</title>
+
+    <title>Exploration algorithmique — Hugo Challaye</title>
     <meta name="description" content="Implémentation des algorithmes de la théorie des automates et des langages formels en Python.">
     <meta name="author" content="Hugo Challaye">
     <link rel="canonical" href="https://hugoolasticot.github.io/portfolio/pages/projets/exploration-algorithmique.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Exploration Algorithmique | Hugo Challaye">
+    <meta property="og:title" content="Exploration algorithmique — Hugo Challaye">
     <meta property="og:description" content="Implémentation des algorithmes de la théorie des automates et des langages formels en Python.">
     <meta property="og:url" content="https://hugoolasticot.github.io/portfolio/pages/projets/exploration-algorithmique.html">
     <meta property="og:image" content="https://hugoolasticot.github.io/portfolio/assets/img/og-image.png">
@@ -17,27 +18,27 @@
     <meta property="og:locale" content="fr_FR">
     <meta name="twitter:card" content="summary_large_image">
 
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#F2EFE8" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E0D0C" media="(prefers-color-scheme: dark)">
 
-    <!-- Chemins relatifs : cette page est deux niveaux sous la racine du site. -->
+    <!-- Chemins relatifs : cette page est deux niveaux sous la racine. -->
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <link rel="icon" type="image/x-icon" href="../../favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
 
-    <!-- La police est désormais servie par le site lui-même : voir la règle
-         @font-face en haut de style.css. preload la demande dès la
-         première lecture du <head>, sans attendre que le CSS soit
-         analysé. L'attribut crossorigin est obligatoire pour les
-         polices, même lorsqu'elles viennent du même domaine. -->
     <link rel="preload" href="../../assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-    <link rel="stylesheet" href="../../assets/css/tokens.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
 
-    <!-- Applique le thème avant le premier affichage, pour éviter un flash
-         de thème sombre chez les visiteurs en thème clair. Même code que
-         sur la page d'accueil : il doit rester en ligne, sans defer. -->
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/composants.css">
+
+    <!-- Applique le thème avant le premier affichage. Doit rester en
+         ligne et sans defer : sinon on voit un éclair de thème clair. -->
     <script>
         (function () {
             document.documentElement.classList.add('js');
@@ -46,45 +47,114 @@
             try {
                 choix = localStorage.getItem('theme');
             } catch (e) {
-                // localStorage peut être bloqué (navigation privée) : on ignore
+                // localStorage bloqué : on retombe sur le système.
             }
 
-            var clair = window.matchMedia('(prefers-color-scheme: light)').matches;
-            document.documentElement.setAttribute('data-theme', choix || (clair ? 'light' : 'dark'));
+            var sombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', choix || (sombre ? 'dark' : 'light'));
         })();
     </script>
 </head>
+
 <body>
 
-<main class="fiche">
+<a class="saut-contenu" href="#contenu">Aller au contenu principal</a>
 
-    <div class="fiche-nav">
-        <a href="../../index.html#projets" class="fiche-retour">← Retour aux projets</a>
-        <button type="button" class="theme-toggle" aria-label="Basculer entre le thème clair et le thème sombre">
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>        </button>
+<!-- Pas de scène 3D sur les fiches projet : l'objet appartient à la
+     page d'accueil, il n'aurait rien à raconter ici. -->
+
+<header class="entete">
+    <a class="entete-nom" href="../../index.html">Hugo Challaye</a>
+
+    <div class="entete-droite">
+        <nav class="nav-principale" aria-label="Navigation principale">
+            <ul>
+                <li><a href="../../index.html#projets">Tous les projets</a></li>
+                <li><a href="../../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <button type="button" class="bouton-icone bascule-theme" aria-label="Basculer entre le thème clair et le thème sombre">
+            <svg class="icone-lune" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="17" height="17" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icone-soleil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" width="17" height="17" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+
+        <button type="button" class="bouton-icone menu-bascule" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" width="17" height="17" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
     </div>
+</header>
 
-    <div class="fiche-cat">Python · SAÉ 2-02 · Mathématiques</div>
-    <h1 class="fiche-titre">Exploration<br>Algorithmique</h1>
+<main class="fiche" id="contenu" tabindex="-1">
+
+    <nav class="fiche-fil" aria-label="Fil d'Ariane">
+        <a href="../../index.html#projets">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Tous les projets
+        </a>
+        <span aria-hidden="true">/</span>
+        <span>Python · SAÉ 2-02 · Mathématiques</span>
+    </nav>
+    <h1>Exploration algorithmique</h1>
     <p class="fiche-chapo">Implémentation des algorithmes de la théorie des automates et des langages formels en Python.</p>
-    <div class="fiche-meta">
-        <div class="fiche-meta-item"><div class="fiche-meta-l">Type</div><div class="fiche-meta-v">SAÉ 2-02</div></div>
-        <div class="fiche-meta-item"><div class="fiche-meta-l">Équipe</div><div class="fiche-meta-v">Individuel</div></div>
-        <div class="fiche-meta-item"><div class="fiche-meta-l">Module</div><div class="fiche-meta-v">Graphes</div></div>
-        <div class="fiche-meta-item"><div class="fiche-meta-l">Année</div><div class="fiche-meta-v">2024-2025</div></div>
+
+    <dl class="fiche-meta">
+        <div><dt>Type</dt><dd>SAÉ 2-02</dd></div>
+        <div><dt>Équipe</dt><dd>Individuel</dd></div>
+        <div><dt>Module</dt><dd>Graphes</dd></div>
+        <div><dt>Année</dt><dd>2024-2025</dd></div>
+    </dl>
+
+    <div class="fiche-etiquettes">
+        <span class="etiquette">Python 3</span>
+        <span class="etiquette">Automates</span>
+        <span class="etiquette">Graphes</span>
     </div>
-    <div class="fiche-tags"><span class="fiche-tag">Python 3</span><span class="fiche-tag">Automates</span><span class="fiche-tag">Graphes</span></div>
-    <div class="fiche-bloc"><h3 class="fiche-bloc-titre">Fonctions implémentées</h3><ul><li><strong>Mots :</strong> pref, suf, fact, miroir</li><li><strong>Langages :</strong> concatene, puis, tousmots</li><li><strong>Automates :</strong> defauto, lirelettre, accepte</li><li><strong>Déterminisation</strong> et renommage</li><li><strong>Complémentation</strong></li><li><strong>Automate produit</strong> : intersection, différence</li><li><strong>Minimisation</strong> — algorithme de Moore</li></ul></div>
-    <div class="fiche-bloc"><h3 class="fiche-bloc-titre">Compétences développées</h3><ul><li>Algorithmique avancée et théorie des graphes</li><li>Mathématiques discrètes et langages formels</li></ul></div>
+
+    <!-- TODO Hugo : capture d'une exécution ou d'un automate produit, à déposer en
+         assets/img/projets/exploration-algorithmique.webp puis remplacer ce bloc par :
+         <figure class="fiche-visuel"><img src="../../assets/img/projets/exploration-algorithmique.webp"
+         alt="..." width="1200" height="750" loading="lazy" decoding="async"></figure> -->
+
+
+    <section class="fiche-bloc">
+        <h2>Fonctions implémentées</h2>
+        <ul>
+            <li><strong>Mots :</strong> pref, suf, fact, miroir</li>
+            <li><strong>Langages :</strong> concatene, puis, tousmots</li>
+            <li><strong>Automates :</strong> defauto, lirelettre, accepte</li>
+            <li><strong>Déterminisation</strong> et renommage</li>
+            <li><strong>Complémentation</strong></li>
+            <li><strong>Automate produit</strong> : intersection, différence</li>
+            <li><strong>Minimisation</strong> — algorithme de Moore</li>
+        </ul>
+    </section>
+
+    <section class="fiche-bloc">
+        <h2>Compétences développées</h2>
+        <ul>
+            <li>Algorithmique avancée et théorie des graphes</li>
+            <li>Mathématiques discrètes et langages formels</li>
+        </ul>
+    </section>
+
+    <nav class="fiche-suite" aria-label="Projet précédent et suivant">
+        <a href="mont-saint-michel.html">Projet précédent<strong>Le Mont Saint-Michel</strong></a>
+        <a href="serveur-dhcp.html" style="text-align:right">Projet suivant<strong>Serveur DHCP</strong></a>
+    </nav>
 
 </main>
 
-<footer>
-    <span>© Hugo Challaye</span>
-    <span>Alternance recherchée · Septembre 2026 · Île-de-France</span>
+<footer class="pied">
+    <span>© 2026 Hugo Challaye</span>
+    <span>Écrit à la main : HTML, CSS, JavaScript, Three.js</span>
 </footer>
 
-<script src="../../assets/js/script.js" defer></script>
+<button type="button" class="vers-haut" aria-label="Revenir en haut de la page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="../../assets/js/interface.js" defer></script>
+
 </body>
 </html>

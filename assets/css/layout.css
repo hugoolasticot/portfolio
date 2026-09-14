@@ -1,0 +1,496 @@
+/* ============================================================
+   MISE EN PAGE
+   ============================================================
+   Structure générale : la scène 3D en fond fixe, l'en-tête, le
+   rythme des sections, la grille de contenu, le pied de page.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   LA SCÈNE 3D
+   ------------------------------------------------------------
+   Le canvas est fixé derrière toute la page et ne bouge jamais :
+   c'est le contenu qui défile devant lui. C'est ce qui donne
+   l'impression d'un objet unique qu'on observe sous des angles
+   différents, plutôt que d'une image qui accompagne le scroll.
+
+   pointer-events: none — sans cette ligne, le canvas capterait
+   tous les clics et le site deviendrait inutilisable.
+
+   aria-hidden est posé sur le canvas dans le HTML : l'objet est
+   décoratif, il n'a rien à annoncer à un lecteur d'écran.
+   ------------------------------------------------------------ */
+.scene-3d {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    /* Le canvas apparaît en fondu une fois la première image
+       rendue (classe posée par scene-3d.js). Sans cela, on
+       verrait un rectangle vide pendant le chargement. */
+    opacity: 0;
+    transition: opacity 1.2s var(--courbe);
+}
+
+.scene-3d.est-prete {
+    opacity: 1;
+}
+
+.scene-3d canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Tout le contenu passe devant la scène. */
+.entete,
+.contenu,
+.pied,
+.vers-haut {
+    position: relative;
+    z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   EN-TÊTE
+   ------------------------------------------------------------
+   Fine, fixée, presque transparente. Elle ne doit jamais entrer
+   en concurrence avec l'objet 3D.
+   ------------------------------------------------------------ */
+.entete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--e5);
+    padding: var(--e5) clamp(var(--e5), 4vw, var(--e8));
+
+    /* Seuls le fond et le filet changent au défilement. Une version
+       antérieure réduisait aussi le padding : animer une marge
+       intérieure force le navigateur à refaire la mise en page, et
+       une barre qui change de hauteur sous le curseur fait sauter
+       tout le contenu. */
+    transition: background var(--d-base) var(--courbe),
+                border-color var(--d-base) var(--courbe);
+    border-bottom: 1px solid transparent;
+}
+
+/* Dès qu'on quitte le haut de page, l'en-tête se densifie pour
+   rester lisible par-dessus le contenu qui passe dessous.
+   Le flou d'arrière-plan n'est appliqué que s'il est supporté :
+   sans @supports, les navigateurs qui l'ignorent afficheraient
+   un fond entièrement opaque. */
+.entete.est-detachee {
+    border-bottom-color: var(--trait);
+    background: var(--fond);
+}
+
+@supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
+    .entete.est-detachee {
+        background: color-mix(in srgb, var(--fond) 72%, transparent);
+        -webkit-backdrop-filter: blur(14px) saturate(1.4);
+        backdrop-filter: blur(14px) saturate(1.4);
+    }
+}
+
+.entete-nom {
+    font-family: var(--texte);
+    font-size: var(--t-petit);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+}
+
+.entete-droite {
+    display: flex;
+    align-items: center;
+    gap: var(--e5);
+}
+
+.nav-principale ul {
+    display: flex;
+    gap: var(--e5);
+}
+
+.nav-principale a {
+    position: relative;
+    font-size: var(--t-petit);
+    color: var(--encre-3);
+    padding-block: var(--e1);
+    transition: color var(--d-vif) var(--courbe);
+}
+
+.nav-principale a:hover,
+.nav-principale a.est-active {
+    color: var(--encre);
+}
+
+/* Le trait sous le lien de la section en cours. On anime
+   scaleX plutôt que la largeur : une transformation est
+   calculée par la carte graphique, une largeur oblige le
+   navigateur à refaire toute la mise en page. */
+.nav-principale a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--d-base) var(--courbe);
+}
+
+.nav-principale a.est-active::after {
+    transform: scaleX(1);
+}
+
+/* Boutons ronds de l'en-tête : thème, menu. */
+.bouton-icone {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-rond);
+    border: 1px solid var(--trait);
+    color: var(--encre-2);
+    transition: border-color var(--d-vif) var(--courbe),
+                color var(--d-vif) var(--courbe),
+                background var(--d-vif) var(--courbe);
+}
+
+.bouton-icone:hover {
+    border-color: var(--trait-fort);
+    color: var(--encre);
+    background: var(--surface);
+}
+
+/* Une seule des deux icônes du bouton de thème est affichée.
+   On montre l'icône de la destination : en thème clair, on
+   propose la lune. */
+.icone-lune { display: none; }
+.icone-soleil { display: block; }
+:root[data-theme="dark"] .icone-lune { display: block; }
+:root[data-theme="dark"] .icone-soleil { display: none; }
+
+/* ------------------------------------------------------------
+   RYTHME DES SECTIONS
+   ------------------------------------------------------------
+   Beaucoup d'air entre les sections : c'est ce vide qui laisse
+   l'objet 3D exister entre deux blocs de texte.
+   ------------------------------------------------------------ */
+.contenu > section {
+    padding-inline: clamp(var(--e5), 5vw, var(--e9));
+    padding-block: clamp(var(--e9), 14vh, var(--e11));
+}
+
+.section-large {
+    max-width: 1320px;
+    margin-inline: auto;
+}
+
+/* En-tête de section : le numéro et le titre.
+   Le numéro est en <span> à l'intérieur du <h2> et non dans un
+   élément à part : il fait partie du titre annoncé. */
+.section-titre {
+    display: flex;
+    align-items: baseline;
+    gap: var(--e4);
+    margin-bottom: var(--e8);
+}
+
+.section-titre .numero {
+    font-family: var(--texte);
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+
+    /* Le numéro ne doit jamais se retrouver seul sur sa ligne. */
+    flex-shrink: 0;
+    transform: translateY(-0.55em);
+}
+
+/* ------------------------------------------------------------
+   ACCUEIL
+   ------------------------------------------------------------ */
+.accueil {
+    min-height: 100vh;
+    min-height: 100svh;   /* sur mobile, hors barres du navigateur */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* On laisse la place de l'en-tête fixe en haut. */
+    padding-top: clamp(var(--e9), 16vh, var(--e10)) !important;
+    padding-bottom: clamp(var(--e6), 6vh, var(--e8)) !important;
+}
+
+.accueil-haut {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--e5);
+    flex-wrap: wrap;
+}
+
+/* Le nom, en très grand. C'est la seule pièce typographique de
+   cette taille sur le site : elle ne se répète nulle part. */
+.accueil-nom {
+    font-family: var(--titre);
+    font-size: var(--t-geant);
+    line-height: var(--i-geant);
+    letter-spacing: var(--l-geant);
+    font-weight: var(--g-normal);
+    margin-block: auto;
+}
+
+.accueil-nom span {
+    display: block;
+}
+
+/* La deuxième ligne est décalée et en italique : le décalage
+   crée un déséquilibre volontaire qui empêche le bloc de
+   ressembler à un logo centré. */
+.accueil-nom .ligne-2 {
+    font-style: italic;
+    padding-left: clamp(var(--e5), 9vw, var(--e10));
+    color: var(--accent);
+}
+
+.accueil-bas {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--e7);
+    flex-wrap: wrap;
+}
+
+.accueil-accroche {
+    max-width: 34ch;
+    font-size: var(--t-lead);
+    line-height: var(--i-serre);
+    color: var(--encre-2);
+    letter-spacing: -0.01em;
+}
+
+/* Invitation à descendre. Le trait s'étire en boucle. */
+.indice-scroll {
+    display: flex;
+    align-items: center;
+    gap: var(--e3);
+    color: var(--encre-3);
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+}
+
+.indice-scroll::after {
+    content: '';
+    width: 56px;
+    height: 1px;
+    background: var(--trait-fort);
+    transform-origin: left;
+    animation: etirer 2.6s var(--courbe) infinite;
+}
+
+@keyframes etirer {
+    0%, 100% { transform: scaleX(0.25); opacity: 0.4; }
+    50%      { transform: scaleX(1);    opacity: 1; }
+}
+
+/* ------------------------------------------------------------
+   GRILLE À DEUX COLONNES
+   ------------------------------------------------------------
+   Employée par « À propos » et « Parcours » : un intitulé court
+   à gauche, le contenu à droite. En dessous de 900 px, tout
+   repasse en une seule colonne.
+   ------------------------------------------------------------ */
+.duo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--e7);
+}
+
+@media (min-width: 900px) {
+    .duo {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+        gap: clamp(var(--e7), 6vw, var(--e9));
+    }
+}
+
+.duo-texte > p + p {
+    margin-top: var(--e4);
+}
+
+.duo-texte p {
+    max-width: var(--mesure);
+    color: var(--encre-2);
+    line-height: var(--i-ample);
+}
+
+/* Énoncé court et large, en serif : sert de contrepoint aux
+   paragraphes. */
+.enonce {
+    font-family: var(--titre);
+    font-size: var(--t-h2);
+    line-height: var(--i-titre);
+    letter-spacing: var(--l-titre);
+    max-width: 18ch;
+}
+
+.enonce em {
+    color: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   PIED DE PAGE
+   ------------------------------------------------------------ */
+.pied {
+    border-top: 1px solid var(--trait);
+    padding: var(--e7) clamp(var(--e5), 5vw, var(--e9));
+    margin-top: var(--e8);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--e5);
+    flex-wrap: wrap;
+
+    font-size: var(--t-petit);
+    color: var(--encre-3);
+}
+
+.pied a:hover {
+    color: var(--encre);
+}
+
+/* ------------------------------------------------------------
+   RETOUR EN HAUT
+   ------------------------------------------------------------ */
+.vers-haut {
+    position: fixed;
+    right: clamp(var(--e4), 3vw, var(--e6));
+    bottom: clamp(var(--e4), 3vw, var(--e6));
+    z-index: 20;
+
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--r-rond);
+    border: 1px solid var(--trait);
+    background: var(--fond);
+    color: var(--encre-2);
+
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity var(--d-base) var(--courbe),
+                transform var(--d-base) var(--courbe),
+                border-color var(--d-vif) var(--courbe);
+}
+
+.vers-haut.est-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.vers-haut:hover {
+    border-color: var(--trait-fort);
+    color: var(--encre);
+}
+
+/* ------------------------------------------------------------
+   RÉVÉLATIONS AU SCROLL
+   ------------------------------------------------------------
+   Classe posée par interface.js sur les blocs à révéler. Le
+   décalage est un déplacement discret : une apparition qui vient
+   de trop loin donne l'impression d'attendre.
+   ------------------------------------------------------------ */
+.reveler {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity var(--d-lent) var(--courbe),
+                transform var(--d-lent) var(--courbe);
+}
+
+.reveler.est-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* Sans JavaScript, rien n'ajoute la classe .est-visible : le
+   contenu resterait invisible pour toujours. La classe .js est
+   posée par le script en ligne du <head>, donc cette règle ne
+   s'applique que lorsque le JavaScript a bien démarré. */
+html:not(.js) .reveler {
+    opacity: 1;
+    transform: none;
+}
+
+/* ------------------------------------------------------------
+   NAVIGATION EN PETIT ÉCRAN
+   ------------------------------------------------------------
+   Sous 760 px, la navigation passe dans un panneau déroulant
+   ouvert par le bouton menu.
+   ------------------------------------------------------------ */
+.menu-bascule {
+    display: none;
+}
+
+@media (max-width: 759px) {
+    .menu-bascule {
+        display: grid;
+    }
+
+    .nav-principale {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        background: var(--fond);
+        border-bottom: 1px solid var(--trait);
+        padding: var(--e5) clamp(var(--e5), 4vw, var(--e8)) var(--e6);
+
+        /* Replié : on n'utilise ni display:none ni visibility,
+           pour garder une transition. pointer-events coupe
+           l'interaction, et le HTML porte inert quand c'est
+           supporté (voir interface.js). */
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity var(--d-vif) var(--courbe),
+                    transform var(--d-vif) var(--courbe);
+    }
+
+    .nav-principale.est-ouverte {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .nav-principale ul {
+        flex-direction: column;
+        gap: var(--e4);
+    }
+
+    .nav-principale a {
+        font-size: var(--t-base);
+    }
+
+    .accueil-bas {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: var(--e5);
+    }
+}

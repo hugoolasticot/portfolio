@@ -1,0 +1,287 @@
+/* ============================================================
+   BASE
+   ============================================================
+   Remise à plat des styles du navigateur, typographie de fond,
+   et les règles d'accessibilité qui s'appliquent à tout le site.
+   Aucun composant ici.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   La police de texte est servie par le site lui-même. Un seul
+   fichier variable couvre toutes les graisses de 100 à 900, là
+   où il aurait fallu quatre fichiers statiques.
+
+   font-display: swap — le texte s'affiche immédiatement dans la
+   police de repli, puis bascule sur Inter une fois chargée. Le
+   visiteur lit pendant le chargement au lieu d'attendre devant
+   une page blanche.
+   ------------------------------------------------------------ */
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/inter-latin-variable.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ------------------------------------------------------------
+   REMISE À PLAT
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* Le défilement fluide natif sert de repli quand Lenis n'est
+       pas actif (JavaScript coupé, ou mouvement réduit demandé).
+       Lenis, lui, prend la main en JavaScript. */
+    scroll-behavior: smooth;
+
+    /* Les ancres ne doivent pas se coller sous l'en-tête fixe. */
+    scroll-padding-top: var(--e9);
+
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: var(--fond);
+    color: var(--encre);
+    font-family: var(--texte);
+    font-size: var(--t-base);
+    line-height: var(--i-base);
+    font-weight: var(--g-normal);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Aucune page ne doit pouvoir défiler horizontalement : la
+       scène 3D déborde volontairement du cadre.
+
+       `clip` plutôt que `hidden` : `hidden` transforme le <body> en
+       conteneur de défilement, ce qui peut rogner les éléments en
+       position fixe ou collante posés à l'intérieur. `clip` coupe
+       le débordement sans rien créer de tel. `hidden` reste en
+       repli pour les navigateurs qui ne connaissent pas `clip`. */
+    overflow-x: hidden;
+    overflow-x: clip;
+
+    /* Pas de transition sur le fond ni sur la couleur du texte.
+       Les deux sont alimentés par des variables qui changent au
+       basculement de thème, et une transition dont la valeur de
+       départ est elle-même redéfinie en cours de route peut rester
+       bloquée : en enchaînant plusieurs basculements rapprochés, la
+       page se retrouvait annoncée en thème clair avec un fond resté
+       sombre, donc texte sombre sur fond sombre.
+
+       Le reste du site change de couleur instantanément de toute
+       façon : faire fondre le seul fond était autant un défaut de
+       cohérence qu'un risque. */
+}
+
+img,
+picture,
+svg,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   TYPOGRAPHIE
+   ------------------------------------------------------------ */
+h1, h2, h3, h4 {
+    font-family: var(--titre);
+    font-weight: var(--g-normal);
+    line-height: var(--i-titre);
+    letter-spacing: var(--l-titre);
+
+    /* text-wrap: balance répartit les mots entre les lignes d'un
+       titre au lieu de laisser une ligne orpheline d'un seul mot.
+       Ignoré par les navigateurs qui ne le connaissent pas. */
+    text-wrap: balance;
+}
+
+h1 { font-size: var(--t-h2); }
+h2 { font-size: var(--t-h2); }
+h3 {
+    font-size: var(--t-h3);
+    line-height: var(--i-serre);
+}
+
+p {
+    text-wrap: pretty;   /* évite les lignes veuves en fin de paragraphe */
+}
+
+strong {
+    font-weight: var(--g-semi);
+    color: var(--encre);
+}
+
+em {
+    font-style: italic;
+}
+
+code {
+    font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, monospace;
+    font-size: 0.88em;
+    background: var(--surface);
+    border: 1px solid var(--trait);
+    border-radius: var(--r-petit);
+    padding: 0.1em 0.38em;
+}
+
+/* Les labels techniques : numéro de section, étiquettes, méta.
+   Capitales espacées et chiffres à chasse fixe, pour que les
+   nombres s'alignent verticalement d'une ligne à l'autre. */
+.label {
+    font-family: var(--texte);
+    font-size: var(--t-micro);
+    font-weight: var(--g-semi);
+    letter-spacing: var(--l-label);
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    color: var(--encre-3);
+}
+
+/* ------------------------------------------------------------
+   SÉLECTION
+   ------------------------------------------------------------ */
+::selection {
+    background: var(--accent);
+    color: var(--sur-accent);
+}
+
+/* ------------------------------------------------------------
+   ACCESSIBILITÉ
+   ------------------------------------------------------------ */
+
+/* Premier élément focusable de chaque page. Invisible tant qu'on
+   ne l'a pas atteint au clavier ; il évite de retraverser toute
+   la navigation pour arriver au contenu. */
+.saut-contenu {
+    position: absolute;
+    top: var(--e4);
+    left: var(--e4);
+    z-index: 100;
+    padding: var(--e3) var(--e5);
+    background: var(--encre);
+    color: var(--fond);
+    border-radius: var(--r-moyen);
+    font-size: var(--t-petit);
+    font-weight: var(--g-semi);
+
+    /* Sorti de l'écran plutôt que display:none : un élément en
+       display:none n'est pas focusable du tout. */
+    transform: translateY(calc(-100% - var(--e5)));
+    transition: transform var(--d-vif) var(--courbe);
+}
+
+.saut-contenu:focus {
+    transform: translateY(0);
+}
+
+/* Anneau de focus unique pour tout le site. :focus-visible ne
+   se déclenche qu'à la navigation clavier, jamais au clic
+   souris — on garde donc le repère sans polluer l'usage à la
+   souris. */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--r-petit);
+}
+
+/* Texte réservé aux lecteurs d'écran : présent dans le document,
+   invisible à l'écran. */
+.lecteur-seul {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ------------------------------------------------------------
+   MOUVEMENT RÉDUIT
+   ------------------------------------------------------------
+   Quand le visiteur a demandé moins d'animations dans les
+   réglages de son système, on coupe tout : transitions,
+   animations, et défilement fluide. La scène 3D se fige de son
+   côté (voir scene-3d.js), le site reste entièrement utilisable.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Les éléments révélés au scroll doivent rester visibles :
+       sans cette règle, couper la transition les laisserait
+       transparents pour toujours. */
+    .reveler {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ------------------------------------------------------------
+   IMPRESSION
+   ------------------------------------------------------------ */
+@media print {
+    .scene-3d,
+    .entete,
+    .vers-haut,
+    .saut-contenu {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+    }
+}

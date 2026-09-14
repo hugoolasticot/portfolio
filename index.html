@@ -3,44 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hugo Challaye | Portfolio</title>
-    <meta name="description" content="Portfolio de Hugo Challaye, étudiant en BUT Informatique à l'IUT Gustave Eiffel. Projets en Python, Java, développement web, bases de données et réseaux.">
+
+    <title>Hugo Challaye — Développement</title>
+    <meta name="description" content="Portfolio de Hugo Challaye, étudiant en BUT Informatique. Projets en PHP, PostgreSQL, Python, Java et développement web.">
     <meta name="author" content="Hugo Challaye">
     <link rel="canonical" href="https://hugoolasticot.github.io/portfolio/">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Hugo Challaye | Portfolio">
-    <meta property="og:description" content="Étudiant en BUT Informatique — projets en Python, Java, développement web, bases de données et réseaux.">
+    <meta property="og:title" content="Hugo Challaye — Développement">
+    <meta property="og:description" content="Projets en PHP, PostgreSQL, Python, Java et développement web.">
     <meta property="og:url" content="https://hugoolasticot.github.io/portfolio/">
     <meta property="og:image" content="https://hugoolasticot.github.io/portfolio/assets/img/og-image.png">
     <meta property="og:image:alt" content="Portfolio de Hugo Challaye, étudiant en BUT Informatique">
     <meta property="og:locale" content="fr_FR">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Couleur de la barre du navigateur sur mobile, accordée au thème
-         du système. -->
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <!-- Couleur de la barre du navigateur sur mobile, accordée au
+         thème du système. -->
+    <meta name="theme-color" content="#F2EFE8" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E0D0C" media="(prefers-color-scheme: dark)">
 
-    <!-- Le SVG est net à toutes les tailles, mais Safari avant la version 16
-         et certains agrégateurs de liens ne le lisent pas : le .ico sert de
-         repli. L'apple-touch-icon est utilisé quand on ajoute le site à
-         l'écran d'accueil d'un iPhone. -->
+    <!-- Le SVG est net à toutes les tailles, mais Safari avant la
+         version 16 et certains agrégateurs de liens ne le lisent
+         pas : le .ico sert de repli. -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <!-- Données structurées : aident les moteurs de recherche à comprendre
-         qui je suis et ce que je cherche (format schema.org) -->
+    <!-- Données structurées : aident les moteurs de recherche à
+         comprendre qui je suis et sur quoi je travaille. -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Hugo Challaye",
         "url": "https://hugoolasticot.github.io/portfolio/",
-        "email": "mailto:challayehugo.pro@gmail.com",
         "jobTitle": "Étudiant en BUT Informatique",
-        "description": "Étudiant en BUT Informatique à l'IUT Gustave Eiffel, à la recherche d'une alternance de 2 ans en développement web / fullstack à partir de septembre 2026 en Île-de-France.",
+        "description": "Étudiant en BUT Informatique à l'IUT Gustave Eiffel, spécialité Réalisation d'applications.",
         "affiliation": {
             "@type": "CollegeOrUniversity",
             "name": "IUT Gustave Eiffel — Université Gustave Eiffel",
@@ -50,13 +49,8 @@
                 "addressCountry": "FR"
             }
         },
-        "address": {
-            "@type": "PostalAddress",
-            "addressRegion": "Île-de-France",
-            "addressCountry": "FR"
-        },
         "knowsAbout": [
-            "PHP", "PostgreSQL", "SQL", "Python", "Java", "JavaFX",
+            "PHP", "PostgreSQL", "SQL", "MySQL", "Python", "Java", "JavaFX",
             "JavaScript", "HTML", "CSS", "C", "Linux", "Git", "Réseaux"
         ],
         "knowsLanguage": [
@@ -64,12 +58,6 @@
             { "@type": "Language", "name": "Anglais" },
             { "@type": "Language", "name": "Espagnol" }
         ],
-        "seeks": {
-            "@type": "Demand",
-            "name": "Alternance de 2 ans en développement web / fullstack",
-            "availabilityStarts": "2026-09-01",
-            "areaServed": "Île-de-France"
-        },
         "sameAs": [
             "https://github.com/hugoolasticot",
             "https://www.linkedin.com/in/hugo-challaye-ab300a339/"
@@ -77,451 +65,587 @@
     }
     </script>
 
-    <!-- La police est désormais servie par le site lui-même : voir la règle
-         @font-face en haut de style.css. preload la demande dès la
-         première lecture du <head>, sans attendre que le CSS soit
-         analysé. L'attribut crossorigin est obligatoire pour les
-         polices, même lorsqu'elles viennent du même domaine. -->
+    <!-- La police de texte est servie par le site lui-même : voir
+         la règle @font-face en haut de base.css. preload la
+         demande dès la lecture du <head>, sans attendre que le CSS
+         soit analysé. crossorigin est obligatoire pour les
+         polices, même quand elles viennent du même domaine. -->
     <link rel="preload" href="assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- tokens.css doit venir en premier : il définit les variables
-         (couleurs, espacements, tailles) que style.css utilise ensuite. -->
-    <link rel="stylesheet" href="assets/css/tokens.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- La police de titre vient de Google Fonts. preconnect ouvre
+         la connexion pendant que le HTML finit d'être analysé, ce
+         qui évite d'attendre la poignée de main TLS au moment où
+         la feuille de style est demandée. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+
+    <!-- variables.css d'abord : il définit les jetons que les trois
+         autres fichiers emploient. -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/composants.css">
 
     <!-- Ce script doit rester ici, en haut de page et sans defer :
-         il applique le thème avant le premier affichage pour éviter
-         un flash de thème sombre chez les visiteurs en thème clair. -->
+         il applique le thème avant le premier affichage, ce qui
+         évite un éclair de thème clair chez les visiteurs en
+         thème sombre. -->
     <script>
         (function () {
-            // Signale au CSS que le JS est actif (voir le filtre des projets)
+            // Signale au CSS que le JavaScript tourne : voir les
+            // règles html:not(.js) et html.js.
             document.documentElement.classList.add('js');
 
             var choix = null;
             try {
                 choix = localStorage.getItem('theme');
             } catch (e) {
-                // localStorage peut être bloqué (navigation privée) : on ignore
+                // localStorage bloqué : on retombe sur le système.
             }
 
-            // Choix mémorisé en priorité, sinon la préférence du système
-            var clair = window.matchMedia('(prefers-color-scheme: light)').matches;
-            document.documentElement.setAttribute('data-theme', choix || (clair ? 'light' : 'dark'));
+            var sombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', choix || (sombre ? 'dark' : 'light'));
         })();
     </script>
 </head>
-<body>
 
-<!-- Premier élément focusable de la page : invisible tant qu'on ne l'a pas
-     atteint au clavier. Il évite de retraverser les 10 liens de la barre
-     latérale à chaque fois pour arriver au contenu. -->
-<a class="skip-link" href="#contenu">Aller au contenu principal</a>
+<body data-scene="accueil">
 
-<div class="layout">
+<a class="saut-contenu" href="#contenu">Aller au contenu principal</a>
 
-<!-- ========================
-     SIDEBAR — nav gauche
-     ======================== -->
-<aside class="sidebar">
-    <!-- Burger : visible uniquement sous 768px (voir la media query) -->
-    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="sidebar-nav" aria-label="Ouvrir le menu">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-    </button>
+<!-- ============================================================
+     LA SCÈNE 3D
+     ============================================================
+     Purement décorative : aria-hidden la retire de l'arbre
+     d'accessibilité, et aucun de ses éléments n'est focusable.
+     Le conteneur reste vide si WebGL est indisponible, sans rien
+     casser de la page.
+     ============================================================ -->
+<div class="scene-3d" aria-hidden="true"></div>
 
-    <nav class="sidebar-nav" id="sidebar-nav" aria-label="Navigation principale">
-        <a href="#hero">Accueil</a>
-        <a href="#apropos">À propos</a>
-        <a href="#competences">Compétences</a>
-        <a href="#projets">Projets</a>
-        <a href="#cv">CV</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<header class="entete">
+    <a class="entete-nom" href="#accueil">Hugo Challaye</a>
 
-    <div class="sidebar-icons">
-        <button type="button" class="theme-toggle" aria-label="Basculer entre le thème clair et le thème sombre">
-            <!-- Icône lune : affichée en thème sombre -->
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <!-- Icône soleil : affichée en thème clair -->
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    <div class="entete-droite">
+        <nav class="nav-principale" aria-label="Navigation principale">
+            <ul>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <button type="button" class="bouton-icone bascule-theme" aria-label="Basculer entre le thème clair et le thème sombre">
+            <svg class="icone-lune" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="17" height="17" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icone-soleil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" width="17" height="17" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         </button>
-        <a href="https://github.com/hugoolasticot" target="_blank" rel="noopener" title="GitHub" aria-label="Mon profil GitHub (nouvel onglet)">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank" rel="noopener" title="LinkedIn" aria-label="Mon profil LinkedIn (nouvel onglet)">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a href="mailto:challayehugo.pro@gmail.com" title="Email" aria-label="M'envoyer un email">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-        </a>
+
+        <button type="button" class="bouton-icone menu-bascule" aria-expanded="false" aria-controls="nav-principale" aria-label="Ouvrir le menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" width="17" height="17" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
     </div>
-</aside>
+</header>
 
-<main class="content" id="contenu" tabindex="-1">
+<main class="contenu" id="contenu" tabindex="-1">
 
-    <!-- 01 HERO -->
-    <section id="hero">
-        <p class="hero-topname">Portfolio</p>
-
-        <div class="hero-titles">
-            <p class="hero-name-small">IUT Gustave Eiffel · Champs-sur-Marne</p>
-            <h1 class="hero-big">
-                <span class="line-white">HUGO</span>
-                <span class="line-green">CHALLAYE</span>
-                <span class="line-white">BUT INFO.</span>
-            </h1>
+    <!-- ========================================================
+         01 — ACCUEIL
+         ======================================================== -->
+    <section id="accueil" class="accueil section-large">
+        <div class="accueil-haut">
+            <p class="label">Portfolio · 2026</p>
+            <p class="label">IUT Gustave Eiffel · Champs-sur-Marne</p>
         </div>
 
-        <div class="hero-bottom">
-            <p class="hero-desc">
-                Développement web, algorithmes et systèmes — j'aime comprendre comment les choses fonctionnent.
+        <h1 class="accueil-nom">
+            <span class="ligne-1">Hugo</span>
+            <span class="ligne-2">Challaye</span>
+        </h1>
+
+        <div class="accueil-bas">
+            <p class="accueil-accroche">
+                Je construis des applications web et j'aime démonter
+                ce qu'il y a dessous : les algorithmes, les bases de
+                données, les réseaux.
             </p>
-            <div class="hero-cta">
-                <a href="#projets" class="btn btn-filled">Mes projets</a>
-                <a href="assets/cv/Hugo_CHALLAYE_CV.pdf" download class="btn btn-ghost">Télécharger le CV</a>
-            </div>
+
+            <p class="indice-scroll">Faites défiler</p>
         </div>
     </section>
 
-    <!-- BANDEAU ALTERNANCE — l'information la plus importante pour un recruteur -->
-    <aside class="alt-banner">
-        <div class="alt-banner-txt">
-            <p class="alt-banner-title">Recherche une alternance de 2 ans en développement web / fullstack</p>
-            <p class="alt-banner-sub">Rentrée septembre 2026 · Île-de-France</p>
-        </div>
-        <div class="alt-banner-cta">
-            <a href="mailto:challayehugo.pro@gmail.com?subject=Alternance%20d%C3%A9veloppement%20web%20-%20septembre%202026" class="btn btn-filled">Me contacter</a>
-            <a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
-        </div>
-    </aside>
+    <!-- ========================================================
+         02 — À PROPOS
+         ======================================================== -->
+    <section id="apropos" class="section-large">
+        <h2 class="section-titre">
+            <span class="numero">02</span>
+            <span>À propos</span>
+        </h2>
 
-    <!-- 02 À PROPOS -->
-    <section id="apropos">
-        <h2 class="sec-label">02 — À propos</h2>
-
-        <div class="apropos-layout">
-            <div class="apropos-left">
-                <p class="apropos-big">
-                    Qui<br>suis<span>-je ?</span>
-                </h2>
-
-                <div class="apropos-bio">
-                    <p>Je m'appelle <strong>Hugo Challaye</strong>, j'ai 20 ans. Je suis étudiant en BUT Informatique à l'IUT Gustave Eiffel de Champs-sur-Marne.</p>
-                    <p>Je travaille sur des projets en Python, Java et développement web. J'aime comprendre comment les choses fonctionnent, que ce soit un algorithme, un réseau ou une interface.</p>
-                    <p>Je m'exprime en français, en anglais (B1) et un peu en espagnol (A2). Je suis joignable à <a href="mailto:challayehugo.pro@gmail.com" class="lien-vert">challayehugo.pro@gmail.com</a> ou sur <a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank" rel="noopener" class="lien-vert">LinkedIn</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 03 COMPÉTENCES — onglets CSS -->
-    <section id="competences">
-        <h2 class="sec-label">03 — Compétences</h2>
-
-        <input type="radio" name="tabs" id="tab-langages" class="tabs-radio" checked>
-        <input type="radio" name="tabs" id="tab-outils" class="tabs-radio">
-        <input type="radio" name="tabs" id="tab-soft" class="tabs-radio">
-        <input type="radio" name="tabs" id="tab-langues" class="tabs-radio">
-
-        <div class="tabs-labels">
-            <label for="tab-langages" class="tab-label">Langages</label>
-            <label for="tab-outils" class="tab-label">Outils</label>
-            <label for="tab-soft" class="tab-label">Soft Skills</label>
-            <label for="tab-langues" class="tab-label">Langues</label>
-        </div>
-
-        <div class="tab-panels">
-            <div class="tab-panel panel-langages">
-                <div class="skills-grid">
-                    <div class="skill-item"><span class="skill-dot"></span>Python</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Java</div>
-                    <div class="skill-item"><span class="skill-dot"></span>JavaFX</div>
-                    <div class="skill-item"><span class="skill-dot"></span>HTML / CSS</div>
-                    <div class="skill-item"><span class="skill-dot"></span>SQL</div>
-                    <div class="skill-item"><span class="skill-dot"></span>PHP</div>
-                    <div class="skill-item"><span class="skill-dot"></span>C</div>
-                    <div class="skill-item"><span class="skill-dot"></span>JavaScript</div>
-                </div>
-            </div>
-            <div class="tab-panel panel-outils">
-                <div class="skills-grid">
-                    <div class="skill-item"><span class="skill-dot"></span>Git / GitHub</div>
-                    <div class="skill-item"><span class="skill-dot"></span>VS Code</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Eclipse</div>
-                    <div class="skill-item"><span class="skill-dot"></span>MySQL</div>
-                    <div class="skill-item"><span class="skill-dot"></span>PostgreSQL</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Netkit-ng</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Wireshark</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Linux</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Suite Office</div>
-                </div>
-            </div>
-            <div class="tab-panel panel-soft">
-                <div class="skills-grid">
-                    <div class="skill-item"><span class="skill-dot"></span>Travail d'équipe</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Communication</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Gestion de projet</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Adaptabilité</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Rigueur</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Curiosité</div>
-                </div>
-            </div>
-            <div class="tab-panel panel-langues">
-                <div class="skills-grid">
-                    <div class="skill-item"><span class="skill-dot"></span>Français — Natif</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Anglais — B1</div>
-                    <div class="skill-item"><span class="skill-dot"></span>Espagnol — A2</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 04 PROJETS -->
-    <section id="projets">
-        <h2 class="sec-label">04 — Projets</h2>
-
-        <input type="radio" name="pfilter" id="pf-all" class="filter-radios" checked>
-        <input type="radio" name="pfilter" id="pf-python" class="filter-radios">
-        <input type="radio" name="pfilter" id="pf-java" class="filter-radios">
-        <input type="radio" name="pfilter" id="pf-web" class="filter-radios">
-        <input type="radio" name="pfilter" id="pf-php" class="filter-radios">
-        <input type="radio" name="pfilter" id="pf-sql" class="filter-radios">
-        <input type="radio" name="pfilter" id="pf-reseau" class="filter-radios">
-
-        <div class="filter-labels">
-            <label for="pf-all" class="filter-label">Tous</label>
-            <label for="pf-python" class="filter-label">Python</label>
-            <label for="pf-java" class="filter-label">Java</label>
-            <label for="pf-web" class="filter-label">Web</label>
-            <label for="pf-php" class="filter-label">PHP</label>
-            <label for="pf-sql" class="filter-label">SQL</label>
-            <label for="pf-reseau" class="filter-label">Réseau</label>
-        </div>
-
-        <div class="projects-grid">
-
-            <a href="pages/projets/campusconnect.html" class="pcard web php sql">
-                <div class="pcard-img">
-                    <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
-                         <img src="assets/img/projets/campusconnect.webp" alt="Capture d'écran de la plateforme CampusConnect" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" aria-hidden="true" data-lang="PHP"><span>PHP</span></div>
-                </div>
-                <div class="pcard-body">
-                    <span class="pcard-num">01</span>
-                    <h3 class="pcard-title">CampusConnect</h3>
-                    <p class="pcard-desc">Plateforme web d'entraide entre étudiants pour s'échanger des cours.</p>
-                    <div class="pcard-tags">
-                        <span class="pcard-tag">PHP</span>
-                        <span class="pcard-tag">PostgreSQL</span>
-                        <span class="pcard-tag">Web</span>
-                    </div>
-                </div>
-                <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </div>
-            </a>
-
-            <a href="pages/projets/zarza-ski.html" class="pcard php sql web">
-                <div class="pcard-img">
-                    <img src="assets/img/projets/zarza-ski.webp" alt="Page d'accueil de Zarza-Ski présentant les formules et les tarifs réduits" width="1200" height="600" loading="lazy" decoding="async">
-                </div>
-                <div class="pcard-body">
-                    <span class="pcard-num">02</span>
-                    <h3 class="pcard-title">Zarza-Ski</h3>
-                    <p class="pcard-desc">Gestion des forfaits et des réservations d'une station de ski. SAÉ 2-04, projet individuel.</p>
-                    <div class="pcard-tags">
-                        <span class="pcard-tag">PHP</span>
-                        <span class="pcard-tag">PostgreSQL</span>
-                        <span class="pcard-tag">SQL</span>
-                    </div>
-                </div>
-                <div class="pcard-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </div>
-            </a>
-
-            <a href="pages/projets/mont-saint-michel.html" class="pcard web">
-                <div class="pcard-img">
-                    <img src="assets/img/projets/mont-saint-michel.webp" alt="Page d'accueil du site de médiation culturelle sur le Mont Saint-Michel" width="1200" height="576" loading="lazy" decoding="async">
-                </div>
-                <div class="pcard-body">
-                    <span class="pcard-num">03</span>
-                    <h3 class="pcard-title">Le Mont Saint-Michel</h3>
-                    <p class="pcard-desc">Site de médiation culturelle UNESCO. Projet en équipe de 6.</p>
-                    <div class="pcard-tags">
-                        <span class="pcard-tag">HTML</span>
-                        <span class="pcard-tag">CSS</span>
-                        <span class="pcard-tag">JS</span>
-                    </div>
-                </div>
-                <div class="pcard-arrow">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </div>
-            </a>
-
-            <a href="pages/projets/wall-is-you.html" class="pcard python">
-                <div class="pcard-img">
-                    <img src="assets/img/projets/wall-is-you.webp" alt="Grille de jeu du donjon Wall Is You avec ses salles pivotables" width="1194" height="748" loading="lazy" decoding="async">
-                </div>
-                <div class="pcard-body">
-                    <span class="pcard-num">04</span>
-                    <h3 class="pcard-title">Wall Is You</h3>
-                    <p class="pcard-desc">Jeu de donjon avec pathfinding. Interface graphique fltk.</p>
-                    <div class="pcard-tags">
-                        <span class="pcard-tag">Python</span>
-                        <span class="pcard-tag">fltk</span>
-                        <span class="pcard-tag">Algorithmes</span>
-                    </div>
-                </div>
-                <div class="pcard-arrow">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </div>
-            </a>
-
-            <a href="pages/projets/conseil-schtroumpfs.html" class="pcard java">
-                <div class="pcard-img">
-                    <img src="assets/img/projets/conseil-schtroumpfs.webp" alt="Écran de gestion des ressources du jeu Conseil des Schtroumpfs" width="1021" height="707" loading="lazy" decoding="async">
-                </div>
-                <div class="pcard-body">
-                    <span class="pcard-num">05</span>
-                    <h3 class="pcard-title">Conseil des Schtroumpfs</h3>
-                    <p class="pcard-desc">Jeu de gestion stratégique en Java. Architecture MVC.</p>
-                    <div class="pcard-tags">
-                        <span class="pcard-tag">Java 25</span>
-                        <span class="pcard-tag">MVC</span>
-                        <span class="pcard-tag">POO</span>
-                    </div>
-                </div>
-                <div class="pcard-arrow">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </div>
-            </a>
-
-            <a href="pages/projets/exploration-algorithmique.html" class="pcard python">
-                <div class="pcard-img">
-                    <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
-                         <img src="assets/img/projets/exploration-algorithmique.webp" alt="Capture d'écran du projet Exploration Algorithmique" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" aria-hidden="true" data-lang="Python"><span>Py</span></div>
-                </div>
-                <div class="pcard-body">
-                    <span class="pcard-num">06</span>
-                    <h3 class="pcard-title">Exploration Algorithmique</h3>
-                    <p class="pcard-desc">Algorithmes sur automates et langages formels.</p>
-                    <div class="pcard-tags">
-                        <span class="pcard-tag">Python</span>
-                        <span class="pcard-tag">Graphes</span>
-                    </div>
-                </div>
-                <div class="pcard-arrow">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </div>
-            </a>
-
-            <a href="pages/projets/serveur-dhcp.html" class="pcard reseau">
-                <div class="pcard-img">
-                    <!-- Capture à venir : remplacer le bloc .pcard-ph par cette ligne
-                         <img src="assets/img/projets/serveur-dhcp.webp" alt="Capture Wireshark des échanges du serveur DHCP" width="1200" height="675" loading="lazy" decoding="async"> -->
-                    <div class="pcard-ph" aria-hidden="true" data-lang="Linux"><span>Net</span></div>
-                </div>
-                <div class="pcard-body">
-                    <span class="pcard-num">07</span>
-                    <h3 class="pcard-title">Serveur DHCP</h3>
-                    <p class="pcard-desc">Configuration réseau Linux avec Netkit-ng et Wireshark.</p>
-                    <div class="pcard-tags">
-                        <span class="pcard-tag">Linux</span>
-                        <span class="pcard-tag">Netkit</span>
-                    </div>
-                </div>
-                <div class="pcard-arrow">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </div>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- 05 CV -->
-    <section id="cv">
-        <h2 class="sec-label">05 — Curriculum Vitae</h2>
-        <div class="cv-layout">
-            <div class="cv-left">
-                <h3>Hugo Challaye</h3>
-                <p><strong>BUT Informatique</strong> — IUT Gustave Eiffel (2024-2027)</p>
-                <p>Recherche une alternance de 2 ans en développement informatique.</p>
-                <div class="cv-btns">
-                    <a href="assets/cv/Hugo_CHALLAYE_CV.pdf" download class="btn btn-filled">Télécharger (PDF)</a>
-                    <a href="assets/cv/Hugo_CHALLAYE_CV.pdf" target="_blank" class="btn btn-ghost">Ouvrir dans un onglet</a>
-                </div>
-            </div>
-            <!-- loading="lazy" : le PDF fait 169 Ko et se trouve tout en bas
-                 de la page. Sans cet attribut, il était téléchargé par tous
-                 les visiteurs, y compris ceux qui ne descendent jamais
-                 jusqu'ici. Le navigateur attend maintenant que la zone
-                 approche de l'écran. -->
-            <div class="cv-frame">
-                <iframe src="assets/cv/Hugo_CHALLAYE_CV.pdf"
-                        title="Aperçu du CV de Hugo Challaye au format PDF"
-                        loading="lazy"></iframe>
-            </div>
-
-            <!-- Affiché à la place de l'aperçu sous 768px : les navigateurs
-                 mobiles n'affichent pas de PDF dans une page, le cadre y
-                 restait donc vide. -->
-            <p class="cv-note">
-                L'aperçu du CV n'est pas affiché sur mobile : les navigateurs
-                de téléphone ne savent pas montrer un PDF à l'intérieur d'une
-                page. Utilise les boutons ci-dessus pour le télécharger ou
-                l'ouvrir.
+        <div class="duo">
+            <p class="enonce a-reveler">
+                Comprendre <em>comment</em> ça marche, avant de
+                s'en servir.
             </p>
-        </div>
-    </section>
 
-    <!-- 06 CONTACT -->
-    <section id="contact">
-        <h2 class="sec-label">06 — Contact</h2>
-
-        <div class="contact-inner">
-            <p class="contact-big">Disponible<br><span>dès septembre 2026</span></h2>
-
-            <div class="contact-links">
-                <a href="mailto:challayehugo.pro@gmail.com?subject=Alternance%20d%C3%A9veloppement%20web%20-%20septembre%202026" class="contact-link-item">
-                    <span>challayehugo.pro@gmail.com</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </a>
-
-                <!-- Bouton de copie : le JS écrit l'adresse dans le presse-papier -->
-                <button type="button" class="contact-link-item contact-copy" data-email="challayehugo.pro@gmail.com">
-                    <span class="contact-copy-label">Copier l'adresse email</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                </button>
-
-                <a href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank" rel="noopener" class="contact-link-item">
-                    <span>LinkedIn — Hugo Challaye</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </a>
-
-                <a href="https://github.com/hugoolasticot" target="_blank" rel="noopener" class="contact-link-item">
-                    <span>GitHub — hugoolasticot</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-                </a>
+            <div class="duo-texte a-reveler">
+                <p>
+                    J'ai 20 ans et je suis étudiant en BUT Informatique
+                    à l'IUT Gustave Eiffel de Champs-sur-Marne, en
+                    spécialité Réalisation d'applications.
+                </p>
+                <p>
+                    Je travaille surtout en PHP et PostgreSQL sur le
+                    web, en Python et en Java sur le reste. Ce qui
+                    m'intéresse dans un projet, c'est rarement la
+                    surface : c'est le schéma de la base derrière le
+                    formulaire, l'algorithme derrière le déplacement
+                    d'un personnage, les quatre trames qui s'échangent
+                    avant qu'une machine reçoive son adresse IP.
+                </p>
+                <p>
+                    C'est aussi pour ça que ce site a un objet en verre
+                    au milieu : on le traverse pour voir la structure
+                    en dessous. Il est écrit à la main, sans framework,
+                    et son code est <a href="https://github.com/hugoolasticot/portfolio" class="lien-fleche" target="_blank" rel="noopener">ouvert sur GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>.
+                </p>
+                <p>
+                    Je parle français, anglais (B1) et un peu espagnol
+                    (A2).
+                </p>
             </div>
         </div>
     </section>
 
-    <footer>
-        <span>© Hugo Challaye</span>
-        <span>Alternance recherchée · Septembre 2026 · Île-de-France</span>
-    </footer>
+    <!-- ========================================================
+         03 — COMPÉTENCES
+         ======================================================== -->
+    <section id="competences" class="section-large">
+        <h2 class="section-titre">
+            <span class="numero">03</span>
+            <span>Compétences</span>
+        </h2>
+
+        <div class="grille-competences">
+            <article class="groupe-competences">
+                <h3>Langages</h3>
+                <ul>
+                    <li>PHP</li>
+                    <li>Python</li>
+                    <li>Java <span class="precision">(dont JavaFX)</span></li>
+                    <li>JavaScript</li>
+                    <li>SQL</li>
+                    <li>HTML / CSS</li>
+                    <li>C</li>
+                </ul>
+            </article>
+
+            <article class="groupe-competences">
+                <h3>Bases de données</h3>
+                <ul>
+                    <li>PostgreSQL</li>
+                    <li>MySQL</li>
+                    <li>Modélisation relationnelle</li>
+                    <li>Requêtes et jointures</li>
+                </ul>
+            </article>
+
+            <article class="groupe-competences">
+                <h3>Systèmes et réseaux</h3>
+                <ul>
+                    <li>Linux</li>
+                    <li>Netkit-ng</li>
+                    <li>Wireshark</li>
+                    <li>DHCP, adressage IPv4</li>
+                </ul>
+            </article>
+
+            <article class="groupe-competences">
+                <h3>Outils</h3>
+                <ul>
+                    <li>Git / GitHub</li>
+                    <li>VS Code</li>
+                    <li>Eclipse</li>
+                    <li>Suite Office</li>
+                </ul>
+            </article>
+
+            <article class="groupe-competences">
+                <h3>Méthodes</h3>
+                <ul>
+                    <li>Programmation orientée objet</li>
+                    <li>Architecture MVC</li>
+                    <li>Algorithmique et graphes</li>
+                    <li>Travail en équipe et en binôme</li>
+                </ul>
+            </article>
+
+            <article class="groupe-competences">
+                <h3>Langues</h3>
+                <ul>
+                    <li>Français <span class="precision">(langue maternelle)</span></li>
+                    <li>Anglais <span class="precision">(B1)</span></li>
+                    <li>Espagnol <span class="precision">(A2)</span></li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         04 — PROJETS
+         ========================================================
+         Les boutons radio pilotent le filtre en CSS pur : il
+         fonctionne même sans JavaScript. Ils sont placés avant la
+         grille parce que les sélecteurs de composants.css
+         remontent du radio coché vers ses frères suivants.
+         ======================================================== -->
+    <section id="projets" class="section-large">
+        <h2 class="section-titre">
+            <span class="numero">04</span>
+            <span>Projets</span>
+        </h2>
+
+        <fieldset style="border:0;padding:0;margin:0;">
+            <legend class="lecteur-seul">Filtrer les projets par technologie</legend>
+
+            <input type="radio" name="filtre" id="f-tous"   class="radios-filtre" checked>
+            <input type="radio" name="filtre" id="f-web"    class="radios-filtre">
+            <input type="radio" name="filtre" id="f-php"    class="radios-filtre">
+            <input type="radio" name="filtre" id="f-python" class="radios-filtre">
+            <input type="radio" name="filtre" id="f-java"   class="radios-filtre">
+            <input type="radio" name="filtre" id="f-sql"    class="radios-filtre">
+            <input type="radio" name="filtre" id="f-reseau" class="radios-filtre">
+
+            <div class="etiquettes-filtre">
+                <label class="etiquette-filtre" for="f-tous">Tous</label>
+                <label class="etiquette-filtre" for="f-web">Web</label>
+                <label class="etiquette-filtre" for="f-php">PHP</label>
+                <label class="etiquette-filtre" for="f-python">Python</label>
+                <label class="etiquette-filtre" for="f-java">Java</label>
+                <label class="etiquette-filtre" for="f-sql">SQL</label>
+                <label class="etiquette-filtre" for="f-reseau">Réseau</label>
+            </div>
+
+            <div class="grille-projets">
+
+                <!-- Projet phare : occupe deux colonnes au-delà de
+                     1100 px, et passe son visuel à côté du texte. -->
+                <a href="pages/projets/campusconnect.html" class="carte-projet est-phare web php sql">
+                    <div class="visuel-projet">
+                        <!-- TODO Hugo : capture de CampusConnect à ajouter en
+                             assets/img/projets/campusconnect.webp, puis
+                             remplacer ce bloc par :
+                             <img src="assets/img/projets/campusconnect.webp" alt="Page d'accueil de CampusConnect" width="1200" height="750" loading="lazy" decoding="async"> -->
+                        <div class="visuel-absent"><span>CampusConnect</span></div>
+                    </div>
+                    <div class="corps-projet">
+                        <div class="entete-projet">
+                            <span class="numero-projet">01 · SAÉ</span>
+                            <span class="numero-projet">2025-2026</span>
+                        </div>
+                        <h3>CampusConnect</h3>
+                        <p>
+                            Plateforme d'entraide entre étudiants pour
+                            s'échanger des cours. J'y ai développé
+                            l'authentification et la messagerie, en
+                            binôme, dans une équipe de quatre.
+                        </p>
+                        <div class="etiquettes">
+                            <span class="etiquette">PHP</span>
+                            <span class="etiquette">PostgreSQL</span>
+                            <span class="etiquette">HTML / CSS</span>
+                        </div>
+                        <span class="lien-fleche">Voir le projet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="pages/projets/zarza-ski.html" class="carte-projet web php sql">
+                    <div class="visuel-projet">
+                        <img src="assets/img/projets/zarza-ski.webp" alt="Page d'accueil de Zarza-Ski présentant les formules et les tarifs réduits" width="1200" height="600" loading="lazy" decoding="async">
+                    </div>
+                    <div class="corps-projet">
+                        <div class="entete-projet">
+                            <span class="numero-projet">02 · SAÉ 2-04</span>
+                            <span class="numero-projet">2025-2026</span>
+                        </div>
+                        <h3>Zarza-Ski</h3>
+                        <p>
+                            Gestion des forfaits et des réservations
+                            d'une station de ski. Projet individuel,
+                            de la conception du schéma relationnel
+                            jusqu'à la mise en production.
+                        </p>
+                        <div class="etiquettes">
+                            <span class="etiquette">PHP</span>
+                            <span class="etiquette">PostgreSQL</span>
+                            <span class="etiquette">SQL</span>
+                        </div>
+                        <span class="lien-fleche">Voir le projet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="pages/projets/wall-is-you.html" class="carte-projet python">
+                    <div class="visuel-projet">
+                        <img src="assets/img/projets/wall-is-you.webp" alt="Grille de jeu du donjon Wall Is You avec ses salles pivotables" width="1194" height="748" loading="lazy" decoding="async">
+                    </div>
+                    <div class="corps-projet">
+                        <div class="entete-projet">
+                            <span class="numero-projet">03 · SAÉ</span>
+                            <span class="numero-projet">2025-2026</span>
+                        </div>
+                        <h3>Wall Is You</h3>
+                        <p>
+                            Jeu de donjon où le joueur est le décor et
+                            l'aventurier se déplace seul. Moteur de jeu,
+                            pathfinding en parcours de graphe, interface
+                            fltk.
+                        </p>
+                        <div class="etiquettes">
+                            <span class="etiquette">Python</span>
+                            <span class="etiquette">fltk</span>
+                            <span class="etiquette">Algorithmes</span>
+                        </div>
+                        <span class="lien-fleche">Voir le projet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="pages/projets/conseil-schtroumpfs.html" class="carte-projet java">
+                    <div class="visuel-projet">
+                        <img src="assets/img/projets/conseil-schtroumpfs.webp" alt="Écran de gestion des ressources du jeu Conseil des Schtroumpfs" width="1021" height="707" loading="lazy" decoding="async">
+                    </div>
+                    <div class="corps-projet">
+                        <div class="entete-projet">
+                            <span class="numero-projet">04 · SAÉ POO</span>
+                            <span class="numero-projet">2025-2026</span>
+                        </div>
+                        <h3>Conseil des Schtroumpfs</h3>
+                        <p>
+                            Jeu de gestion sur douze mois, en Java 25 et
+                            architecture MVC stricte. Sept ressources,
+                            des événements aléatoires et un système de
+                            crises.
+                        </p>
+                        <div class="etiquettes">
+                            <span class="etiquette">Java 25</span>
+                            <span class="etiquette">MVC</span>
+                            <span class="etiquette">POO</span>
+                        </div>
+                        <span class="lien-fleche">Voir le projet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="pages/projets/mont-saint-michel.html" class="carte-projet web">
+                    <div class="visuel-projet">
+                        <img src="assets/img/projets/mont-saint-michel.webp" alt="Page d'accueil du site de médiation culturelle sur le Mont Saint-Michel" width="1200" height="576" loading="lazy" decoding="async">
+                    </div>
+                    <div class="corps-projet">
+                        <div class="entete-projet">
+                            <span class="numero-projet">05 · Universitaire</span>
+                            <span class="numero-projet">2024-2025</span>
+                        </div>
+                        <h3>Le Mont Saint-Michel</h3>
+                        <p>
+                            Site de médiation culturelle sur le site
+                            UNESCO, en HTML, CSS et JavaScript. Projet
+                            collaboratif en équipe de six.
+                        </p>
+                        <div class="etiquettes">
+                            <span class="etiquette">HTML</span>
+                            <span class="etiquette">CSS</span>
+                            <span class="etiquette">JavaScript</span>
+                        </div>
+                        <span class="lien-fleche">Voir le projet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="pages/projets/exploration-algorithmique.html" class="carte-projet python">
+                    <div class="visuel-projet">
+                        <!-- TODO Hugo : capture à ajouter en
+                             assets/img/projets/exploration-algorithmique.webp -->
+                        <div class="visuel-absent"><span>Automates</span></div>
+                    </div>
+                    <div class="corps-projet">
+                        <div class="entete-projet">
+                            <span class="numero-projet">06 · SAÉ 2-02</span>
+                            <span class="numero-projet">2024-2025</span>
+                        </div>
+                        <h3>Exploration algorithmique</h3>
+                        <p>
+                            Théorie des automates et des langages
+                            formels implémentée en Python :
+                            déterminisation, complémentation, automate
+                            produit, minimisation par l'algorithme de
+                            Moore.
+                        </p>
+                        <div class="etiquettes">
+                            <span class="etiquette">Python</span>
+                            <span class="etiquette">Automates</span>
+                            <span class="etiquette">Graphes</span>
+                        </div>
+                        <span class="lien-fleche">Voir le projet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </a>
+
+                <a href="pages/projets/serveur-dhcp.html" class="carte-projet reseau">
+                    <div class="visuel-projet">
+                        <!-- TODO Hugo : capture Wireshark à ajouter en
+                             assets/img/projets/serveur-dhcp.webp -->
+                        <div class="visuel-absent"><span>DHCP</span></div>
+                    </div>
+                    <div class="corps-projet">
+                        <div class="entete-projet">
+                            <span class="numero-projet">07 · SAÉ Réseaux</span>
+                            <span class="numero-projet">2024-2025</span>
+                        </div>
+                        <h3>Serveur DHCP</h3>
+                        <p>
+                            Réseau virtuel de cinq machines sous
+                            Netkit-ng, serveur DHCP configuré à la main
+                            et analyse des quatre trames de
+                            l'attribution d'adresse sous Wireshark.
+                        </p>
+                        <div class="etiquettes">
+                            <span class="etiquette">Linux</span>
+                            <span class="etiquette">Netkit-ng</span>
+                            <span class="etiquette">Wireshark</span>
+                        </div>
+                        <span class="lien-fleche">Voir le projet<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </a>
+
+            </div>
+        </fieldset>
+    </section>
+
+    <!-- ========================================================
+         05 — PARCOURS
+         ========================================================
+         Une liste de définition : chaque date est associée à son
+         contenu. La structure se lit correctement même sans
+         feuille de style.
+         ======================================================== -->
+    <section id="parcours" class="section-large">
+        <h2 class="section-titre">
+            <span class="numero">05</span>
+            <span>Parcours</span>
+        </h2>
+
+        <dl class="frise">
+            <div class="entree-frise">
+                <dt class="frise-date">2024 — 2027</dt>
+                <dd>
+                    <h3 class="frise-titre">BUT Informatique</h3>
+                    <p class="frise-lieu">IUT Gustave Eiffel, Champs-sur-Marne</p>
+                    <p>
+                        Spécialité Réalisation d'applications.
+                        Développement web et logiciel, bases de
+                        données, algorithmique, réseaux et systèmes.
+                        Chaque semestre s'articule autour de projets
+                        longs (les SAÉ), menés seul ou en équipe.
+                    </p>
+                </dd>
+            </div>
+
+            <div class="entree-frise">
+                <dt class="frise-date">2024</dt>
+                <dd>
+                    <h3 class="frise-titre">Baccalauréat</h3>
+                    <p class="frise-lieu">
+                        <!-- TODO Hugo : établissement, ville, et
+                             spécialités suivies en terminale. -->
+                        <span class="a-completer">à compléter</span>
+                    </p>
+                    <p>
+                        Série et spécialités à renseigner.
+                    </p>
+                </dd>
+            </div>
+
+            <div class="entree-frise">
+                <dt class="frise-date">Expériences</dt>
+                <dd>
+                    <h3 class="frise-titre">
+                        <span class="a-completer">à compléter</span>
+                    </h3>
+                    <p>
+                        <!-- TODO Hugo : stages, jobs d'été, projets
+                             personnels hors cursus, associations.
+                             Supprimer cette entrée s'il n'y a rien
+                             à y mettre pour l'instant. -->
+                        Stages, emplois saisonniers ou projets menés
+                        en dehors des cours.
+                    </p>
+                </dd>
+            </div>
+        </dl>
+    </section>
+
+    <!-- ========================================================
+         06 — CONTACT
+         ======================================================== -->
+    <section id="contact" class="section-large">
+        <h2 class="section-titre">
+            <span class="numero">06</span>
+            <span>Contact</span>
+        </h2>
+
+        <div class="duo">
+            <p class="enonce a-reveler">
+                Une question sur un <em>projet</em> ?
+            </p>
+
+            <div>
+                <div class="liens-contact">
+                    <a class="lien-contact" href="mailto:challayehugo.pro@gmail.com">
+                        <span>challayehugo.pro@gmail.com</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </a>
+
+                    <!-- Le JavaScript écrit l'adresse dans le
+                         presse-papier. Masqué si l'API n'existe pas. -->
+                    <button type="button" class="lien-contact copier-email" data-email="challayehugo.pro@gmail.com">
+                        <span class="libelle-copie">Copier l'adresse</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                    </button>
+
+                    <a class="lien-contact" href="https://github.com/hugoolasticot" target="_blank" rel="noopener">
+                        <span>GitHub · hugoolasticot</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </a>
+
+                    <a class="lien-contact" href="https://www.linkedin.com/in/hugo-challaye-ab300a339/" target="_blank" rel="noopener">
+                        <span>LinkedIn · Hugo Challaye</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </main>
-</div>
 
-<!-- Retour en haut : le JS lui ajoute la classe .is-visible après quelques centaines de pixels -->
-<button type="button" class="to-top" aria-label="Revenir en haut de la page">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+<footer class="pied">
+    <span>© 2026 Hugo Challaye</span>
+    <span>Écrit à la main : HTML, CSS, JavaScript, Three.js</span>
+</footer>
+
+<button type="button" class="vers-haut" aria-label="Revenir en haut de la page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
-<script src="assets/js/script.js" defer></script>
+<!-- interface.js d'abord, et sans type="module" : c'est lui qui
+     porte tout ce qui est nécessaire à l'usage du site. Il ne
+     dépend d'aucun CDN et se charge même si les modules ES ne
+     sont pas gérés.
+
+     scroll.js n'apporte que le décor — défilement inertiel et
+     objet 3D. Un module ES est automatiquement différé, et son
+     échec n'empêche rien. -->
+<script src="assets/js/interface.js" defer></script>
+<script src="assets/js/scroll.js" type="module"></script>
+
 </body>
 </html>
