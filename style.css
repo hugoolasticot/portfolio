@@ -1,22 +1,51 @@
 /* ================================
    VARIABLES
    ================================ */
+/* Thème sombre = thème par défaut.
+   Les noms décrivent le rôle (fond, texte, trait) et non la couleur,
+   pour que le thème clair puisse réutiliser les mêmes variables. */
 :root {
-    --black:   #000000;
-    --bg:      #0a0a0a;
-    --surface: #111111;
-    --line:    #1c1c1c;
-    --line2:   #252525;
+    --bg:       #000000;   /* fond de page */
+    --surface:  #111111;   /* fond des cartes et encarts */
+    --line:     #1c1c1c;   /* trait discret */
+    --line2:    #252525;   /* trait plus marqué */
 
-    --white:   #ffffff;
-    --silver:  #c8c8c8;
-    --grey:    #707070;
-    --grey2:   #444444;
+    /* Les gris sont calés pour rester lisibles (WCAG AA, 4.5:1)
+       même sur le fond des cartes, qui est le pire cas */
+    --text:     #ffffff;   /* texte principal */
+    --text-2:   #c8c8c8;   /* texte secondaire */
+    --text-3:   #949494;   /* texte tertiaire   — 6.2:1 */
+    --text-4:   #808080;   /* texte très discret — 4.8:1 */
 
-    --green:   #4a9e78;   /* vert sobre, mat */
+    --green:    #4a9e78;   /* vert sobre, mat */
+    --on-green: #ffffff;   /* texte posé sur le vert : blanc dans les deux thèmes */
+    --green-hover: #3a8a66;
+    --green-soft:  rgba(74, 158, 120, 0.08);   /* fond vert très dilué */
 
-    --sidebar: 160px;
-    --font:    'Inter', sans-serif;
+    --shadow:   0 12px 28px rgba(0, 0, 0, 0.45);   /* élévation des cartes au survol */
+
+    --sidebar:  160px;
+    --font:     'Inter', sans-serif;
+}
+
+/* Thème clair. Appliqué par le JS via data-theme="light" sur <html>.
+   Le vert est assombri pour rester lisible sur fond blanc. */
+:root[data-theme="light"] {
+    --bg:       #ffffff;
+    --surface:  #f6f6f4;
+    --line:     #e7e7e3;
+    --line2:    #d5d5cf;
+
+    --text:     #14140f;
+    --text-2:   #3a3a34;
+    --text-3:   #5f5f57;   /* 6.0:1 */
+    --text-4:   #6e6e66;   /* 4.8:1 */
+
+    --green:    #2c7355;
+    --green-hover: #215a42;
+    --green-soft:  rgba(44, 115, 85, 0.09);
+
+    --shadow:   0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* ================================
@@ -26,12 +55,49 @@
 html { scroll-behavior: smooth; }
 body {
     font-family: var(--font);
-    background: var(--black);
-    color: var(--white);
+    background: var(--bg);
+    color: var(--text);
 }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
+
+/* ================================
+   APPARITION AU SCROLL
+   Placé tôt dans le fichier volontairement : les règles :hover des
+   cartes, définies plus bas, doivent pouvoir écraser ce transform.
+   ================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cascade du hero au chargement de la page */
+@keyframes apparition {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-topname,
+.hero-name-small,
+.hero-big,
+.hero-desc,
+.hero-cta {
+    opacity: 0;
+    animation: apparition 0.6s ease forwards;
+}
+
+.hero-topname    { animation-delay: 0.05s; }
+.hero-name-small { animation-delay: 0.15s; }
+.hero-big        { animation-delay: 0.25s; }
+.hero-desc       { animation-delay: 0.40s; }
+.hero-cta        { animation-delay: 0.50s; }
 
 /* ================================
    LAYOUT
@@ -42,24 +108,28 @@ img { max-width: 100%; display: block; }
 }
 
 /* ================================
-   SIDEBAR — 64px, logo vertical, nav + icônes
+   SIDEBAR — nav gauche, icônes en bas
    ================================ */
-:root {
-}
-
 .sidebar {
     width: var(--sidebar);
     min-height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    background: var(--black);
+    background: var(--bg);
     border-right: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 28px 0;
     z-index: 200;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+/* Le fond se densifie une fois qu'on a quitté le haut de la page */
+.sidebar.is-scrolled {
+    background: var(--surface);
+    border-color: var(--line2);
 }
 
 .sidebar-logo { display: none; }
@@ -78,14 +148,20 @@ img { max-width: 100%; display: block; }
     padding: 9px 14px;
     font-size: 12px;
     font-weight: 500;
-    color: var(--grey);
+    color: var(--text-3);
     border-radius: 4px;
     transition: all 0.2s;
 }
 
 .sidebar-nav a:hover {
-    color: var(--white);
+    color: var(--text);
     background: var(--line);
+}
+
+/* Lien de la section en cours de lecture (scrollspy piloté par le JS) */
+.sidebar-nav a.is-active {
+    color: var(--green);
+    background: var(--green-soft);
 }
 
 /* Icônes sociales en bas */
@@ -105,13 +181,13 @@ img { max-width: 100%; display: block; }
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--grey);
+    color: var(--text-3);
     transition: color 0.2s;
     border-radius: 4px;
 }
 
 .sidebar-icons a:hover {
-    color: var(--white);
+    color: var(--text);
 }
 
 /* ================================
@@ -145,7 +221,7 @@ img { max-width: 100%; display: block; }
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--silver);
+    color: var(--text-2);
     align-self: flex-start;
 }
 
@@ -163,7 +239,7 @@ img { max-width: 100%; display: block; }
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--grey);
+    color: var(--text-3);
     margin-bottom: 20px;
     text-align: center;
 }
@@ -177,7 +253,7 @@ img { max-width: 100%; display: block; }
     text-align: center;
 }
 
-.hero-big .line-white  { color: var(--silver); display: block; }
+.hero-big .line-white  { color: var(--text-2); display: block; }
 .hero-big .line-green  { color: var(--green);  display: block; }
 
 /* Bas du hero */
@@ -189,7 +265,7 @@ img { max-width: 100%; display: block; }
 
 .hero-desc {
     font-size: 13px;
-    color: var(--grey);
+    color: var(--text-3);
     max-width: 340px;
     line-height: 1.7;
 }
@@ -212,17 +288,17 @@ img { max-width: 100%; display: block; }
 
 .btn-filled {
     background: var(--green);
-    color: var(--white);
+    color: var(--on-green);
     border: 1px solid var(--green);
 }
-.btn-filled:hover { background: #3a8a66; border-color: #3a8a66; }
+.btn-filled:hover { background: var(--green-hover); border-color: var(--green-hover); }
 
 .btn-ghost {
     background: transparent;
-    color: var(--silver);
+    color: var(--text-2);
     border: 1px solid var(--line2);
 }
-.btn-ghost:hover { border-color: var(--grey); color: var(--white); }
+.btn-ghost:hover { border-color: var(--text-3); color: var(--text); }
 
 /* ================================
    SECTIONS COMMUNES
@@ -280,7 +356,7 @@ section:not(#hero) {
 #apropos .apropos-bio p {
     font-size: 18px;
     line-height: 1.85;
-    color: var(--grey);
+    color: var(--text-3);
     margin-bottom: 20px;
 }
 
@@ -289,7 +365,7 @@ section:not(#hero) {
     font-weight: 700;
     letter-spacing: -2px;
     line-height: 1.05;
-    color: var(--white);
+    color: var(--text);
     margin-bottom: 32px;
 }
 
@@ -297,12 +373,22 @@ section:not(#hero) {
 
 .apropos-bio p {
     font-size: 15px;
-    color: var(--grey);
+    color: var(--text-3);
     line-height: 1.9;
     margin-bottom: 16px;
 }
 
-.apropos-bio p strong { color: var(--silver); font-weight: 600; }
+.apropos-bio p strong { color: var(--text-2); font-weight: 600; }
+
+/* Lien mis en avant dans un paragraphe */
+.lien-vert {
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.lien-vert:hover { border-bottom-color: var(--green); }
 
 .apropos-right {
     display: flex;
@@ -324,7 +410,7 @@ section:not(#hero) {
 .apropos-stat-n {
     font-size: 36px;
     font-weight: 800;
-    color: var(--white);
+    color: var(--text);
     letter-spacing: -1px;
     line-height: 1;
 }
@@ -333,7 +419,7 @@ section:not(#hero) {
 
 .apropos-stat-l {
     font-size: 11px;
-    color: var(--grey);
+    color: var(--text-3);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 6px;
@@ -353,13 +439,13 @@ section:not(#hero) {
 .info-card-title {
     font-size: 13px;
     font-weight: 700;
-    color: var(--white);
+    color: var(--text);
     margin-bottom: 8px;
 }
 
 .info-card-text {
     font-size: 13px;
-    color: var(--grey);
+    color: var(--text-3);
     line-height: 1.6;
 }
 
@@ -406,7 +492,7 @@ section:not(#hero) {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    color: var(--grey);
+    color: var(--text-3);
     cursor: pointer;
     transition: all 0.2s;
     border-right: 1px solid var(--line2);
@@ -415,7 +501,7 @@ section:not(#hero) {
 }
 
 .tab-label:last-child { border-right: none; }
-.tab-label:hover { color: var(--white); background: var(--line); }
+.tab-label:hover { color: var(--text); background: var(--line); }
 
 /* Onglet actif */
 #tab-langages:checked ~ .tabs-labels label[for="tab-langages"],
@@ -423,7 +509,7 @@ section:not(#hero) {
 #tab-soft:checked ~ .tabs-labels label[for="tab-soft"],
 #tab-langues:checked ~ .tabs-labels label[for="tab-langues"] {
     background: var(--green);
-    color: var(--white);
+    color: var(--text);
     border-color: var(--green);
 }
 
@@ -448,13 +534,13 @@ section:not(#hero) {
 }
 
 .skill-item {
-    background: var(--black);
+    background: var(--bg);
     border: 1px solid var(--line2);
     border-radius: 6px;
     padding: 18px 20px;
     font-size: 14px;
     font-weight: 500;
-    color: var(--silver);
+    color: var(--text-2);
     transition: all 0.2s;
     display: flex;
     align-items: center;
@@ -463,7 +549,7 @@ section:not(#hero) {
 
 .skill-item:hover {
     border-color: var(--green);
-    color: var(--white);
+    color: var(--text);
 }
 
 .skill-dot {
@@ -494,6 +580,7 @@ section:not(#hero) {
 #pf-python:focus-visible ~ .filter-labels label[for="pf-python"],
 #pf-java:focus-visible ~ .filter-labels label[for="pf-java"],
 #pf-web:focus-visible ~ .filter-labels label[for="pf-web"],
+#pf-php:focus-visible ~ .filter-labels label[for="pf-php"],
 #pf-sql:focus-visible ~ .filter-labels label[for="pf-sql"],
 #pf-reseau:focus-visible ~ .filter-labels label[for="pf-reseau"] {
     outline: 2px solid var(--green);
@@ -515,30 +602,35 @@ section:not(#hero) {
     text-transform: uppercase;
     border: 1px solid var(--line2);
     border-radius: 3px;
-    color: var(--grey);
+    color: var(--text-3);
     cursor: pointer;
     transition: all 0.2s;
     user-select: none;
 }
 
-.filter-label:hover { border-color: var(--grey2); color: var(--silver); }
+.filter-label:hover { border-color: var(--text-4); color: var(--text-2); }
 
 #pf-all:checked ~ .filter-labels label[for="pf-all"],
 #pf-python:checked ~ .filter-labels label[for="pf-python"],
 #pf-java:checked ~ .filter-labels label[for="pf-java"],
 #pf-web:checked ~ .filter-labels label[for="pf-web"],
+#pf-php:checked ~ .filter-labels label[for="pf-php"],
 #pf-sql:checked ~ .filter-labels label[for="pf-sql"],
 #pf-reseau:checked ~ .filter-labels label[for="pf-reseau"] {
     border-color: var(--green);
     color: var(--green);
-    background: rgba(74, 158, 120, 0.08);
+    background: var(--green-soft);
 }
 
-#pf-python:checked ~ .projects-grid .pcard:not(.python),
-#pf-java:checked ~ .projects-grid .pcard:not(.java),
-#pf-web:checked ~ .projects-grid .pcard:not(.web),
-#pf-sql:checked ~ .projects-grid .pcard:not(.sql),
-#pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
+/* Masquage des cartes filtrées.
+   Le JS reprend la main pour animer la transition (voir .is-hiding / .is-hidden).
+   Ces règles servent de repli si le JS ne se charge pas : html.js les désactive. */
+html:not(.js) #pf-python:checked ~ .projects-grid .pcard:not(.python),
+html:not(.js) #pf-java:checked ~ .projects-grid .pcard:not(.java),
+html:not(.js) #pf-web:checked ~ .projects-grid .pcard:not(.web),
+html:not(.js) #pf-php:checked ~ .projects-grid .pcard:not(.php),
+html:not(.js) #pf-sql:checked ~ .projects-grid .pcard:not(.sql),
+html:not(.js) #pf-reseau:checked ~ .projects-grid .pcard:not(.reseau) {
     display: none;
 }
 
@@ -557,7 +649,7 @@ section:not(#hero) {
     color: inherit;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -567,16 +659,32 @@ section:not(#hero) {
     pointer-events: none;
 }
 
+/* Élévation douce au survol */
 .pcard:hover {
     border-color: var(--line2);
     z-index: 1;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+/* Filtrage : la carte s'efface avant d'être retirée de la grille.
+   Ces deux classes sont posées par le JS (voir script.js).
+   Elles viennent après :hover pour pouvoir l'écraser. */
+.pcard.is-hiding {
+    opacity: 0;
+    transform: scale(0.96);
+    pointer-events: none;
+}
+
+.pcard.is-hidden {
+    display: none;
 }
 
 /* Zone image — simple, carré */
 .pcard-img {
     width: 100%;
     aspect-ratio: 16/9;
-    background: var(--black);
+    background: var(--bg);
     overflow: hidden;
     position: relative;
 }
@@ -594,28 +702,54 @@ section:not(#hero) {
     transform: scale(1.04);
 }
 
-/* Placeholder quand pas d'image */
-.pcard-img-placeholder {
+/* Placeholder quand la capture n'est pas encore fournie :
+   dégradé teinté selon le langage + initiales du langage en filigrane */
+.pcard-ph {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    border: 2px dashed var(--line2);
-    color: var(--grey2);
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    background: linear-gradient(135deg, #17211d 0%, #0b0b0b 100%);
     pointer-events: none;
 }
 
-.pcard-img-placeholder svg {
-    width: 28px;
-    height: 28px;
-    opacity: 0.4;
-    pointer-events: none;
+.pcard-ph span {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.13);
+}
+
+/* Une teinte par langage pour que les cartes ne se ressemblent pas toutes */
+.pcard-ph[data-lang="PHP"]    { background: linear-gradient(135deg, #1b1d2e 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="SQL"]    { background: linear-gradient(135deg, #12231f 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="Java"]   { background: linear-gradient(135deg, #2a1c15 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="Python"] { background: linear-gradient(135deg, #16202e 0%, #0b0b0b 100%); }
+.pcard-ph[data-lang="Linux"]  { background: linear-gradient(135deg, #26200f 0%, #0b0b0b 100%); }
+
+/* Mêmes dégradés en version claire */
+:root[data-theme="light"] .pcard-ph                     { background: linear-gradient(135deg, #e4ece8 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph span                { color: rgba(0, 0, 0, 0.16); }
+:root[data-theme="light"] .pcard-ph[data-lang="PHP"]    { background: linear-gradient(135deg, #e5e6f2 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="SQL"]    { background: linear-gradient(135deg, #dfeee8 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="Java"]   { background: linear-gradient(135deg, #f2e5dd 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="Python"] { background: linear-gradient(135deg, #e0e8f3 0%, #f6f6f4 100%); }
+:root[data-theme="light"] .pcard-ph[data-lang="Linux"]  { background: linear-gradient(135deg, #f0ead6 0%, #f6f6f4 100%); }
+
+/* Marqueur des contenus qu'il me reste à rédiger — voir TODO.md */
+.todo {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #e0a33e;
+    border: 1px solid rgba(224, 163, 62, 0.45);
+    background: rgba(224, 163, 62, 0.09);
+    padding: 1px 7px;
+    border-radius: 3px;
+    vertical-align: middle;
 }
 
 /* Corps carte */
@@ -629,7 +763,7 @@ section:not(#hero) {
 
 .pcard-num {
     font-size: 10px;
-    color: var(--grey2);
+    color: var(--text-4);
     letter-spacing: 2px;
     font-weight: 500;
     text-transform: uppercase;
@@ -638,14 +772,14 @@ section:not(#hero) {
 .pcard-title {
     font-size: 17px;
     font-weight: 700;
-    color: var(--white);
+    color: var(--text);
     letter-spacing: -0.3px;
     line-height: 1.2;
 }
 
 .pcard-desc {
     font-size: 13px;
-    color: var(--grey);
+    color: var(--text-3);
     line-height: 1.6;
 }
 
@@ -660,7 +794,7 @@ section:not(#hero) {
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    color: var(--grey2);
+    color: var(--text-4);
     border: 1px solid var(--line2);
     padding: 3px 8px;
     border-radius: 2px;
@@ -681,7 +815,7 @@ section:not(#hero) {
     justify-content: center;
     opacity: 0;
     transition: opacity 0.2s, border-color 0.2s;
-    background: var(--black);
+    background: var(--bg);
 }
 
 .pcard-arrow svg {
@@ -714,7 +848,7 @@ section:not(#hero) {
     font-weight: 800;
     letter-spacing: -3px;
     line-height: 1.0;
-    color: var(--white);
+    color: var(--text);
 }
 
 .contact-big span { color: var(--green); }
@@ -733,15 +867,15 @@ section:not(#hero) {
     border: 1px solid var(--line2);
     border-radius: 6px;
     transition: all 0.2s;
-    color: var(--silver);
+    color: var(--text-2);
     font-size: 14px;
     font-weight: 500;
 }
 
 .contact-link-item:hover {
     border-color: var(--green);
-    color: var(--white);
-    background: rgba(74, 158, 120, 0.05);
+    color: var(--text);
+    background: var(--green-soft);
 }
 
 .contact-link-item svg {
@@ -775,18 +909,18 @@ section:not(#hero) {
     font-size: 26px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    color: var(--white);
+    color: var(--text);
     margin-bottom: 16px;
 }
 
 .cv-left p {
     font-size: 14px;
-    color: var(--grey);
+    color: var(--text-3);
     line-height: 1.8;
     margin-bottom: 12px;
 }
 
-.cv-left p strong { color: var(--silver); }
+.cv-left p strong { color: var(--text-2); }
 
 .cv-btns {
     display: flex;
@@ -816,11 +950,11 @@ footer {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
-    color: var(--grey2);
+    color: var(--text-4);
     border-top: 1px solid var(--line);
 }
 
-footer a { color: var(--grey); transition: color 0.2s; }
+footer a { color: var(--text-3); transition: color 0.2s; }
 footer a:hover { color: var(--green); }
 
 /* ================================
@@ -833,7 +967,7 @@ footer a:hover { color: var(--green); }
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0a0a0a;
+    background: var(--bg);
     z-index: 9999;
     overflow-y: auto;
 }
@@ -864,7 +998,7 @@ body.popup-open {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--grey);
+    color: var(--text-3);
     border: 1px solid var(--line2);
     padding: 10px 18px;
     border-radius: 4px;
@@ -887,14 +1021,14 @@ body.popup-open {
     font-size: clamp(36px, 5vw, 64px);
     font-weight: 800;
     letter-spacing: -2px;
-    color: var(--white);
+    color: var(--text);
     line-height: 1.0;
     margin-bottom: 20px;
 }
 
 .popup-desc {
     font-size: 15px;
-    color: var(--grey);
+    color: var(--text-3);
     line-height: 1.8;
     max-width: 600px;
     margin-bottom: 36px;
@@ -923,14 +1057,14 @@ body.popup-open {
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--grey2);
+    color: var(--text-4);
     margin-bottom: 8px;
 }
 
 .popup-meta-v {
     font-size: 15px;
     font-weight: 700;
-    color: var(--white);
+    color: var(--text);
 }
 
 .popup-tags {
@@ -964,18 +1098,18 @@ body.popup-open {
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--silver);
+    color: var(--text-2);
     margin-bottom: 16px;
 }
 
 .popup-section p {
     font-size: 14px;
-    color: var(--grey);
+    color: var(--text-3);
     line-height: 1.8;
     margin-bottom: 10px;
 }
 
-.popup-section p strong { color: var(--silver); }
+.popup-section p strong { color: var(--text-2); }
 
 .popup-section ul {
     display: flex;
@@ -985,7 +1119,7 @@ body.popup-open {
 
 .popup-section li {
     font-size: 14px;
-    color: var(--grey);
+    color: var(--text-3);
     padding-left: 20px;
     position: relative;
     line-height: 1.6;
@@ -999,7 +1133,160 @@ body.popup-open {
     font-weight: 700;
 }
 
-.popup-section li strong { color: var(--silver); }
+.popup-section li strong { color: var(--text-2); }
+
+/* ================================
+   BANDEAU ALTERNANCE
+   ================================ */
+.alt-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 28px 64px;
+    background: var(--green-soft);
+    border-bottom: 1px solid var(--line);
+    border-left: 3px solid var(--green);
+}
+
+.alt-banner-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.2px;
+}
+
+.alt-banner-sub {
+    font-size: 13px;
+    color: var(--text-3);
+    margin-top: 6px;
+}
+
+.alt-banner-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ================================
+   BOUTON DE COPIE DE L'EMAIL
+   ================================ */
+/* Le bouton doit ressembler exactement aux liens voisins */
+.contact-copy {
+    width: 100%;
+    background: transparent;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* État affiché une seconde après la copie */
+.contact-copy.is-copied {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+/* ================================
+   BASCULE DE THÈME
+   ================================ */
+.theme-toggle {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.theme-toggle:hover { color: var(--text); }
+
+/* On n'affiche que l'icône du thème courant */
+.icon-sun  { display: none; }
+:root[data-theme="light"] .icon-moon { display: none; }
+:root[data-theme="light"] .icon-sun  { display: block; }
+
+/* ================================
+   BURGER — masqué au-dessus de 768px
+   ================================ */
+.nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid var(--line2);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text-2);
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Burger ouvert : les barres forment une croix */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ================================
+   RETOUR EN HAUT
+   ================================ */
+.to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--line2);
+    border-radius: 50%;
+    color: var(--text-2);
+    cursor: pointer;
+    z-index: 300;
+
+    /* Caché par défaut, révélé par .is-visible */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s, border-color 0.2s;
+}
+
+.to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.to-top:hover { border-color: var(--green); color: var(--green); }
+.to-top svg { width: 18px; height: 18px; }
+
+/* ================================
+   FOCUS CLAVIER — visible partout
+   ================================ */
+:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
 
 /* ================================
    RESPONSIVE
@@ -1011,69 +1298,169 @@ body.popup-open {
     .cv-layout { grid-template-columns: 1fr; }
     section:not(#hero) { padding: 72px 48px; }
     #hero { padding: 28px 48px 40px; }
+    .alt-banner { padding: 24px 48px; }
 }
 
+/* Sous 768px la sidebar devient une barre en haut de l'écran,
+   et les liens de nav passent dans un panneau ouvert par le burger. */
 @media (max-width: 768px) {
     :root { --sidebar: 0px; }
 
     .sidebar {
         width: 100%;
         min-height: auto;
-        height: 52px;
+        height: 56px;
         position: fixed;
-        bottom: 0;
-        top: auto;
+        top: 0;
         left: 0;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         padding: 0 16px;
         border-right: none;
-        border-top: 1px solid var(--line);
-        justify-content: space-around;
+        border-bottom: 1px solid var(--line);
     }
 
-    .sidebar-logo { display: none; }
-    .sidebar-sep { display: none; }
+    .nav-toggle { display: flex; }
 
+    /* Panneau de navigation, dépliant sous la barre */
+    .sidebar-nav {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 12px 16px;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        display: none;
+    }
+
+    .sidebar.is-open .sidebar-nav { display: flex; }
+
+    .sidebar-nav a {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    /* Icônes sociales alignées à droite de la barre */
     .sidebar-icons {
         flex-direction: row;
-        gap: 0;
-        margin-bottom: 0;
-        width: 100%;
-        justify-content: space-around;
-    }
-
-    .sidebar-icons a[href^="#"] {
-        writing-mode: horizontal-tb;
-        transform: none;
-        font-size: 9px;
-        height: 52px;
+        gap: 2px;
+        margin-top: 0;
+        padding-bottom: 0;
         width: auto;
-        padding: 0 8px;
-    }
-
-    .sidebar-icons a:not([href^="#"]) {
-        height: 52px;
-        width: 36px;
     }
 
     .content {
         margin-left: 0;
-        padding-bottom: 60px;
+        padding-top: 56px;
     }
 
     section:not(#hero) { padding: 56px 24px; }
-    #hero { padding: 24px 24px 36px; }
+    #hero { padding: 24px 24px 36px; min-height: calc(100vh - 56px); }
     .hero-big { font-size: 56px; letter-spacing: -2px; }
     .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .alt-banner { padding: 24px; gap: 20px; }
+    .alt-banner-title { font-size: 15px; }
     .popup-meta { grid-template-columns: repeat(2, 1fr); }
     .popup-box { padding: 0 16px; }
     footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
     .tabs-labels { flex-wrap: wrap; width: 100%; }
     .skills-grid { grid-template-columns: repeat(2, 1fr); }
     #apropos .apropos-bio p { font-size: 15px; }
+    .to-top { right: 16px; bottom: 16px; }
+}
+
+/* En dessous de 600px une carte projet sur deux colonnes devient
+   trop étroite : on passe à une seule colonne */
+@media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
     .hero-big { font-size: 44px; }
+    .alt-banner-cta .btn { flex: 1; text-align: center; }
+}
+
+/* ================================
+   PAGE 404
+   ================================ */
+.erreur {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 64px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.erreur-code {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+}
+
+.erreur-titre {
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.0;
+    color: var(--text);
+    margin-bottom: 24px;
+}
+
+.erreur-titre span { color: var(--green); }
+
+.erreur-texte {
+    font-size: 15px;
+    color: var(--text-3);
+    line-height: 1.8;
+    margin-bottom: 36px;
+}
+
+.erreur-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .erreur { padding: 32px 24px; }
+}
+
+/* ================================
+   MOUVEMENT RÉDUIT
+   Si le visiteur a demandé moins d'animations dans son système,
+   on coupe tout : plus de transitions, plus de cascade, plus de
+   défilement animé. Le contenu reste évidemment visible.
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+    }
+
+    html { scroll-behavior: auto; }
+
+    /* Les éléments animés au scroll doivent rester visibles
+       même si l'observateur n'a pas encore agi */
+    .reveal,
+    .hero-topname,
+    .hero-name-small,
+    .hero-big,
+    .hero-desc,
+    .hero-cta {
+        opacity: 1;
+        transform: none;
+    }
 }
