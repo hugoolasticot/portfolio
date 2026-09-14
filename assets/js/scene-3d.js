@@ -47,10 +47,10 @@ const POSES = [
     { camera: [-1.55, 0.35, 5.00], regard: [ 0.75, 0.05, 0.00], rotation: [ 0.05,  0.31, -0.02], ouverture: 0.34, graphe: 1.00, eveil: 1.00, chaine: 0 },
 
     // 4. Projets — la coque s'écarte franchement et libère le graphe.
-    { camera: [0.75, -0.95, 4.80], regard: [-0.45,-0.10, 0.00], rotation: [ 0.09,  0.52, 0.03], ouverture: 1.00, graphe: 1.00, eveil: 1.00, chaine: 0 },
+    { camera: [0.75, -0.95, 4.80], regard: [-1.10,-0.10, 0.00], rotation: [ 0.09,  0.52, 0.03], ouverture: 1.00, graphe: 1.00, eveil: 1.00, chaine: 0 },
 
     // 5. Parcours — le graphe s'aligne : il devient une ligne de temps.
-    { camera: [0.00,  0.10, 4.80], regard: [-1.15, 0.15, 0.00], rotation: [ 0.02,  0.70, 0.00], ouverture: 0.70, graphe: 0.90, eveil: 0.85, chaine: 1 },
+    { camera: [0.00,  0.10, 4.80], regard: [-1.95, 0.15, 0.00], rotation: [ 0.02,  0.70, 0.00], ouverture: 0.70, graphe: 0.90, eveil: 0.85, chaine: 1 },
 
     // 6. Contact — tout se recompose et s'éloigne.
     { camera: [0.00,  0.25, 6.40], regard: [-0.90, 0.00, 0.00], rotation: [ 0.00,  0.88, 0.00], ouverture: 0.08, graphe: 0.18, eveil: 0.10, chaine: 0 },
@@ -115,10 +115,11 @@ const SHADER_SOMMET = /* glsl */ `
 `;
 
 const SHADER_FRAGMENT = /* glsl */ `
-    uniform vec3  uVerre;     // teinte de fond du verre
-    uniform vec3  uIrisA;     // premier extrême de l'irisation
-    uniform vec3  uIrisB;     // second extrême
-    uniform float uOpacite;   // opacité générale, pilotée au scroll
+    uniform vec3  uVerre;      // teinte de fond du verre
+    uniform vec3  uIrisA;      // premier extrême de l'irisation
+    uniform vec3  uIrisB;      // second extrême
+    uniform float uOpacite;    // opacité générale, pilotée au scroll
+    uniform float uOuverture;  // 0 fermé → 1 éclaté
     uniform float uTemps;
 
     varying vec3 vNormale;
@@ -168,8 +169,17 @@ const SHADER_FRAGMENT = /* glsl */ `
 
         vec3 couleur = mix(uVerre, iris, fresnel * 0.92);
 
-        // L'arête prend la couleur d'irisation à pleine intensité.
-        couleur = mix(couleur, iris, arete * 0.85);
+        // L'arête prend la couleur d'irisation.
+        //
+        // Elle s'estompe à mesure que la coque s'ouvre. Ouverte, ses
+        // facettes sont vues de biais et leurs arêtes deviennent les
+        // éléments les plus lumineux de l'écran : elles se mettaient
+        // à couper les lignes de texte qui passent devant, et c'est
+        // le contraste le plus gênant du site — celui qu'aucune
+        // mesure texte / fond ne détecte, puisqu'il se joue entre le
+        // texte et le canvas.
+        float forceArete = arete * (1.0 - uOuverture * 0.6);
+        couleur = mix(couleur, iris, forceArete * 0.85);
 
         // Les facettes qui se sont le plus écartées captent un peu
         // plus de lumière, une fois sorties de l'ombre de l'objet.
@@ -187,7 +197,7 @@ const SHADER_FRAGMENT = /* glsl */ `
         // sa masse à l'objet. Il reste volontairement sous 6 %,
         // de quoi teinter le fond sans faire bouger le contraste
         // du texte posé par-dessus.
-        float alpha = uOpacite * (0.055 + fresnel * 0.88 + arete * 0.55);
+        float alpha = uOpacite * (0.055 + fresnel * 0.88 + forceArete * 0.55);
 
         gl_FragColor = vec4(couleur, alpha);
 
